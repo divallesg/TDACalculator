@@ -28,7 +28,7 @@
                                     <div class="col">
                                         <p>Level (1-120):&nbsp;</p>
                                     </div>
-                                    <div class="col"><input type="number" placeholder="1" min="1" max="120" step="1" style="margin-top:2px;"></div>
+                                    <div class="col"><input type="number" value="1" placeholder="1-120" min="1" max="120" step="1" id="level" style="margin-top:2px;" pattern="[0-9]"></div>
                                 </div>
                             </div>
                         </div>
@@ -126,37 +126,37 @@
                             <div class="col">
                                 <p>Health Level:&nbsp;</p>
                             </div>
-                            <div class="col"><select class="dropdown"><optgroup label="Ascension upgrade"><option value="0" selected="">None</option><option value="2">Health Level</option><option value="5">Health Level II</option><option value="10">Health Level III</option></optgroup></select></div>
+                            <div class="col"><select id="healthLevel" class="dropdown"><optgroup label="Ascension upgrade"><option value="0" selected="">None</option><option value="2">Health Level</option><option value="5">Health Level II</option><option value="10">Health Level III</option></optgroup></select></div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <p>Experimagic:&nbsp;</p>
                             </div>
-                            <div class="col"><input type="checkbox"></div>
+                            <div class="col"><input type="checkbox" id="experimagic"></div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <p>Strength Level:&nbsp;</p>
                             </div>
-                            <div class="col"><input type="checkbox"></div>
+                            <div class="col"><input type="checkbox" id="strLevel"></div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <p>Vitality Level:&nbsp;</p>
                             </div>
-                            <div class="col"><input type="checkbox"></div>
+                            <div class="col"><input type="checkbox" id="vitLevel"></div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <p>Magic Level:&nbsp;</p>
                             </div>
-                            <div class="col"><select class="dropdown"><optgroup label="Ascension upgrade"><option value="0" selected="">None</option><option value="1">Magic Level</option><option value="3">Magic Level II</option></optgroup></select></div>
+                            <div class="col"><select id="magLevel" class="dropdown"><optgroup label="Ascension upgrade"><option value="0" selected="">None</option><option value="1">Magic Level</option><option value="3">Magic Level II</option></optgroup></select></div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <p>Spirit Level:&nbsp;</p>
                             </div>
-                            <div class="col"><input type="checkbox"></div>
+                            <div class="col"><input type="checkbox" id="sprLevel"></div>
                         </div>
                     </div>
                 </div>

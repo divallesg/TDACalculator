@@ -689,7 +689,7 @@ new Attire ('Ignis','Unkempt Crownsguard',0,0,35,0,0,0,0,0,0,0,0,0,0,0,0,'')];
 //modify later to account for all chocobros
 
 //Attire dropdown menu
-for (var i = 1; i < attireList.length; i++) {
+for (let i = 1; i < attireList.length; i++) {
     if (attireList[i].equip == 'Noctis' || attireList[i].equip == 'All') {
         document.getElementById('attire').innerHTML += '\n<option value="' +
             i + '">' + attireList[i].name + '</option>';
@@ -698,7 +698,7 @@ for (var i = 1; i < attireList.length; i++) {
 
 //Food dropdown menu
 var currentType = '';
-for (var i = 1; i < foodList.length; i++) {
+for (let i = 1; i < foodList.length; i++) {
     if (currentType != foodList[i].type) {
         document.getElementById('food').innerHTML += '<optgroup label="' +
             foodList[i].type + '"></optgroup>';
@@ -709,7 +709,7 @@ for (var i = 1; i < foodList.length; i++) {
 }
 
 //Weapons dropdown menu
-for (var i = 1; i < weaponList.length; i++) {
+for (let i = 1; i < weaponList.length; i++) {
     if (currentType != weaponList[i].type) {
         document.getElementById('weapon1').innerHTML += '<optgroup label="' +
             weaponList[i].type + '"></optgroup>';
@@ -733,7 +733,7 @@ for (var i = 1; i < weaponList.length; i++) {
 }
 
 //Accessories dropdown menu
-for (var i = 1; i < accessoryList.length; i++) {
+for (let i = 1; i < accessoryList.length; i++) {
     if (accessoryList[i].equip == 'Noctis' || accessoryList[i].equip == 'All') {
         document.getElementById('accessory1').innerHTML += '\n<option value="' + 
             i + '">' + accessoryList[i].name + '</option>';
@@ -747,75 +747,120 @@ for (var i = 1; i < accessoryList.length; i++) {
 //--------------------------------------------------------------------
 //Calculations
 //--------------------------------------------------------------------
-var baseStats = noctisStats[0];
-var attire = attireList[0];
-var food = foodList[0];
-var weapon = [weaponList[0], weaponList[0], weaponList[0], weaponList[0]];
-var accessory = [accessoryList[0], accessoryList[0], accessoryList[0]];
 
-var hp, mp, str, vit, mag, spr, fire, ice, lightning, dark, shot, attack, defense;
-var tdaPhysical, tdaMagical, tdaFire, tdaIce, tdaLightning, tdaDark, tdaShot;
-var equipped = 0;
+//Limit the value to some lower and higher bound.
+function limit(someNumber, lowerBound, higherBound) {
+    if (Number.isFinite(lowerBound) && someNumber < lowerBound) {
+        return lowerBound;
+    }
+    else if (Number.isFinite(higherBound) && someNumber > higherBound) {
+        return higherBound;
+    }
+    else
+        return someNumber;
+}
 
-
+//Update the entire right-hand side of the screen.
 function updateData() {
 
-	//compute all the things!
-	hp = Math.floor(baseStats.hp * (1 + attire.hpBonus)) + Math.round((1 + attire.hpBonus) *
-		(weapon[0].hp + weapon[1].hp + weapon[2].hp + weapon[3].hp + accessory[0].hp +
-		accessory[1].hp + accessory[2].hp)) + food.hp;
+    const baseStats = window.noctisStats[document.getElementById('level').value - 1];
+    const attire = window.attireList[document.getElementById('attire').value];
+    const food = window.foodList[document.getElementById('food').value];
 
-	mp = Math.floor(baseStats.mp * (1 + attire.mpBonus)) + Math.round((1 + attire.mpBonus) *
-		(weapon[0].mp + weapon[1].mp + weapon[2].mp + weapon[3].mp + accessory[0].mp +
-		accessory[1].mp + accessory[2].mp));
+    const weapon = [window.weaponList[document.getElementById('weapon1').value],
+        window.weaponList[document.getElementById('weapon2').value],
+        window.weaponList[document.getElementById('weapon3').value],
+        window.weaponList[document.getElementById('weapon4').value]];
 
-	str = Math.floor(baseStats.str * (1 + attire.strBonus)) + Math.round((1 + attire.strBonus) *
-		(weapon[0].str + weapon[1].str + weapon[2].str + weapon[3].str + accessory[0].str +
-		accessory[1].str + accessory[2].str)) + food.str;
+    const accessory = [window.accessoryList[document.getElementById('accessory1').value],
+        window.accessoryList[document.getElementById('accessory2').value],
+        window.accessoryList[document.getElementById('accessory3').value]];
 
-	vit = Math.floor(baseStats.vit * (1 + attire.vitBonus)) + Math.round((1 + attire.vitBonus) *
-		(weapon[0].vit + weapon[1].vit + weapon[2].vit + weapon[3].vit + accessory[0].vit +
-		accessory[1].vit + accessory[2].vit)) + food.vit;
+    //Read radio buttons for selected one.
+    const equippedRadios = document.getElementsByName('equipped');
+    let equipped;
+    for (let i = 0; i < equippedRadios.length; i++) {
+        if (equippedRadios[i].checked) {
+            equipped = i;
+            break;
+        }
+    }
 
-	mag = Math.floor(baseStats.mag * (1 + attire.magBonus)) + Math.round((1 + attire.magBonus) *
-		(weapon[0].mag + weapon[1].mag + weapon[2].mag + weapon[3].mag + accessory[0].mag +
-		accessory[1].mag + accessory[2].mag)) + food.mag;
+    const healthLevel = document.getElementById('healthLevel').value;
+    const experimagic = +document.getElementById('experimagic').checked;
+    const strLevel = +document.getElementById('strLevel').checked;
+    const vitLevel = +document.getElementById('vitLevel').checked;
+    const magLevel = document.getElementById('magLevel').value;
+    const sprLevel = +document.getElementById('sprLevel').checked;
 
-	spr = Math.floor(baseStats.spr * (1 + attire.sprBonus)) + Math.round((1 + attire.sprBonus) *
-		(weapon[0].spr + weapon[1].spr + weapon[2].spr + weapon[3].spr + accessory[0].spr +
-		accessory[1].spr + accessory[2].spr)) + food.spr;
-
-	fire = attire.fire + weapon[0].fire + weapon[1].fire + weapon[2].fire + weapon[3].fire +
-		accessory[0].fire + accessory[1].fire + accessory[2].fire + food.fire;
-
-	ice = attire.ice + weapon[0].ice + weapon[1].ice + weapon[2].ice + weapon[3].ice +
-		accessory[0].ice + accessory[1].ice + accessory[2].ice + food.ice;
-
-	lightning = attire.lightning + weapon[0].lightning + weapon[1].lightning +
-		weapon[2].lightning + weapon[3].lightning + accessory[0].lightning +
-		accessory[1].lightning + accessory[2].lightning + food.lightning;
-
-	dark = attire.dark + weapon[0].dark + weapon[1].dark + weapon[2].dark + weapon[3].dark +
-		accessory[0].dark + accessory[1].dark + accessory[2].dark;
-
-	shot = attire.shot + weapon[0].shot + weapon[1].shot + weapon[2].shot + weapon[3].shot +
-		accessory[0].shot + accessory[1].shot + accessory[2].shot;
+    let hp, mp, str, vit, mag, spr, fire, ice, lightning, dark, shot, attack, defense;
+    let hpDiff, fireDiff, iceDiff, lightningDiff, darkDiff, shotDiff;
+    let tdaPhysical, tdaMagical, tdaFire, tdaIce, tdaLightning, tdaDark, tdaShot;
 
 
-	attack = weapon[equipped].str + str;
-	defense = vit;
+    //Start computing
+    hp = Math.floor(baseStats.hp * (1 + attire.hpBonus)) + Math.round((1 + attire.hpBonus) *
+        (weapon[0].hp + weapon[1].hp + weapon[2].hp + weapon[3].hp + accessory[0].hp +
+        accessory[1].hp + accessory[2].hp + (healthLevel * baseStats.level))) + food.hp;
+    hp = limit(hp,1,9999);
 
-	tdaPhysical = hp * (1 + vit/100);
-	tdaMagical = hp * (1 + spr/100);
-	tdaFire = tdaMagical * (1 + fire/100);
-	tdaIce = tdaMagical * (1 + ice/100);
-	tdaLightning = tdaMagical * (1 + lightning/100);
-	tdaDark = tdaMagical * (1 + dark/100);
-	tdaShot = tdaMagical * (1 + shot/100);
+    mp = Math.floor(baseStats.mp * (1 + attire.mpBonus)) + Math.round((1 + attire.mpBonus) *
+        (weapon[0].mp + weapon[1].mp + weapon[2].mp + weapon[3].mp + accessory[0].mp +
+        accessory[1].mp + accessory[2].mp + (experimagic * baseStats.level)));
+    mp = limit(mp,1,999);
+
+    str = Math.floor(baseStats.str * (1 + attire.strBonus)) + Math.round((1 + attire.strBonus) *
+        (weapon[0].str + weapon[1].str + weapon[2].str + weapon[3].str + accessory[0].str +
+        accessory[1].str + accessory[2].str + (strLevel * baseStats.level))) + food.str;
+
+    vit = Math.floor(baseStats.vit * (1 + attire.vitBonus)) + Math.round((1 + attire.vitBonus) *
+        (weapon[0].vit + weapon[1].vit + weapon[2].vit + weapon[3].vit + accessory[0].vit +
+        accessory[1].vit + accessory[2].vit + (vitLevel * baseStats.level))) + food.vit;
+
+    mag = Math.floor(baseStats.mag * (1 + attire.magBonus)) + Math.round((1 + attire.magBonus) *
+        (weapon[0].mag + weapon[1].mag + weapon[2].mag + weapon[3].mag + accessory[0].mag +
+        accessory[1].mag + accessory[2].mag + (magLevel * baseStats.level))) + food.mag;
+
+    spr = Math.floor(baseStats.spr * (1 + attire.sprBonus)) + Math.round((1 + attire.sprBonus) *
+        (weapon[0].spr + weapon[1].spr + weapon[2].spr + weapon[3].spr + accessory[0].spr +
+        accessory[1].spr + accessory[2].spr + (sprLevel * baseStats.level))) + food.spr;
+
+    fire = attire.fire + weapon[0].fire + weapon[1].fire + weapon[2].fire + weapon[3].fire +
+        accessory[0].fire + accessory[1].fire + accessory[2].fire + food.fire;
+    fire = limit(fire,0,100);
+
+    ice = attire.ice + weapon[0].ice + weapon[1].ice + weapon[2].ice + weapon[3].ice +
+        accessory[0].ice + accessory[1].ice + accessory[2].ice + food.ice;
+    ice = limit(ice,0,100);
+
+    lightning = attire.lightning + weapon[0].lightning + weapon[1].lightning +
+        weapon[2].lightning + weapon[3].lightning + accessory[0].lightning +
+        accessory[1].lightning + accessory[2].lightning + food.lightning;
+    lightning = limit(lightning,0,100);
+
+    dark = attire.dark + weapon[0].dark + weapon[1].dark + weapon[2].dark + weapon[3].dark +
+        accessory[0].dark + accessory[1].dark + accessory[2].dark;
+    dark = limit(dark,0,100);
+
+    shot = attire.shot + weapon[0].shot + weapon[1].shot + weapon[2].shot + weapon[3].shot +
+        accessory[0].shot + accessory[1].shot + accessory[2].shot;
+    shot = limit(shot,0,100);
+
+    attack = weapon[equipped].attack + str;
+    defense = vit;
+
+    tdaPhysical = hp * (1 + vit/100);
+    tdaMagical = hp * (1 + spr/100);
+    tdaFire = tdaMagical * (1 + fire/100);
+    tdaIce = tdaMagical * (1 + ice/100);
+    tdaLightning = tdaMagical * (1 + lightning/100);
+    tdaDark = tdaMagical * (1 + dark/100);
+    tdaShot = tdaMagical * (1 + shot/100);
 
 
+    //Dump data on screen
 
-	//TDA
+    //TDA
     document.getElementById('TDAPhysical').innerHTML = Math.round(tdaPhysical).toString();
     document.getElementById('TDAMagical').innerHTML = Math.round(tdaMagical).toString();
     document.getElementById('TDAFire').innerHTML = Math.round(tdaFire).toString();
@@ -843,4 +888,31 @@ function updateData() {
     document.getElementById('Notes').innerHTML = '';
 }
 
-updateData();
+
+updateData();//Run once to fill up result screen with initial data.
+
+//Add event listeners
+document.getElementById('level').addEventListener('change', updateData);
+document.getElementById('attire').addEventListener('change', updateData);
+document.getElementById('food').addEventListener('change', updateData);
+
+document.getElementById('weapon1').addEventListener('change', updateData);
+document.getElementById('weapon2').addEventListener('change', updateData);
+document.getElementById('weapon3').addEventListener('change', updateData);
+document.getElementById('weapon4').addEventListener('change', updateData);
+
+let radios = document.getElementsByName('equipped');
+for (const i in radios) {
+    radios[i].addEventListener('change', updateData);
+}
+
+document.getElementById('accessory1').addEventListener('change', updateData);
+document.getElementById('accessory2').addEventListener('change', updateData);
+document.getElementById('accessory3').addEventListener('change', updateData);
+
+document.getElementById('healthLevel').addEventListener('change', updateData);
+document.getElementById('experimagic').addEventListener('change', updateData);
+document.getElementById('strLevel').addEventListener('change', updateData);
+document.getElementById('vitLevel').addEventListener('change', updateData);
+document.getElementById('magLevel').addEventListener('change', updateData);
+document.getElementById('sprLevel').addEventListener('change', updateData);
