@@ -799,29 +799,29 @@ function updateData() {
 
 
     //Start computing
-    hp = Math.floor(baseStats.hp * (1 + attire.hpBonus)) + Math.round((1 + attire.hpBonus) *
+    hp = Math.floor(baseStats.hp * (1 + attire.hpBonus/100)) + Math.round((1 + attire.hpBonus/100) *
         (weapon[0].hp + weapon[1].hp + weapon[2].hp + weapon[3].hp + accessory[0].hp +
         accessory[1].hp + accessory[2].hp + (healthLevel * baseStats.level))) + food.hp;
     hp = limit(hp,1,9999);
 
-    mp = Math.floor(baseStats.mp * (1 + attire.mpBonus)) + Math.round((1 + attire.mpBonus) *
+    mp = Math.floor(baseStats.mp * (1 + attire.mpBonus/100)) + Math.round((1 + attire.mpBonus/100) *
         (weapon[0].mp + weapon[1].mp + weapon[2].mp + weapon[3].mp + accessory[0].mp +
         accessory[1].mp + accessory[2].mp + (experimagic * baseStats.level)));
     mp = limit(mp,1,999);
 
-    str = Math.floor(baseStats.str * (1 + attire.strBonus)) + Math.round((1 + attire.strBonus) *
+    str = Math.floor(baseStats.str * (1 + attire.strBonus/100)) + Math.round((1 + attire.strBonus/100) *
         (weapon[0].str + weapon[1].str + weapon[2].str + weapon[3].str + accessory[0].str +
         accessory[1].str + accessory[2].str + (strLevel * baseStats.level))) + food.str;
 
-    vit = Math.floor(baseStats.vit * (1 + attire.vitBonus)) + Math.round((1 + attire.vitBonus) *
+    vit = Math.floor(baseStats.vit * (1 + attire.vitBonus/100)) + Math.round((1 + attire.vitBonus/100) *
         (weapon[0].vit + weapon[1].vit + weapon[2].vit + weapon[3].vit + accessory[0].vit +
         accessory[1].vit + accessory[2].vit + (vitLevel * baseStats.level))) + food.vit;
 
-    mag = Math.floor(baseStats.mag * (1 + attire.magBonus)) + Math.round((1 + attire.magBonus) *
+    mag = Math.floor(baseStats.mag * (1 + attire.magBonus/100)) + Math.round((1 + attire.magBonus/100) *
         (weapon[0].mag + weapon[1].mag + weapon[2].mag + weapon[3].mag + accessory[0].mag +
         accessory[1].mag + accessory[2].mag + (magLevel * baseStats.level))) + food.mag;
 
-    spr = Math.floor(baseStats.spr * (1 + attire.sprBonus)) + Math.round((1 + attire.sprBonus) *
+    spr = Math.floor(baseStats.spr * (1 + attire.sprBonus/100)) + Math.round((1 + attire.sprBonus/100) *
         (weapon[0].spr + weapon[1].spr + weapon[2].spr + weapon[3].spr + accessory[0].spr +
         accessory[1].spr + accessory[2].spr + (sprLevel * baseStats.level))) + food.spr;
 
@@ -886,6 +886,35 @@ function updateData() {
 
     //Notes
     document.getElementById('Notes').innerHTML = '';
+    
+    if (weapon[equipped].effect != '') {
+        document.getElementById('Notes').innerHTML += '<strong>' + weapon[equipped].name +
+            ':</strong> ' + weapon[equipped].effect + '<br>';
+    }
+    
+    if (attire.effect != '') {
+        document.getElementById('Notes').innerHTML += '<strong>' + attire.name +
+            ':</strong> ' + attire.effect + '<br>';
+    }
+        
+    if (accessory[0].effect != '') {
+        document.getElementById('Notes').innerHTML += '<strong>' + accessory[0].name +
+            ':</strong> ' + accessory[0].effect + '<br>';
+    }
+    
+    if (accessory[1].effect != '') {
+        document.getElementById('Notes').innerHTML += '<strong>' + accessory[1].name +
+            ':</strong> ' + accessory[1].effect + '<br>';
+    }
+
+    if (accessory[2].effect != '') {
+        document.getElementById('Notes').innerHTML += '<strong>' + accessory[2].name +
+            ':</strong> ' + accessory[2].effect + '<br>';
+    }
+    
+    if (food.effect != ''){
+        document.getElementById('Notes').innerHTML += '<strong>' + food.name + ':</strong> ' + food.effect + '<br>';
+    }
 }
 
 
