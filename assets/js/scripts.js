@@ -902,7 +902,7 @@ document.getElementById('weapon3').addEventListener('change', updateData);
 document.getElementById('weapon4').addEventListener('change', updateData);
 
 let radios = document.getElementsByName('equipped');
-for (const i in radios) {
+for (let i = 0; i < radios.length; i++) {
     radios[i].addEventListener('change', updateData);
 }
 
