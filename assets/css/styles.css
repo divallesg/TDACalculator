@@ -1,4 +1,51 @@
 .dropdown {
-  max-width:12rem;
+  max-width:15rem;
+  margin-top:3px;
+}
+
+.col-lg-4.weapon-column {
+  max-width:28%;
+}
+
+.col.ascension-column {
+  max-width:35%;
+}
+
+.col-lg-5.accessory-column {
+  max-width:39%;
+}
+
+.result-box {
+  height:12px;
+}
+
+.fire {
+  color:red;
+  text-shadow:1px 1px 10px white, 1px 1px 10px red;
+}
+
+.ice {
+  color:blue;
+  text-shadow:1px 1px 10px white, 1px 1px 10px blue;
+}
+
+.lightning {
+  color:yellow;
+  text-shadow:1px 1px 10px white, 1px 1px 10px yellow;
+}
+
+.dark {
+  color:black;
+  text-shadow:1px 1px 10px white, 1px 1px 10px black;
+}
+
+.shot {
+  color:green;
+  text-shadow:1px 1px 10px white, 1px 1px 10px green;
+}
+
+.row.divider {
+  height:1.5rem;
+  color:grey;
 }
 

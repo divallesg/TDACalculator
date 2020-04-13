@@ -13,7 +13,7 @@
     <header>
         <div class="row">
             <div class="col">
-                <h1 style="padding-left:22px;padding-top:8px;">TDA Calculator for FFXV (Noctis)</h1>
+                <h1 style="padding-left:22px;padding-top:8px;">TDA Calculator for FFXV</h1>
             </div>
         </div>
     </header>
@@ -23,26 +23,32 @@
                 <div class="row" style="background-color:#FEE5D5;margin:6px;border-radius:12px;">
                     <div class="col">
                         <div class="row">
+                            <div class="col-lg-3">
+                                <p>Character:</p>
+                            </div>
+                            <div class="col"><select id="character" style="margin-top:3px;"><option value="0" selected="">Noctis</option><option value="1">Gladiolus</option><option value="2">Ignis</option><option value="3">Prompto</option></select></div>
+                        </div>
+                        <div class="row">
                             <div class="col">
                                 <div class="row">
-                                    <div class="col">
-                                        <p>Level (1-120):&nbsp;</p>
+                                    <div class="col-lg-3">
+                                        <p>Level:</p>
                                     </div>
-                                    <div class="col"><input type="number" value="1" placeholder="1-120" min="1" max="120" step="1" id="level" style="margin-top:2px;" pattern="[0-9]"></div>
+                                    <div class="col"><input type="number" value="1" placeholder="1-120" min="1" max="120" step="1" id="level" style="margin-top:3px;" pattern="[0-9]"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col">
-                                <p>Attire:&nbsp;</p>
+                            <div class="col-lg-4" style="max-width:14%;">
+                                <p>Attire:</p>
                             </div>
-                            <div class="col"><select id="attire" class="dropdown"><option value="0" selected="">None</option></select></div>
+                            <div class="col"><select id="attire" class="dropdown" style="max-width:17rem;"><option value="0" selected="">None</option></select></div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-3">
-                                <p>Food:&nbsp;</p>
+                            <div class="col-lg-3" style="max-width:14%;">
+                                <p>Food:</p>
                             </div>
-                            <div class="col"><select id="food" class="dropdown"><option value="0" selected="">None</option></select></div>
+                            <div class="col"><select id="food" class="dropdown" style="max-width:19rem;"><option value="0" selected="">None</option></select></div>
                         </div>
                     </div>
                 </div>
@@ -60,29 +66,29 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-1"><input type="radio" name="equipped" value="0" checked=""></div>
-                            <div class="col-lg-4">
-                                <p>Weapon 1:&nbsp;</p>
+                            <div class="col-lg-4 weapon-column">
+                                <p>Weapon 1:</p>
                             </div>
                             <div class="col"><select id="weapon1" class="dropdown"><option value="0" selected="">None</option></select></div>
                         </div>
                         <div class="row">
                             <div class="col-lg-1"><input type="radio" name="equipped" value="1"></div>
-                            <div class="col-lg-4">
-                                <p>Weapon 2:&nbsp;</p>
+                            <div class="col-lg-4 weapon-column">
+                                <p>Weapon 2:</p>
                             </div>
                             <div class="col"><select id="weapon2" class="dropdown"><option value="0" selected="">None</option></select></div>
                         </div>
                         <div class="row">
                             <div class="col-lg-1"><input type="radio" name="equipped" value="2"></div>
-                            <div class="col-lg-4">
-                                <p>Weapon 3:&nbsp;</p>
+                            <div class="col-lg-4 weapon-column">
+                                <p>Weapon 3:</p>
                             </div>
                             <div class="col"><select id="weapon3" class="dropdown"><option value="0" selected="">None</option></select></div>
                         </div>
                         <div class="row">
                             <div class="col-lg-1"><input type="radio" name="equipped" value="3"></div>
-                            <div class="col-lg-4">
-                                <p>Weapon 4:&nbsp;</p>
+                            <div class="col-lg-4 weapon-column">
+                                <p>Weapon 4:</p>
                             </div>
                             <div class="col"><select id="weapon4" class="dropdown"><option value="0" selected="">None</option></select></div>
                         </div>
@@ -96,20 +102,20 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-5">
-                                <p>Accessory Slot 1:&nbsp;</p>
+                            <div class="col-lg-5 accessory-column">
+                                <p>Accessory Slot 1:</p>
                             </div>
                             <div class="col"><select id="accessory1" class="dropdown"><option value="0" selected="">None</option></select></div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-5">
-                                <p>Accessory Slot 2:&nbsp;</p>
+                            <div class="col-lg-5 accessory-column">
+                                <p>Accessory Slot 2:</p>
                             </div>
                             <div class="col"><select id="accessory2" class="dropdown"><option value="0" selected="">None</option></select></div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-5">
-                                <p>Accessory Slot 3:&nbsp;</p>
+                            <div class="col-lg-5 accessory-column">
+                                <p>Accessory Slot 3:</p>
                             </div>
                             <div class="col"><select id="accessory3" class="dropdown"><option value="0" selected="">None</option></select></div>
                         </div>
@@ -123,38 +129,38 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col">
-                                <p>Health Level:&nbsp;</p>
+                            <div class="col ascension-column">
+                                <p>Health Level:</p>
                             </div>
                             <div class="col"><select id="healthLevel" class="dropdown"><optgroup label="Ascension upgrade"><option value="0" selected="">None</option><option value="2">Health Level</option><option value="5">Health Level II</option><option value="10">Health Level III</option></optgroup></select></div>
                         </div>
                         <div class="row">
-                            <div class="col">
-                                <p>Experimagic:&nbsp;</p>
+                            <div class="col ascension-column">
+                                <p>Experimagic:</p>
                             </div>
                             <div class="col"><input type="checkbox" id="experimagic"></div>
                         </div>
                         <div class="row">
-                            <div class="col">
-                                <p>Strength Level:&nbsp;</p>
+                            <div class="col ascension-column">
+                                <p>Strength Level:</p>
                             </div>
                             <div class="col"><input type="checkbox" id="strLevel"></div>
                         </div>
                         <div class="row">
-                            <div class="col">
-                                <p>Vitality Level:&nbsp;</p>
+                            <div class="col ascension-column">
+                                <p>Vitality Level:</p>
                             </div>
                             <div class="col"><input type="checkbox" id="vitLevel"></div>
                         </div>
                         <div class="row">
-                            <div class="col">
-                                <p>Magic Level:&nbsp;</p>
+                            <div class="col ascension-column">
+                                <p>Magic Level:</p>
                             </div>
                             <div class="col"><select id="magLevel" class="dropdown"><optgroup label="Ascension upgrade"><option value="0" selected="">None</option><option value="1">Magic Level</option><option value="3">Magic Level II</option></optgroup></select></div>
                         </div>
                         <div class="row">
-                            <div class="col">
-                                <p>Spirit Level:&nbsp;</p>
+                            <div class="col ascension-column">
+                                <p>Spirit Level:</p>
                             </div>
                             <div class="col"><input type="checkbox" id="sprLevel"></div>
                         </div>
@@ -203,69 +209,69 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row divider">
                             <div class="col">
-                                <h5 style="height:12px;">Elemental</h5>
+                                <h5>- - - - - - - - - - - - - - Elemental&nbsp;- - - - - - - - - - - - - -<br></h5>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <div class="row">
                                     <div class="col">
-                                        <p id="TDAFire" style="height:12px;"></p>
+                                        <p id="TDAFire" class="result-box"></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <h6>Fire</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="row">
-                                    <div class="col">
-                                        <p id="TDAIce" style="height:12px;"></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <h6>Ice</h6>
+                                        <h6 class="fire">Fire</h6>
                                     </div>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="row">
                                     <div class="col">
-                                        <p id="TDALightning" style="height:12px;"></p>
+                                        <p id="TDAIce" class="result-box"></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <h6>Lightning</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="row">
-                                    <div class="col">
-                                        <p id="TDADark" style="height:12px;"></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <h6>Dark</h6>
+                                        <h6 class="ice">Ice</h6>
                                     </div>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="row">
                                     <div class="col">
-                                        <p id="TDAShot" style="height:12px;"></p>
+                                        <p id="TDALightning" class="result-box"></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <h6>Shot</h6>
+                                        <h6 class="lightning">Lightning</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        <p id="TDADark" class="result-box"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="dark">Dark</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        <p id="TDAShot" class="result-box"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="shot">Shot</h6>
                                     </div>
                                 </div>
                             </div>
@@ -304,6 +310,23 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-lg-1">
+                                <div class="row divider">
+                                    <div class="col">
+                                        <p>|</p>
+                                    </div>
+                                </div>
+                                <div class="row divider">
+                                    <div class="col">
+                                        <p>|</p>
+                                    </div>
+                                </div>
+                                <div class="row divider">
+                                    <div class="col">
+                                        <p>|</p>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col">
                                 <div class="row">
                                     <div class="col">
@@ -327,6 +350,70 @@
                                         <h5 style="height:36px;">Defense</h5>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="row">
+                                            <div class="col">
+                                                <p id="StatsHPRec"></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <h6>HP Recovery Rate</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="row">
+                                            <div class="col">
+                                                <p id="StatsMPRec"></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <h6>MP Recovery Rate</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-1">
+                                <div class="row divider">
+                                    <div class="col">
+                                        <p>|</p>
+                                    </div>
+                                </div>
+                                <div class="row divider">
+                                    <div class="col">
+                                        <p>|</p>
+                                    </div>
+                                </div>
+                                <div class="row divider">
+                                    <div class="col">
+                                        <p>|</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        <p id="StatsCrit"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <h5>Critical Hit Rate</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row divider">
+                            <div class="col">
+                                <h5 style="color:gray;">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</h5>
                             </div>
                         </div>
                         <div class="row">
@@ -379,69 +466,130 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row divider">
                             <div class="col">
-                                <h5 style="height:12px;">Resistences</h5>
+                                <h5>- - - - - - - - - - - Elemental Resistances - - - - - - - - - - -<br></h5>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <div class="row">
                                     <div class="col">
-                                        <p id="StatsFire" style="height:12px;"></p>
+                                        <p id="StatsFire" class="result-box"></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <h6>Fire<br></h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="row">
-                                    <div class="col">
-                                        <p id="StatsIce" style="height:12px;"></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <h6>Ice</h6>
+                                        <h6 class="fire">Fire<br></h6>
                                     </div>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="row">
                                     <div class="col">
-                                        <p id="StatsLightning" style="height:12px;"></p>
+                                        <p id="StatsIce" class="result-box"></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <h6>Lightning</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="row">
-                                    <div class="col">
-                                        <p id="StatsDark" style="height:12px;"></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <h6>Dark</h6>
+                                        <h6 class="ice">Ice</h6>
                                     </div>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="row">
                                     <div class="col">
-                                        <p id="StatsShot" style="height:12px;"></p>
+                                        <p id="StatsLightning" class="result-box"></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <h6>Shot</h6>
+                                        <h6 class="lightning">Lightning</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        <p id="StatsDark" class="result-box"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="dark">Dark</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        <p id="StatsShot" class="result-box"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="shot">Shot</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="background-color:#BFDCFF;margin:6px;border-radius:12px;text-align:center;">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <h2 class="text-center">Bonuses</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        <p id="BonusesIDR"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6>Item Drop Rate</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        <p id="BonusesXP"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6>Experience</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        <p id="BonusesPhase"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6>Phase Cost</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="row divider">
+                                    <div class="col">
+                                        <h5>- - - - - - - - - - - - - -&nbsp;Immunities - - - - - - - - - - - - - -<br></h5>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p id="bonusesImmunities"></p>
                                     </div>
                                 </div>
                             </div>
