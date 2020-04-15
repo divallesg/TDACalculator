@@ -16,7 +16,10 @@
 }
 
 .result-box {
-  height:12px;
+  /*height:8px;*/
+  margin-bottom:0px;
+  /*white-space:nowrap;*/
+  /*margin:auto;*/
 }
 
 .fire {
@@ -44,8 +47,22 @@
   text-shadow:1px 1px 10px white, 1px 1px 10px green;
 }
 
+.light {
+  color:white;
+  text-shadow:1px 1px 10px white, 1px 1px 10px white;
+}
+
+.non-elemental {
+  color:gray;
+  text-shadow:1px 1px 10px white, 1px 1px 10px gray;
+}
+
 .row.divider {
   height:1.5rem;
   color:grey;
+}
+
+.damage {
+  font-size:small;
 }
 

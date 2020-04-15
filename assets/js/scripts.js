@@ -16,15 +16,15 @@ class BaseStat {
 }
 
 class Character {
-	constructor(name, hprec, mprec, baseStats) {
+	constructor(name, hprec, mprec, weaponType1, weaponType2, baseStats) {
 		this.name = name;
 		this.hprec = hprec;
 		this.mprec = mprec;
+		this.weaponType1 = weaponType1;
+		this.weaponType2 = weaponType2;
 		this.baseStats = baseStats;
 	}
 }
-
-//Make a GetStats function where you drop in the level.
 
 class Attire {    
     constructor(equip,name,hpBonus,mpBonus,strBonus,vitBonus,magBonus,sprBonus,fire,ice,lightning,dark,
@@ -77,7 +77,8 @@ class Food {
 }
 
 class Weapon {
-    constructor(type,name,attack,crit,hp,mp,str,vit,mag,spr,fire,ice,lightning,dark,shot,hprec,effect) {
+    constructor(type,name,attack,crit,hp,mp,str,vit,mag,spr,fire,ice,lightning,dark,shot,hprec,
+    	element,effect) {
         this.type = type;
         this.name = name;
         this.attack = attack;
@@ -94,6 +95,7 @@ class Weapon {
         this.dark = dark;
         this.shot = shot;
         this.hprec = hprec;
+        this.element = element;
         this.effect = effect;
     }
 }
@@ -142,7 +144,7 @@ const xpRequired = [99,165,264,396,462,627,759,891,1023,1221,1386,1584,1815,2013
 
 
 //Character stats
-const charList = [new Character ('Noctis',4,20,[
+const charList = [new Character ('Noctis',4,20,'','',[
 	new BaseStat (1,325,75,19,22,63,40),
 	new BaseStat (2,331,77,20,23,71,41),
 	new BaseStat (3,336,79,20,23,77,41),
@@ -265,7 +267,7 @@ const charList = [new Character ('Noctis',4,20,[
 	new BaseStat (120,4346,249,379,157,415,209)]),
 	
 	//Gladiolus
-	new Character ('Gladiolus',4,0,[
+	new Character ('Gladiolus',4,0,'Greatsword','Shield',[
 	new BaseStat (1,534,100,27,40,7,36),
 	new BaseStat (2,542,100,27,41,8,37),
 	new BaseStat (3,552,100,28,43,9,38),
@@ -388,7 +390,7 @@ const charList = [new Character ('Noctis',4,20,[
 	new BaseStat (120,7024,100,456,296,55,180)]),
 
 	//Ignis
-	new Character ('Ignis',4,0,[
+	new Character ('Ignis',4,0,'Daggers','Polearm',[
 	new BaseStat (1,339,100,17,31,24,51),
 	new BaseStat (2,345,100,17,32,27,52),
 	new BaseStat (3,351,100,18,33,30,53),
@@ -511,7 +513,7 @@ const charList = [new Character ('Noctis',4,20,[
 	new BaseStat (120,4617,100,386,172,213,219)]),
 
 	//Prompto
-	new Character ('Prompto',4,20,[
+	new Character ('Prompto',4,20,'Firearm','Machinery',[
 	new BaseStat (1,178,100,21,21,11,38),
 	new BaseStat (2,180,100,21,22,13,39),
 	new BaseStat (3,185,100,22,23,14,40),
@@ -801,7 +803,7 @@ const foodList = [
 	new Food ('Restaurant','','Leiden Jambalaya',200,150,0,0,0,0,0,0,25,0,0,0,'','',''),
 	new Food ('Restaurant','','Hammerhead Hot Sandwich',200,80,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Restaurant','','Sizzling Humongo-Steak',1000,0,0,0,0,0,0,0,0,0,0,0,'','',''),
-	new Food ('Restaurant','','Jetty\'s',0,0,0,0,0,0,0,0,0,0,0,0,'Poison Toad','',''),
+	new Food ('Restaurant','','Jetty\'s',0,0,0,0,0,0,0,0,0,0,0,0,'Poison, Toad','',''),
 	new Food ('Restaurant','','Kenny\'s Fries',300,0,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Restaurant','','Kenny\'s Salmon',0,150,200,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Restaurant','','Kenny\'s "Special" Salmon',0,400,300,300,0,0,0,0,0,0,0,0,'','',''),
@@ -839,138 +841,138 @@ const foodList = [
 
 //Weapons
 const weaponList = [
-	new Weapon ('','None',0,0,0,0,0,0,0,0,0,0,0,0,0,0,''),
-	new Weapon ('Sword','Engine Blade',28,2,0,5,0,0,5,0,0,0,0,0,0,0,'Absorbs elemental energy when dealing the finishing blow to an enemy'),
-	new Weapon ('Sword','Broadsword',42,2,0,6,0,0,0,0,0,0,0,0,0,0,'+2% Critical Rate per combo hit'),
-	new Weapon ('Sword','Engine Blade II',42,2,0,15,0,0,12,0,0,0,0,0,0,0,'Absorbs elemental energy when dealing the finishing blow to an enemy'),
-	new Weapon ('Sword','Crowbar',58,2,0,0,0,0,0,0,0,0,0,0,0,0,'+80% breakage on body parts/appendages'),
-	new Weapon ('Sword','Blazefire Saber',71,2,0,9,0,18,0,0,0,0,0,0,0,0,'-15% physical damage taken'),
-	new Weapon ('Sword','Blazefire Saber XV',72,2,0,9,0,18,0,0,0,0,0,0,0,0,'-15% physical damage taken'),
-	new Weapon ('Sword','Airstep Sword',83,2,0,7,0,0,0,0,0,0,0,0,0,0,'Halves MP consumption in mid-air'),
-	new Weapon ('Sword','Rune Saber',103,2,48,8,0,8,12,9,0,0,0,0,0,0,''),
-	new Weapon ('Sword','Flame Tongue',117,2,0,7,0,0,0,0,28,0,0,0,0,0,'Inflicts Fire-based damage'),
-	new Weapon ('Sword','Ice Brand',137,2,0,10,0,0,0,0,0,31,0,0,0,0,'Inflicts Ice-based damage'),
-	new Weapon ('Sword','Ragnarok',153,2,0,8,0,0,0,0,0,0,0,0,0,0,'Boosted damage with warp-strike but the warp animation is slower'),
-	new Weapon ('Sword','Sarah\'s Shortsword',179,2,0,0,0,0,9,15,0,0,0,0,0,0,'+50% damage at full HP. Light-elemental'),
-	new Weapon ('Sword','Blood Sword',198,2,0,11,0,0,0,0,0,0,0,0,0,0,'20% chance to recover 30 HP per hit'),
-	new Weapon ('Sword','Garuda\'s Gaze',200,2,0,6,16,17,21,14,0,0,0,0,0,0,'Strengthened aerial attacks'),
-	new Weapon ('Sword','Engine Blade III',207,2,0,25,0,0,18,0,0,0,0,0,0,0,'Absorbs elemental energy when dealing the finishing blow to an enemy'),
-	new Weapon ('Sword','Durandal',232,2,0,11,0,0,0,0,0,0,0,33,0,0,'Light-elemental'),
-	new Weapon ('Sword','Enhancer',276,2,0,12,0,0,0,0,0,0,0,0,0,0,''),
-	new Weapon ('Sword','Soul Saber',343,2,0,12,0,0,0,0,0,0,0,0,0,0,'+4% damage for each 1% below 50% Stamina'),
-	new Weapon ('Sword','Ultima Blade',364,2,0,40,0,0,30,0,0,0,0,0,0,0,'Absorbs elemental energy when dealing the finishing blow to an enemy'),
-	new Weapon ('Sword','Gaze of the Vortex',430,100,0,60,22,22,22,15,0,0,0,0,0,0,'Deals 50% more damage with aerial attacks. Airstepping and aerial warping cost halved. Always inflicts a critical hit'),
-	new Weapon ('Sword','Balmung',446,2,0,11,0,0,0,0,0,0,0,0,0,0,'-4% damage for every 1% of missing MP'),
-	new Weapon ('Greatsword','Two-Handed Sword',48,1,53,0,0,0,0,0,0,0,0,0,0,0,'+15% damage per additional enemy within 65 feet (max 100%)'),
-	new Weapon ('Greatsword','War Sword',78,1,65,0,0,0,0,0,0,0,0,0,0,0,'10% chance to inflict Compromised'),
-	new Weapon ('Greatsword','Dodanuki',80,1,0,0,46,0,0,0,0,0,0,0,0,0,'Reduces enemy defense with each slash'),
-	new Weapon ('Greatsword','Masamune',88,1,49,0,0,0,0,0,0,0,0,0,0,0,'20% chance of inflicting 30% Max HP damage when the target\'s HP is full'),
-	new Weapon ('Greatsword','Blade of Brennaere',131,1,82,0,0,0,0,0,27,0,0,0,0,0,'Inflicts Fire-based damage'),
-	new Weapon ('Greatsword','Claymore',156,1,98,0,0,32,0,0,0,0,0,0,0,0,''),
-	new Weapon ('Greatsword','Force Stealer',210,1,202,6,0,0,0,0,0,0,0,0,0,0,'Absorbs elemental energy when dealing the finishing blow to an enemy'),
-	new Weapon ('Greatsword','Hardedge',244,1,153,0,0,0,0,0,0,0,0,0,0,0,'+80% breakage on body parts/appendages'),
-	new Weapon ('Greatsword','Mutant Rakshasa Blade',328,1,124,32,25,0,52,21,0,0,0,58,0,0,'The blade sends out three projections that damage the target before Noctis warps. The warp-strike also ignores greatsword resistances/weaknesses'),
-	new Weapon ('Greatsword','Thunderbolt',345,1,246,0,0,0,0,0,0,0,29,0,0,0,'Inflicts Lightning-based damage'),
-	new Weapon ('Greatsword','Duel Code',370,1,468,0,0,0,0,0,0,0,0,0,0,0,'+50% damage to lone enemies within 65 feet'),
-	new Weapon ('Greatsword','Genji Blade',426,1,357,0,0,0,0,0,0,0,0,0,0,0,''),
-	new Weapon ('Greatsword','Garuda\'s Pain',456,1,0,6,22,24,29,20,0,0,0,0,0,0,'Strengthened aerial attacks'),
-	new Weapon ('Greatsword','Force Stealer II',463,1,308,11,0,0,0,0,0,0,0,0,0,0,'Absorbs elemental energy when dealing the finishing blow to an enemy'),
-	new Weapon ('Greatsword','Hyperion',496,1,310,0,0,0,0,0,0,0,0,0,0,0,'+15% damage per additional enemy within 65 feet (max 100%)'),
-	new Weapon ('Greatsword','Afrosword',503,1,287,0,0,0,0,54,0,0,0,0,0,0,'Changes battle music to Timed Quest music when equipped to Noctis or Gladiolus and controlling them'),
-	new Weapon ('Greatsword','Pain of the Vortex',572,1,0,60,31,31,31,22,0,0,0,0,0,0,'Deals 50% more damage with aerial attacks. Aerial warping MP cost halved. Always inflicts a critical hit'),
-	new Weapon ('Greatsword','Iron Duke',581,1,153,0,20,0,0,0,0,0,0,0,0,0,''),
-	new Weapon ('Greatsword','Dominator',583,1,298,0,0,0,0,0,0,0,0,32,0,0,'Light-elemental'),
-	new Weapon ('Greatsword','Apocalypse',597,1,403,0,0,0,0,0,0,0,0,0,0,0,'When below 30% HP: +30 damage and +9 damage for each 1% missing HP below 30%'),
-	new Weapon ('Polearm','Javelin',18,3,0,0,0,0,0,0,0,0,0,0,0,0,'When below 30% HP: Critical +5% and another +1.5% per each 1% missing HP below 30%'),
-	new Weapon ('Polearm','Drain Lance',33,3,0,5,0,0,0,0,0,0,0,0,0,0,'Absorbs elemental energy when dealing the finishing blow to an enemy'),
-	new Weapon ('Polearm','Drain Lance II',48,3,0,11,0,0,0,0,0,0,0,0,0,0,'Absorbs elemental energy when dealing the finishing blow to an enemy'),
-	new Weapon ('Polearm','Mythril Lance',55,3,0,0,0,0,32,0,0,0,0,0,0,0,''),
-	new Weapon ('Polearm','Rapier Lance',68,3,0,0,0,0,0,0,0,0,0,0,0,0,'+80% breakage on body parts/appendages'),
-	new Weapon ('Polearm','Gae Bolg',75,3,0,0,0,0,0,0,0,0,0,0,0,0,'+44% damage when using warp-strikes'),
-	new Weapon ('Polearm','Storm Lance',113,3,0,0,0,0,0,0,0,0,0,0,0,0,'Inflicts Lightning-based damage'),
-	new Weapon ('Polearm','Ice Spear',133,3,0,0,0,0,0,0,0,0,0,0,0,0,'Inflicts Ice-based damage'),
-	new Weapon ('Polearm','Wyvern Lance',161,3,0,0,0,0,0,0,0,0,0,0,0,0,'+50% damage in mid-air'),
-	new Weapon ('Polearm','Drain Lance III',195,3,0,11,0,0,0,0,0,0,0,0,0,0,'Absorbs elemental energy when dealing the finishing blow to an enemy'),
-	new Weapon ('Polearm','Radiant Lance',205,3,0,0,0,0,0,0,0,0,0,0,0,0,'Light-elemental'),
-	new Weapon ('Polearm','Dragoon Lance',246,3,0,0,0,0,0,0,15,14,16,0,0,0,''),
-	new Weapon ('Polearm','Precision Lance',266,3,0,0,0,0,0,0,0,0,0,0,0,0,'+10% Critical Rate'),
-	new Weapon ('Polearm','Flayer',337,3,0,0,0,0,0,0,0,0,0,0,0,0,'Finishers deal +80% damage'),
-	new Weapon ('Daggers','Daggers',20,7,0,4,0,0,5,0,0,0,0,0,0,0,'+50% damage to enemies in vulnerable status'),
-	new Weapon ('Daggers','Avengers',43,7,0,4,0,0,5,0,0,0,0,0,0,0,'When below 30% HP: Critical +5 and another +1.5 per each 1% missing HP below 30%'),
-	new Weapon ('Daggers','Cutlasses',58,7,0,6,0,0,10,0,0,0,0,0,0,0,'10% chance to inflict Enfeebled'),
-	new Weapon ('Daggers','Mythril Knives',62,7,0,6,0,0,50,0,0,0,0,0,0,0,''),
-	new Weapon ('Daggers','Mage Mashers',66,7,0,13,0,0,32,0,30,30,30,0,0,0,''),
-	new Weapon ('Daggers','Plunderers',111,7,0,10,0,0,10,0,0,0,0,0,0,0,'Absorbs elemental energy when dealing the finishing blow to an enemy'),
-	new Weapon ('Daggers','Assassin\'s Daggers',126,7,0,7,0,0,10,0,0,0,0,0,0,0,'10% chance to inflict Poisons'),
-	new Weapon ('Daggers','Delta Daggers',153,7,0,6,0,0,15,0,0,0,0,0,0,0,'10% chance to inflict Compromised'),
-	new Weapon ('Daggers','Garuda\'s Plumes',176,7,0,6,22,24,29,20,0,0,0,0,0,0,'Strengthened aerial attacks'),
-	new Weapon ('Daggers','Spelldaggers',178,7,0,0,28,0,0,16,0,0,0,0,0,0,'Exploits any enemy\'s elemental weakness'),
-	new Weapon ('Daggers','Plunderers II',183,7,0,15,0,0,30,0,0,0,0,0,0,0,'Absorbs elemental energy when dealing the finishing blow to an enemy'),
-	new Weapon ('Daggers','Main Gauches',192,7,0,7,0,0,21,0,0,0,0,0,0,0,'+50% damage to enemies in vulnerable status'),
-	new Weapon ('Daggers','Orichalcurn',223,7,0,9,0,0,20,0,0,0,0,0,0,0,'Light-elemental'),
-	new Weapon ('Daggers','Ulric\'s Kukris',234,12,282,24,8,15,48,20,5,7,4,19,21,1,''),
-	new Weapon ('Daggers','Organyx',248,7,0,10,0,25,23,32,10,10,10,10,0,0,''),
-	new Weapon ('Daggers','Vigilantes',290,7,0,5,0,0,20,0,0,0,0,0,0,0,'5% chance to inflict Stop'),
-	new Weapon ('Daggers','Plumes of the Vortex',320,7,0,60,31,31,31,22,0,0,0,0,0,0,'Deal 50% more damage with aerial attacks. Aerial warping MP cost halved. Always inflicts a critical hit'),
-	new Weapon ('Daggers','Zwill Crossblade',345,7,0,5,0,0,25,0,0,0,0,0,0,0,'+80% damage at full HP'),
-	new Weapon ('Firearm','Handgun',32,1,0,0,0,0,0,4,0,0,0,0,0,0,'+80% breakage on body parts/appendages'),
-	new Weapon ('Firearm','Cocytus',45,1,0,0,0,0,0,7,0,0,0,0,0,0,'Inflicts Ice-based damage'),
-	new Weapon ('Firearm','Calamity',53,1,0,0,0,0,0,5,0,0,0,0,0,0,'10% chance to inflict poison'),
-	new Weapon ('Firearm','Mythril Pistol',96,1,0,0,0,0,42,11,0,0,0,0,0,0,''),
-	new Weapon ('Firearm','Valiant',147,1,0,11,0,0,0,12,0,0,0,0,0,0,'Absorbs elemental energy when dealing the finishing blow to an enemy'),
-	new Weapon ('Firearm','Cerberus',156,1,0,0,0,0,0,6,0,0,0,0,0,0,'A rifle that can be manually-aimed in three different ways. It is only available to Noctis'),
-	new Weapon ('Firearm','Rebellion',167,1,0,0,0,0,0,15,0,0,0,0,0,0,'When below 30% HP: Critical +5 and another +1.5 per each 1% missing HP below 30%'),
-	new Weapon ('Firearm','Garuda\'s Abandon',193,1,0,6,22,24,29,20,0,0,0,0,0,0,'Strengthened enemy appendages breaking power'),
-	new Weapon ('Firearm','Valiant II',200,1,0,14,0,0,0,21,0,0,0,0,0,0,'Absorbs elemental energy when dealing the finishing blow to an enemy'),
-	new Weapon ('Firearm','Flame Gun',210,1,0,0,0,0,0,16,0,0,0,0,0,0,'Inflicts Fire-based damage'),
-	new Weapon ('Firearm','Quicksilver',222,1,0,0,0,0,0,18,0,0,0,0,0,0,'+80% breakage on body parts/appendages'),
-	new Weapon ('Firearm','Enforcer',243,1,0,0,0,0,0,19,0,0,0,0,0,0,'+10% Critical Rate'),
-	new Weapon ('Firearm','Lion Heart',262,1,0,0,9,0,0,14,0,0,0,0,0,0,'When below 30% HP: Critical +5 and another +1.5 per each 1% missing HP below 30%'),
-	new Weapon ('Firearm','Executioner',363,1,0,0,0,0,0,22,0,0,0,0,0,0,'+50% damage to lone enemies within 65 feet'),
-	new Weapon ('Firearm','Hyper Magnum',388,1,0,0,0,0,0,21,0,0,0,0,0,0,''),
-	new Weapon ('Firearm','Abandon of the Vortex',399,100,0,60,31,31,31,22,0,0,0,0,0,0,'Strengthened enemy appendage breaking power. Deals 50% more damage to vulnerable targets. Always inflicts a critical hit'),
-	new Weapon ('Firearm','Death Penalty',424,1,0,0,0,0,0,25,0,0,0,0,0,0,'1% chance to inflict Instant Death'),
-	new Weapon ('Shield','Kite Shield',52,0,0,0,0,15,0,0,0,0,0,0,8,0,'Recovers 50 HP per Blink'),
-	new Weapon ('Shield','Absorb Shield',83,0,0,10,0,30,0,0,0,0,0,0,12,0,'Absorbs elemental energy when dealing the finishing blow to an enemy'),
-	new Weapon ('Shield','Ice Shield',93,0,0,0,0,18,0,0,0,22,0,0,10,0,'+30% HP Recovery Rate for 5 seconds after taking Ice damage'),
-	new Weapon ('Shield','Thunder Shield',111,0,0,0,0,21,0,0,0,0,24,0,12,0,'x4 Critical Rate for 5 seconds after taking Lightning damage'),
-	new Weapon ('Shield','Flame Shield',126,0,0,0,0,22,0,0,21,0,0,0,9,0,'+300 Strength for 5 seconds after taking Fire damage'),
-	new Weapon ('Shield','Hero Shield',144,0,0,0,0,25,0,0,0,0,0,0,22,0,'-30% damage from bullets'),
-	new Weapon ('Shield','Absorb Shield II',167,0,0,15,0,38,0,0,0,0,0,0,12,0,'Absorbs elemental energy when dealing the finishing blow to an enemy'),
-	new Weapon ('Shield','Black Prince',175,0,0,0,0,32,0,0,0,0,0,22,13,0,'+300 Magic for 5 seconds after taking Darkness damage'),
-	new Weapon ('Shield','Power Shield',176,0,0,0,0,6,0,0,0,0,0,0,11,0,''),
-	new Weapon ('Shield','Medjay Assassin\'s Shield',202,0,0,0,0,0,0,0,0,0,0,0,0,0,'+200 Strength for 3 seconds after Blocking'),
-	new Weapon ('Shield','Wizard Shield',225,0,0,0,0,34,99,0,0,0,0,0,12,0,''),
-	new Weapon ('Shield','Aegis Shield',292,0,0,0,0,55,0,0,0,0,0,0,11,0,'10% chance to nullify any incoming damage'),
-	new Weapon ('Shield','Alien Shield',313,0,0,0,18,52,0,48,12,14,13,10,18,0,'Light-elemental'),
-	new Weapon ('Shield','Ziedrich',327,0,0,0,0,50,0,0,0,0,0,0,14,0,'+200 Strength for 3 seconds after Blinking'),
-	new Weapon ('Machinery','Auto Crossbow',61,1,12,0,0,0,0,0,0,0,0,0,10,0,'Fires a barrage of crossbow bolts'),
-	new Weapon ('Machinery','Bioblaster',74,1,0,0,0,0,0,0,0,0,0,0,0,0,'Disperses a poisonous mist'),
-	new Weapon ('Machinery','Circular Saw',90,1,0,0,0,9,0,0,0,0,0,0,7,0,'Inflicts repeated damage with spinning blades'),
-	new Weapon ('Machinery','Gravity Well',108,1,0,0,0,0,8,0,0,0,0,0,0,0,'Pulls foes in with a gravity sphere'),
-	new Weapon ('Machinery','Noiseblaster',153,1,0,0,0,0,0,11,0,0,0,0,0,0,'Emits a pummeling sonic wave over a wide area'),
-	new Weapon ('Machinery','Drillbreaker',181,1,7,0,0,5,0,0,0,0,0,0,8,0,'Inflicts repeated damage with piercing drills'),
-	new Weapon ('Machinery','Flamebreath Cannon',286,1,0,0,0,0,0,0,0,0,0,0,0,0,'Spews a constant stream of elemental flames towards enemies, constantly draining MP'),
-	new Weapon ('Machinery','Auto Crossbow Plus',323,1,18,0,0,0,0,0,0,0,0,0,22,0,'Fires a barrage of crossbow bolts'),
-	new Weapon ('Machinery','Bioblaster Plus',339,1,0,0,0,0,0,0,0,0,0,0,0,0,'Disperses a poisonous mist'),
-	new Weapon ('Machinery','Circular Saw Plus',356,1,0,0,0,21,0,0,0,0,0,0,12,0,'Inflicts repeated damage with spinning blades'),
-	new Weapon ('Machinery','Gravity Well Plus',374,1,0,0,0,0,18,0,0,0,0,0,0,0,'Pulls foes in with a gravity sphere'),
-	new Weapon ('Machinery','Noiseblaster Plus',397,1,0,0,0,0,0,23,0,0,0,0,0,0,'Emits a pummeling sonic wave over a wide area'),
-	new Weapon ('Machinery','Drillbreaker Plus',432,1,12,0,0,13,0,0,0,0,0,0,13,0,'Inflicts repeated damage with piercing drills'),
-	new Weapon ('Royal Arm','Sword of the Wise',194,2,100,0,0,30,30,30,0,0,0,0,0,0,'A sword that performs short warp-strikes when near enemies'),
-	new Weapon ('Royal Arm','Axe of the Conqueror',483,1,0,0,60,-80,0,0,0,0,0,0,0,0,'A polearm that performs slow but powerful attacks, at the expense of defense and increased HP loss. Has a unique warp-strike, launching diagonally upward above the target then crashing down. Especially good at making enemies vulnerable'),
-	new Weapon ('Royal Arm','Bow of the Clever',203,6,0,0,0,0,80,0,0,0,0,0,50,0,'A bow that fires piercing arrows, and can fire while moving in any direction. Its damage is based on the Magic stat. Warp-strike fires multiple arrows upward'),
-	new Weapon ('Royal Arm','Swords of the Wanderer',153,3,0,0,0,50,0,50,0,0,0,0,0,0,'Dual swords functioning similar to daggers that can transform into a single weapon to deliver powerful blows'),
-	new Weapon ('Royal Arm','Blade of the Mystic',396,5,150,0,0,30,0,0,0,0,0,20,0,0,'A greatsword with the ability to briefly increase the wielder\'s Strength through a unique self-buff after swinging. The warp-strike fires three ranged energy beams before warping'),
-	new Weapon ('Royal Arm','Star of the Rogue',177,1,0,0,0,0,0,0,20,20,20,0,0,0,'A shuriken capable of dealing multiple piercing ranged hits in rapid succession either on different targets or on the various body parts of a single target'),
-	new Weapon ('Royal Arm','Sword of the Tall',518,1,200,0,0,0,0,-30,-40,-40,-40,-40,0,0,'A greatsword with a chainsaw effect, dealing multiple hits with each blow. The warp-strike is 3 horizontal swings'),
-	new Weapon ('Royal Arm','Shield of the Just',251,0,1000,-50,-100,200,0,0,10,10,10,10,10,0,'A shield that enables cover status when guarding, enabling HP recovery at the cost of MP. It can block normally unblockable attacks and negate most of the damage. The radius of its warp-strike is very wide'),
-	new Weapon ('Royal Arm','Mace of the Fierce',334,1,300,0,0,0,0,0,0,0,0,0,-50,0,'A mace with the ability to deal grievous breakage to body parts/appendages'),
-	new Weapon ('Royal Arm','Scepter of the Pious',237,2,0,0,0,0,150,0,0,0,0,50,0,0,'A scepter that takes on the forms of several other royal arms to perform a variety of attacks. Its damage is based on the magic stat.'),
-	new Weapon ('Royal Arm','Trident of the Oracle',388,4,0,60,0,0,0,0,0,0,0,0,0,0,'A polearm that produces afterimages after attacks that deal damage to nearby foes'),
-	new Weapon ('Royal Arm','Katana of the Warrior',361,2,0,0,0,0,0,100,25,25,25,-50,0,0,'A longsword that attacks quickly and relentlessly after startup. Can spam warp-strikes very quickly'),
-	new Weapon ('Royal Arm','Sword of the Father',141,5,0,0,100,0,100,0,0,0,0,0,0,0,'A sword that increases its wielder\'s Strength after Finishers. Drains less HP compared to other royal arms'),
-	new Weapon ('Ring','Ring of the Lucii',0,0,0,0,0,0,0,0,0,0,0,0,0,0,'It lets the player use a special type of magic and cast three unique spells: Death, Holy and Alterna')];
+	new Weapon ('','None',0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',''),
+	new Weapon ('Sword','Engine Blade',28,2,0,5,0,0,5,0,0,0,0,0,0,0,'Non-Elemental','Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Sword','Broadsword',42,2,0,6,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','+2% Critical Rate per combo hit'),
+	new Weapon ('Sword','Engine Blade II',42,2,0,15,0,0,12,0,0,0,0,0,0,0,'Non-Elemental','Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Sword','Crowbar',58,2,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','+80% breakage on body parts/appendages'),
+	new Weapon ('Sword','Blazefire Saber',71,2,0,9,0,18,0,0,0,0,0,0,0,0,'Non-Elemental','-15% physical damage taken'),
+	new Weapon ('Sword','Blazefire Saber XV',72,2,0,9,0,18,0,0,0,0,0,0,0,0,'Non-Elemental','-15% physical damage taken'),
+	new Weapon ('Sword','Airstep Sword',83,2,0,7,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','Halves MP consumption in mid-air'),
+	new Weapon ('Sword','Rune Saber',103,2,48,8,0,8,12,9,0,0,0,0,0,0,'Non-Elemental',''),
+	new Weapon ('Sword','Flame Tongue',117,2,0,7,0,0,0,0,28,0,0,0,0,0,'Fire',''),
+	new Weapon ('Sword','Ice Brand',137,2,0,10,0,0,0,0,0,31,0,0,0,0,'Ice',''),
+	new Weapon ('Sword','Ragnarok',153,2,0,8,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','Boosted damage with warp-strike but the warp animation is slower'),
+	new Weapon ('Sword','Sarah\'s Shortsword',179,2,0,0,0,0,9,15,0,0,0,0,0,0,'Light','+50% damage at full HP'),
+	new Weapon ('Sword','Blood Sword',198,2,0,11,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','20% chance to recover 30 HP per hit'),
+	new Weapon ('Sword','Garuda\'s Gaze',200,2,0,6,16,17,21,14,0,0,0,0,0,0,'Non-Elemental','Strengthened aerial attacks'),
+	new Weapon ('Sword','Engine Blade III',207,2,0,25,0,0,18,0,0,0,0,0,0,0,'Non-Elemental','Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Sword','Durandal',232,2,0,11,0,0,0,0,0,0,0,33,0,0,'Light',''),
+	new Weapon ('Sword','Enhancer',276,2,0,12,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',''),
+	new Weapon ('Sword','Soul Saber',343,2,0,12,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','+4% damage for each 1% below 50% Stamina'),
+	new Weapon ('Sword','Ultima Blade',364,2,0,40,0,0,30,0,0,0,0,0,0,0,'Non-Elemental','Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Sword','Gaze of the Vortex',430,100,0,60,22,22,22,15,0,0,0,0,0,0,'Non-Elemental','Deals 50% more damage with aerial attacks. Airstepping and aerial warping cost halved'),
+	new Weapon ('Sword','Balmung',446,2,0,11,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','-4% damage for every 1% of missing MP'),
+	new Weapon ('Greatsword','Two-Handed Sword',48,1,53,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','+15% damage per additional enemy within 65 feet (max 100%)'),
+	new Weapon ('Greatsword','War Sword',78,1,65,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','10% chance to inflict Compromised'),
+	new Weapon ('Greatsword','Dodanuki',80,1,0,0,46,0,0,0,0,0,0,0,0,0,'Non-Elemental','Reduces enemy defense with each slash'),
+	new Weapon ('Greatsword','Masamune',88,1,49,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','20% chance of inflicting 30% Max HP damage when the target\'s HP is full'),
+	new Weapon ('Greatsword','Blade of Brennaere',131,1,82,0,0,0,0,0,27,0,0,0,0,0,'Fire',''),
+	new Weapon ('Greatsword','Claymore',156,1,98,0,0,32,0,0,0,0,0,0,0,0,'Non-Elemental',''),
+	new Weapon ('Greatsword','Force Stealer',210,1,202,6,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Greatsword','Hardedge',244,1,153,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','+80% breakage on body parts/appendages'),
+	new Weapon ('Greatsword','Mutant Rakshasa Blade',328,1,124,32,25,0,52,21,0,0,0,58,0,0,'Non-Elemental','The blade sends out three projections that damage the target before Noctis warps. The warp-strike also ignores greatsword resistances/weaknesses'),
+	new Weapon ('Greatsword','Thunderbolt',345,1,246,0,0,0,0,0,0,0,29,0,0,0,'Lightning',''),
+	new Weapon ('Greatsword','Duel Code',370,1,468,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','+50% damage to lone enemies within 65 feet'),
+	new Weapon ('Greatsword','Genji Blade',426,1,357,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',''),
+	new Weapon ('Greatsword','Garuda\'s Pain',456,1,0,6,22,24,29,20,0,0,0,0,0,0,'Non-Elemental','Strengthened aerial attacks'),
+	new Weapon ('Greatsword','Force Stealer II',463,1,308,11,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Greatsword','Hyperion',496,1,310,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','+15% damage per additional enemy within 65 feet (max 100%)'),
+	new Weapon ('Greatsword','Afrosword',503,1,287,0,0,0,0,54,0,0,0,0,0,0,'Non-Elemental','Changes battle music to Timed Quest music when equipped and controlling the user'),
+	new Weapon ('Greatsword','Pain of the Vortex',572,100,0,60,31,31,31,22,0,0,0,0,0,0,'Non-Elemental','Deals 50% more damage with aerial attacks. Aerial warping MP cost halved'),
+	new Weapon ('Greatsword','Iron Duke',581,1,153,0,20,0,0,0,0,0,0,0,0,0,'Non-Elemental',''),
+	new Weapon ('Greatsword','Dominator',583,1,298,0,0,0,0,0,0,0,0,32,0,0,'Light',''),
+	new Weapon ('Greatsword','Apocalypse',597,1,403,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','When below 30% HP: +30 damage and +9 damage for each 1% missing HP below 30%'),
+	new Weapon ('Polearm','Javelin',18,3,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','When below 30% HP: Critical +5% and another +1.5% per each 1% missing HP below 30%'),
+	new Weapon ('Polearm','Drain Lance',33,3,0,5,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Polearm','Drain Lance II',48,3,0,11,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Polearm','Mythril Lance',55,3,0,0,0,0,32,0,0,0,0,0,0,0,'Non-Elemental',''),
+	new Weapon ('Polearm','Rapier Lance',68,3,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','+80% breakage on body parts/appendages'),
+	new Weapon ('Polearm','Gae Bolg',75,3,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','+44% damage when using warp-strikes'),
+	new Weapon ('Polearm','Storm Lance',113,3,0,0,0,0,0,0,0,0,0,0,0,0,'Lightning',''),
+	new Weapon ('Polearm','Ice Spear',133,3,0,0,0,0,0,0,0,0,0,0,0,0,'Ice',''),
+	new Weapon ('Polearm','Wyvern Lance',161,3,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','+50% damage in mid-air'),
+	new Weapon ('Polearm','Drain Lance III',195,3,0,11,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Polearm','Radiant Lance',205,3,0,0,0,0,0,0,0,0,0,0,0,0,'Light',''),
+	new Weapon ('Polearm','Dragoon Lance',246,3,0,0,0,0,0,0,15,14,16,0,0,0,'Non-Elemental',''),
+	new Weapon ('Polearm','Precision Lance',266,13,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',''),
+	new Weapon ('Polearm','Flayer',337,3,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','Finishers deal +80% damage'),
+	new Weapon ('Daggers','Daggers',20,7,0,4,0,0,5,0,0,0,0,0,0,0,'Non-Elemental','+50% damage to enemies in vulnerable status'),
+	new Weapon ('Daggers','Avengers',43,7,0,4,0,0,5,0,0,0,0,0,0,0,'Non-Elemental','When below 30% HP: Critical +5 and another +1.5 per each 1% missing HP below 30%'),
+	new Weapon ('Daggers','Cutlasses',58,7,0,6,0,0,10,0,0,0,0,0,0,0,'Non-Elemental','10% chance to inflict Enfeebled'),
+	new Weapon ('Daggers','Mythril Knives',62,7,0,6,0,0,50,0,0,0,0,0,0,0,'Non-Elemental',''),
+	new Weapon ('Daggers','Mage Mashers',66,7,0,13,0,0,32,0,30,30,30,0,0,0,'Non-Elemental',''),
+	new Weapon ('Daggers','Plunderers',111,7,0,10,0,0,10,0,0,0,0,0,0,0,'Non-Elemental','Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Daggers','Assassin\'s Daggers',126,7,0,7,0,0,10,0,0,0,0,0,0,0,'Non-Elemental','10% chance to inflict Poisons'),
+	new Weapon ('Daggers','Delta Daggers',153,7,0,6,0,0,15,0,0,0,0,0,0,0,'Non-Elemental','10% chance to inflict Compromised'),
+	new Weapon ('Daggers','Garuda\'s Plumes',176,7,0,6,22,24,29,20,0,0,0,0,0,0,'Non-Elemental','Strengthened aerial attacks'),
+	new Weapon ('Daggers','Spelldaggers',178,7,0,0,28,0,0,16,0,0,0,0,0,0,'Non-Elemental','Exploits any enemy\'s elemental weakness'),
+	new Weapon ('Daggers','Plunderers II',183,7,0,15,0,0,30,0,0,0,0,0,0,0,'Non-Elemental','Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Daggers','Main Gauches',192,7,0,7,0,0,21,0,0,0,0,0,0,0,'Non-Elemental','+50% damage to enemies in vulnerable status'),
+	new Weapon ('Daggers','Orichalcum',223,7,0,9,0,0,20,0,0,0,0,0,0,0,'Light',''),
+	new Weapon ('Daggers','Ulric\'s Kukris',234,12,282,24,8,15,48,20,5,7,4,19,21,1,'Non-Elemental',''),
+	new Weapon ('Daggers','Organyx',248,7,0,10,0,25,23,32,10,10,10,10,0,0,'Non-Elemental',''),
+	new Weapon ('Daggers','Vigilantes',290,7,0,5,0,0,20,0,0,0,0,0,0,0,'Non-Elemental','5% chance to inflict Stop'),
+	new Weapon ('Daggers','Plumes of the Vortex',320,100,0,60,31,31,31,22,0,0,0,0,0,0,'Non-Elemental','Deal 50% more damage with aerial attacks. Aerial warping MP cost halved'),
+	new Weapon ('Daggers','Zwill Crossblade',345,7,0,5,0,0,25,0,0,0,0,0,0,0,'Non-Elemental','+80% damage at full HP'),
+	new Weapon ('Firearm','Handgun',32,1,0,0,0,0,0,4,0,0,0,0,0,0,'Shot','+80% breakage on body parts/appendages'),
+	new Weapon ('Firearm','Cocytus',45,1,0,0,0,0,0,7,0,0,0,0,0,0,'Ice',''),
+	new Weapon ('Firearm','Calamity',53,1,0,0,0,0,0,5,0,0,0,0,0,0,'Shot','10% chance to inflict poison'),
+	new Weapon ('Firearm','Mythril Pistol',96,1,0,0,0,0,42,11,0,0,0,0,0,0,'Shot',''),
+	new Weapon ('Firearm','Valiant',147,1,0,11,0,0,0,12,0,0,0,0,0,0,'Shot','Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Firearm','Cerberus',156,1,0,0,0,0,0,6,0,0,0,0,0,0,'Shot','A rifle that can be manually-aimed in three different ways. It is only available to Noctis'),
+	new Weapon ('Firearm','Rebellion',167,1,0,0,0,0,0,15,0,0,0,0,0,0,'Shot','When below 30% HP: Critical +5 and another +1.5 per each 1% missing HP below 30%'),
+	new Weapon ('Firearm','Garuda\'s Abandon',193,1,0,6,22,24,29,20,0,0,0,0,0,0,'Shot','Strengthened enemy appendages breaking power'),
+	new Weapon ('Firearm','Valiant II',200,1,0,14,0,0,0,21,0,0,0,0,0,0,'Shot','Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Firearm','Flame Gun',210,1,0,0,0,0,0,16,0,0,0,0,0,0,'Fire',''),
+	new Weapon ('Firearm','Quicksilver',222,1,0,0,0,0,0,18,0,0,0,0,0,0,'Shot','+80% breakage on body parts/appendages'),
+	new Weapon ('Firearm','Enforcer',243,11,0,0,0,0,0,19,0,0,0,0,0,0,'Shot',''),
+	new Weapon ('Firearm','Lion Heart',262,1,0,0,9,0,0,14,0,0,0,0,0,0,'Shot','When below 30% HP: Critical +5 and another +1.5 per each 1% missing HP below 30%'),
+	new Weapon ('Firearm','Executioner',363,1,0,0,0,0,0,22,0,0,0,0,0,0,'Shot','+50% damage to lone enemies within 65 feet'),
+	new Weapon ('Firearm','Hyper Magnum',388,1,0,0,0,0,0,21,0,0,0,0,0,0,'Shot',''),
+	new Weapon ('Firearm','Abandon of the Vortex',399,100,0,60,31,31,31,22,0,0,0,0,0,0,'Shot','Strengthened enemy appendage breaking power. Deals 50% more damage to vulnerable targets'),
+	new Weapon ('Firearm','Death Penalty',424,1,0,0,0,0,0,25,0,0,0,0,0,0,'Shot','1% chance to inflict Instant Death'),
+	new Weapon ('Shield','Kite Shield',52,0,0,0,0,15,0,0,0,0,0,0,8,0,'Non-Elemental','Recovers 50 HP per Blink'),
+	new Weapon ('Shield','Absorb Shield',83,0,0,10,0,30,0,0,0,0,0,0,12,0,'Non-Elemental','Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Shield','Ice Shield',93,0,0,0,0,18,0,0,0,22,0,0,10,0,'Non-Elemental','+30% HP Recovery Rate for 5 seconds after taking Ice damage'),
+	new Weapon ('Shield','Thunder Shield',111,0,0,0,0,21,0,0,0,0,24,0,12,0,'Non-Elemental','x4 Critical Rate for 5 seconds after taking Lightning damage'),
+	new Weapon ('Shield','Flame Shield',126,0,0,0,0,22,0,0,21,0,0,0,9,0,'Non-Elemental','+300 Strength for 5 seconds after taking Fire damage'),
+	new Weapon ('Shield','Hero Shield',144,0,0,0,0,25,0,0,0,0,0,0,22,0,'Non-Elemental','-30% damage from bullets'),
+	new Weapon ('Shield','Absorb Shield II',167,0,0,15,0,38,0,0,0,0,0,0,12,0,'Non-Elemental','Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Shield','Black Prince',175,0,0,0,0,32,0,0,0,0,0,22,13,0,'Non-Elemental','+300 Magic for 5 seconds after taking Darkness damage'),
+	new Weapon ('Shield','Power Shield',176,0,0,0,0,6,0,0,0,0,0,0,11,0,'Non-Elemental',''),
+	new Weapon ('Shield','Medjay Assassin\'s Shield',202,0,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','+200 Strength for 3 seconds after Blocking'),
+	new Weapon ('Shield','Wizard Shield',225,0,0,0,0,34,99,0,0,0,0,0,12,0,'Non-Elemental',''),
+	new Weapon ('Shield','Aegis Shield',292,0,0,0,0,55,0,0,0,0,0,0,11,0,'Non-Elemental','10% chance to nullify any incoming damage'),
+	new Weapon ('Shield','Alien Shield',313,0,0,0,18,52,0,48,12,14,13,10,18,0,'Light',''),
+	new Weapon ('Shield','Ziedrich',327,0,0,0,0,50,0,0,0,0,0,0,14,0,'Non-Elemental','+200 Strength for 3 seconds after Blinking'),
+	new Weapon ('Machinery','Auto Crossbow',61,1,12,0,0,0,0,0,0,0,0,0,10,0,'Non-Elemental','Fires a barrage of crossbow bolts'),
+	new Weapon ('Machinery','Bioblaster',74,1,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','Disperses a poisonous mist'),
+	new Weapon ('Machinery','Circular Saw',90,1,0,0,0,9,0,0,0,0,0,0,7,0,'Non-Elemental','Inflicts repeated damage with spinning blades'),
+	new Weapon ('Machinery','Gravity Well',108,1,0,0,0,0,8,0,0,0,0,0,0,0,'Non-Elemental','Pulls foes in with a gravity sphere'),
+	new Weapon ('Machinery','Noiseblaster',153,1,0,0,0,0,0,11,0,0,0,0,0,0,'Non-Elemental','Emits a pummeling sonic wave over a wide area'),
+	new Weapon ('Machinery','Drillbreaker',181,1,7,0,0,5,0,0,0,0,0,0,8,0,'Non-Elemental','Inflicts repeated damage with piercing drills'),
+	new Weapon ('Machinery','Flamebreath Cannon',286,1,0,0,0,0,0,0,0,0,0,0,0,0,'Fire','Spews a constant stream of elemental flames towards enemies, constantly draining MP'),
+	new Weapon ('Machinery','Auto Crossbow Plus',323,1,18,0,0,0,0,0,0,0,0,0,22,0,'Non-Elemental','Fires a barrage of crossbow bolts'),
+	new Weapon ('Machinery','Bioblaster Plus',339,1,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','Disperses a poisonous mist'),
+	new Weapon ('Machinery','Circular Saw Plus',356,1,0,0,0,21,0,0,0,0,0,0,12,0,'Non-Elemental','Inflicts repeated damage with spinning blades'),
+	new Weapon ('Machinery','Gravity Well Plus',374,1,0,0,0,0,18,0,0,0,0,0,0,0,'Non-Elemental','Pulls foes in with a gravity sphere'),
+	new Weapon ('Machinery','Noiseblaster Plus',397,1,0,0,0,0,0,23,0,0,0,0,0,0,'Non-Elemental','Emits a pummeling sonic wave over a wide area'),
+	new Weapon ('Machinery','Drillbreaker Plus',432,1,12,0,0,13,0,0,0,0,0,0,13,0,'Non-Elemental','Inflicts repeated damage with piercing drills'),
+	new Weapon ('Royal Arm','Sword of the Wise',194,2,100,0,0,30,30,30,0,0,0,0,0,0,'Non-Elemental','A sword that performs short warp-strikes when near enemies'),
+	new Weapon ('Royal Arm','Axe of the Conqueror',483,1,0,0,60,-80,0,0,0,0,0,0,0,0,'Non-Elemental','A polearm that performs slow but powerful attacks, at the expense of defense and increased HP loss. Has a unique warp-strike, launching diagonally upward above the target then crashing down. Especially good at making enemies vulnerable'),
+	new Weapon ('Royal Arm','Bow of the Clever',203,6,0,0,0,0,80,0,0,0,0,0,50,0,'Non-Elemental','A bow that fires piercing arrows, and can fire while moving in any direction. Its damage is based on the Magic stat. Warp-strike fires multiple arrows upward'),
+	new Weapon ('Royal Arm','Swords of the Wanderer',153,3,0,0,0,50,0,50,0,0,0,0,0,0,'Non-Elemental','Dual swords functioning similar to daggers that can transform into a single weapon to deliver powerful blows'),
+	new Weapon ('Royal Arm','Blade of the Mystic',396,5,150,0,0,30,0,0,0,0,0,20,0,0,'Non-Elemental','A greatsword with the ability to briefly increase the wielder\'s Strength through a unique self-buff after swinging. The warp-strike fires three ranged energy beams before warping'),
+	new Weapon ('Royal Arm','Star of the Rogue',177,1,0,0,0,0,0,0,20,20,20,0,0,0,'Non-Elemental','A shuriken capable of dealing multiple piercing ranged hits in rapid succession either on different targets or on the various body parts of a single target'),
+	new Weapon ('Royal Arm','Sword of the Tall',518,1,200,0,0,0,0,-30,-40,-40,-40,-40,0,0,'Non-Elemental','A greatsword with a chainsaw effect, dealing multiple hits with each blow. The warp-strike is 3 horizontal swings'),
+	new Weapon ('Royal Arm','Shield of the Just',251,0,1000,-50,-100,200,0,0,10,10,10,10,10,0,'Non-Elemental','A shield that enables cover status when guarding, enabling HP recovery at the cost of MP. It can block normally unblockable attacks and negate most of the damage. The radius of its warp-strike is very wide'),
+	new Weapon ('Royal Arm','Mace of the Fierce',334,1,300,0,0,0,0,0,0,0,0,0,-50,0,'Non-Elemental','A mace with the ability to deal grievous breakage to body parts/appendages'),
+	new Weapon ('Royal Arm','Scepter of the Pious',237,2,0,0,0,0,150,0,0,0,0,50,0,0,'Non-Elemental','A scepter that takes on the forms of several other royal arms to perform a variety of attacks. Its damage is based on the magic stat.'),
+	new Weapon ('Royal Arm','Trident of the Oracle',388,4,0,60,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','A polearm that produces afterimages after attacks that deal damage to nearby foes'),
+	new Weapon ('Royal Arm','Katana of the Warrior',361,2,0,0,0,0,0,100,25,25,25,-50,0,0,'Non-Elemental','A longsword that attacks quickly and relentlessly after startup. Can spam warp-strikes very quickly'),
+	new Weapon ('Royal Arm','Sword of the Father',141,5,0,0,100,0,100,0,0,0,0,0,0,0,'Non-Elemental','A sword that increases its wielder\'s Strength after Finishers. Drains less HP compared to other royal arms'),
+	new Weapon ('Ring','Ring of the Lucii',0,0,0,0,0,0,0,0,0,0,0,0,0,0,'Light','It lets the player use a special type of magic and cast three unique spells: Death, Holy and Alterna')];
 
 //Accessories
 const accessoryList = [
@@ -1192,34 +1194,18 @@ function updateCharacter() {
     	 	equippedRadios[0].checked = true; //Check weapon 1 when 3 or 4 are disabled.
     	 }
 
-    	 let weapon1Type, weapon2Type; //Will hold the types of weapons the companion can use.
-
-    	 if (char.name == 'Gladiolus') {
-    	 	weapon1Type = 'Greatsword';
-    	 	weapon2Type = 'Shield';
-    	 }
-    	 else if (char.name == 'Ignis') {
-    	 	weapon1Type = 'Daggers';
-    	 	weapon2Type = 'Polearm';
-    	 }
-    	 else { //Prompto
-    	 	weapon1Type = 'Firearm';
-    	 	weapon2Type = 'Machinery';
-    	 }
-
-    	 //Set the option groups.
+    	 //Set the option groups. The 2 weapon types for the character.
     	 weapon1Box.innerHTML += '<optgroup label="' + '----' +
-    	 	weapon1Type + '----"></optgroup>';
+    	 	char.weaponType1 + '----"></optgroup>';
          weapon2Box.innerHTML += '<optgroup label="' + '----' + 
-         	weapon2Type + '----"></optgroup>';
-    	 let currentType = '';
+         	char.weaponType2 + '----"></optgroup>';
     	 for (let i = 1; i < weaponList.length; i++) {
 
-    	 	if (weaponList[i].type == weapon1Type) {
+    	 	if (weaponList[i].type == char.weaponType1) {
     	 		weapon1Box.innerHTML += '\n<option value="' + 
 	            	i + '">' + weaponList[i].name + '</option>';
     	 	}
-    	 	else if (weaponList[i].type == weapon2Type) {
+    	 	else if (weaponList[i].type == char.weaponType2) {
     	 		weapon2Box.innerHTML += '\n<option value="' + 
 	            	i + '">' + weaponList[i].name + '</option>';
     	 	}
@@ -1284,21 +1270,47 @@ function updateCharacter() {
 
 //Limit the value to some lower and higher bound.
 function limit(someNumber, lowerBound, higherBound) {
-    if (Number.isFinite(lowerBound) && someNumber < lowerBound) {
+    if (someNumber < lowerBound) {
         return lowerBound;
     }
-    else if (Number.isFinite(higherBound) && someNumber > higherBound) {
+    else if (someNumber > higherBound) {
         return higherBound;
     }
     else
         return someNumber;
 }
 
+//Replaces an infinite value with the infinity symbol, keeping the sign.
+function replaceWithInfSymbol(someValue) {
+	if (someValue == Infinity)
+		return '∞';
+	else if (someValue == -Infinity)
+		return '-∞';
+	else
+		return someValue.toString();
+}
+
+//If the limited value differs from the true value, make the displayed resutl have both values.
+function displayDifferenceIfAny(valueLimited, actualValue, additionalSymbol) {
+	if (actualValue != valueLimited) {
+		return valueLimited + additionalSymbol + ' (' +
+			replaceWithInfSymbol(actualValue) + ')';
+	}
+	else {
+		return valueLimited + additionalSymbol;
+	}
+}
+
 //Update the entire right-hand side of the screen.
 function updateData() {
-    
+
+	//Limit level input to integers between 1-120, change the input to the range.
+    const levelBox = document.getElementById('level');
+    const level = Math.round(limit(levelBox.value,1,120));
+    levelBox.value = level;
+
     const char = charList[document.getElementById('character').value];
-    const baseStats = char.baseStats[document.getElementById('level').value - 1];
+    const baseStats = char.baseStats[level - 1];
     const attire = attireList[document.getElementById('attire').value];
     const food = foodList[document.getElementById('food').value];
 
@@ -1331,146 +1343,221 @@ function updateData() {
     let hp, hprec, mp, mprec, attack, defense, crit;
     let str, vit, mag, spr;
     let fire, ice, lightning, dark, shot;
-    let hpDiff, fireDiff, iceDiff, lightningDiff, darkDiff, shotDiff;
     let itemDrop, xp, phase;
     let tdaPhysical, tdaMagical, tdaFire, tdaIce, tdaLightning, tdaDark, tdaShot;
+    let hpLimited, mpLimited, critLimited, itemDropLimited, phaseLimited;
+    let strLimited, vitLimited, magLimited, sprLimited;
+    let fireLimited, iceLimited, lightningLimited, darkLimited, shotLimited;
 
 
     //Start computing
-    hp = Math.floor(baseStats.hp * (1 + attire.hpBonus/100)) + Math.round((1 + attire.hpBonus/100)
-        * (weapon[0].hp + weapon[1].hp + weapon[2].hp + weapon[3].hp + accessory[0].hp +
-        accessory[1].hp + accessory[2].hp + (healthLevel * baseStats.level))) + food.hp;
-    hp = limit(hp,1,9999);
+
+    //HP,HPRec, MP, MPRec
+   	let rareMetalHP = 0;
+    if (accessory[0].name == 'Rare Metal' || accessory[1].name == 'Rare Metal' ||
+    	accessory[2].name == 'Rare Metal') {
+    	//Gives HP to remove, makes input negative to round down on .5 cases.
+    	rareMetalHP = Math.round(-((baseStats.hp + weapon[0].hp + weapon[1].hp + weapon[2].hp +
+    		weapon[3].hp + accessory[0].hp + accessory[1].hp + accessory[2].hp + (healthLevel *
+    		baseStats.level)) * 0.9));
+    }
+
+    hp = Math.floor(baseStats.hp * (1 + attire.hpBonus/100)) + Math.round((1 + attire.hpBonus/100) *
+    	(weapon[0].hp + weapon[1].hp + weapon[2].hp + weapon[3].hp + accessory[0].hp +
+        accessory[1].hp + accessory[2].hp + (healthLevel * baseStats.level))) + food.hp + rareMetalHP;
+    hpLimited = limit(hp,1,9999);
+
+    if (food.effect == 'Last Stand') {
+    	hpLimited = Math.floor(hpLimited/10);
+    }
 
     hprec = char.hprec + weapon[0].hprec + weapon[1].hprec + weapon[2].hprec + weapon[3].hprec +
     	accessory[0].hprec + accessory[1].hprec + accessory[2].hprec + attire.hprec + food.hprec;
 
-    mp = Math.floor(baseStats.mp * (1 + attire.mpBonus/100)) + Math.round((1 + attire.mpBonus/100) * (weapon[0].mp + weapon[1].mp + weapon[2].mp + weapon[3].mp + accessory[0].mp +
-        accessory[1].mp + accessory[2].mp + (experimagic * baseStats.level)));
-    mp = limit(mp,1,999);
+    mp = Math.floor(baseStats.mp * (1 + attire.mpBonus/100)) + Math.round((1 + attire.mpBonus/100) *
+    	(weapon[0].mp + weapon[1].mp + weapon[2].mp + weapon[3].mp + accessory[0].mp +
+		accessory[1].mp + accessory[2].mp + (experimagic * baseStats.level)));
+    mpLimited = limit(mp,1,999);
 
     mprec = char.mprec + accessory[0].mprec + accessory[1].mprec + accessory[2].mprec + attire.mprec;
 
-    crit = weapon[equipped].crit + accessory[0].crit + accessory[1].crit + accessory[2].crit + attire.itemDrop + food.crit;
 
+    //Str,Vit,Mag,Spr
     str = Math.floor(baseStats.str * (1 + attire.strBonus/100)) + Math.round((1 +
         attire.strBonus/100) * (weapon[0].str + weapon[1].str + weapon[2].str + weapon[3].str +
-        accessory[0].str + accessory[1].str + accessory[2].str + (strLevel * baseStats.level))) + food.str;
+        accessory[0].str + accessory[1].str + accessory[2].str + (strLevel * baseStats.level))) +
+    	food.str;
+    strLimited = limit(str,0,Infinity);
 
     vit = Math.floor(baseStats.vit * (1 + attire.vitBonus/100)) + Math.round((1 +
         attire.vitBonus/100) * (weapon[0].vit + weapon[1].vit + weapon[2].vit + weapon[3].vit +
-        accessory[0].vit + accessory[1].vit + accessory[2].vit + (vitLevel * baseStats.level))) + food.vit;
+        accessory[0].vit + accessory[1].vit + accessory[2].vit + (vitLevel * baseStats.level))) +
+    	food.vit;
+    vitLimited = limit(vit,0,Infinity);
 
     mag = Math.floor(baseStats.mag * (1 + attire.magBonus/100)) + Math.round((1 + attire.magBonus/100) *
         (weapon[0].mag + weapon[1].mag + weapon[2].mag + weapon[3].mag + accessory[0].mag +
         accessory[1].mag + accessory[2].mag + (magLevel * baseStats.level))) + food.mag;
+    magLimited = limit(mag,0,Infinity);
 
     spr = Math.floor(baseStats.spr * (1 + attire.sprBonus/100)) + Math.round((1 + attire.sprBonus/100) *
         (weapon[0].spr + weapon[1].spr + weapon[2].spr + weapon[3].spr + accessory[0].spr +
         accessory[1].spr + accessory[2].spr + (sprLevel * baseStats.level))) + food.spr;
+    sprLimited = limit(spr,0,Infinity);
 
-    attack = weapon[equipped].attack + str;
-    defense = vit;
+    //Special Case - Prime Food Effect.
+    if (food.effect == 'Prime' || food.effect == 'Prime Endurance') {
+    	str = Math.round(str * 0.75);
+    	mag = Math.round(mag * 0.75);
+    }
 
+    //Attack, Defense, Crit
+    attack = weapon[equipped].attack + strLimited;
+    defense = vitLimited;
+    crit = weapon[equipped].crit + accessory[0].crit + accessory[1].crit + accessory[2].crit +
+    	attire.crit + food.crit;
+    critLimited = limit(crit,0,100);
+
+    //Elemental
     fire = attire.fire + weapon[0].fire + weapon[1].fire + weapon[2].fire + weapon[3].fire +
         accessory[0].fire + accessory[1].fire + accessory[2].fire + food.fire;
-    fire = limit(fire,0,100);
+    fireLimited = limit(fire,0,100);
 
     ice = attire.ice + weapon[0].ice + weapon[1].ice + weapon[2].ice + weapon[3].ice +
         accessory[0].ice + accessory[1].ice + accessory[2].ice + food.ice;
-    ice = limit(ice,0,100);
+    iceLimited = limit(ice,0,100);
 
     lightning = attire.lightning + weapon[0].lightning + weapon[1].lightning +
         weapon[2].lightning + weapon[3].lightning + accessory[0].lightning +
         accessory[1].lightning + accessory[2].lightning + food.lightning;
-    lightning = limit(lightning,0,100);
+    lightningLimited = limit(lightning,0,100);
 
     dark = attire.dark + weapon[0].dark + weapon[1].dark + weapon[2].dark + weapon[3].dark +
         accessory[0].dark + accessory[1].dark + accessory[2].dark;
-    dark = limit(dark,0,100);
+    darkLimited = limit(dark,0,100);
 
     shot = attire.shot + weapon[0].shot + weapon[1].shot + weapon[2].shot + weapon[3].shot +
         accessory[0].shot + accessory[1].shot + accessory[2].shot;
-    shot = limit(shot,0,100);
+    shotLimited = limit(shot,0,100);
 
-    tdaPhysical = hp * (1 + vit/100);
-    tdaMagical = hp * (1 + spr/100);
-    tdaFire = tdaMagical * (1 + fire/100);
-    tdaIce = tdaMagical * (1 + ice/100);
-    tdaLightning = tdaMagical * (1 + lightning/100);
-    tdaDark = tdaMagical * (1 + dark/100);
-    tdaShot = tdaMagical * (1 + shot/100);
+    //TDA's
+    tdaPhysical = hpLimited * (1 + vitLimited/100);
+    tdaMagical = hpLimited * (1 + sprLimited/100);
+    tdaFire = tdaMagical / (1 - fireLimited/100);
+    tdaIce = tdaMagical / (1 - iceLimited/100);
+    tdaLightning = tdaMagical / (1 - lightningLimited/100);
+    tdaDark = tdaMagical / (1 - darkLimited/100);
+    tdaShot = tdaMagical / (1 - shotLimited/100);
 
-    itemDrop = accessory[0].itemDrop + accessory[1].itemDrop + accessory[2].itemDrop + attire.itemDrop + food.itemDrop;
+    //Special Cases - Resistant Food Effect, Thermal Suit.
+    if (food.effect == 'Resistant') {
+    	tdaFire = Infinity;
+    	tdaIce = Infinity;
+    	tdaLightning = Infinity;
+    }
+    else if (attire.name == 'Thermal Suit') {
+    	tdaFire = Infinity;
+    }
+
+    //Bonuses
+    itemDrop = accessory[0].itemDrop + accessory[1].itemDrop + accessory[2].itemDrop +
+    	attire.itemDrop + food.itemDrop;
+    itemDropLimited = limit(itemDrop,0,100);
+
+    xp = accessory[0].xp + accessory[1].xp + accessory[2].xp + food.xp;
+
    	phase = accessory[0].phase + accessory[1].phase + accessory[2].phase + attire.phase;
-   	xp = accessory[0].xp + accessory[1].xp + accessory[2].xp + food.xp;
+   	phaseLimited = limit(phase,-100,0);
 
     //Dump data on screen
 
     //TDA
-    document.getElementById('TDAPhysical').innerHTML = Math.round(tdaPhysical).toString();
-    document.getElementById('TDAMagical').innerHTML = Math.round(tdaMagical).toString();
-    document.getElementById('TDAFire').innerHTML = Math.round(tdaFire).toString();
-    document.getElementById('TDAIce').innerHTML = Math.round(tdaIce).toString();
-    document.getElementById('TDALightning').innerHTML = Math.round(tdaLightning).toString();
-    document.getElementById('TDADark').innerHTML = Math.round(tdaDark).toString();
-    document.getElementById('TDAShot').innerHTML = Math.round(tdaShot).toString();
+    document.getElementById('TDAPhysical').innerHTML = Math.round(tdaPhysical);
+    document.getElementById('TDAMagical').innerHTML = Math.round(tdaMagical);
+    document.getElementById('TDAFire').innerHTML = replaceWithInfSymbol(Math.round(tdaFire));
+    document.getElementById('TDAIce').innerHTML = replaceWithInfSymbol(Math.round(tdaIce));
+    document.getElementById('TDALightning').innerHTML = replaceWithInfSymbol(Math.round(tdaLightning));
+    document.getElementById('TDADark').innerHTML = replaceWithInfSymbol(Math.round(tdaDark));
+    document.getElementById('TDAShot').innerHTML = replaceWithInfSymbol(Math.round(tdaShot));
 
     //Stats
-    document.getElementById('StatsHP').innerHTML = hp.toString();
-    document.getElementById('StatsMP').innerHTML = mp.toString();
-    document.getElementById('StatsAttack').innerHTML = attack.toString();
-    document.getElementById('StatsDefense').innerHTML = defense.toString();
+    document.getElementById('StatsHP').innerHTML = displayDifferenceIfAny(hpLimited,hp,'');
+    document.getElementById('StatsMP').innerHTML = displayDifferenceIfAny(mpLimited,mp,'');
+    document.getElementById('StatsAttack').innerHTML = attack;
+    document.getElementById('StatsDefense').innerHTML = defense;
+    document.getElementById('StatsDamageType').innerHTML = weapon[equipped].type;
 
-    document.getElementById('StatsHPRec').innerHTML = (hprec/10).toString() + '%';
-    document.getElementById('StatsMPRec').innerHTML = (mprec/10).toString() + '%';
-    document.getElementById('StatsCrit').innerHTML = crit.toString() + '%';
+    //Change StatsDamageElement's color to the element it inflicts, if any.
+    const statsDamageElementBox = document.getElementById('StatsDamageElement');
+	statsDamageElementBox.innerHTML = weapon[equipped].element;
+	statsDamageElementBox.className = 'result-box damage' + ' ' + weapon[equipped].element.toLowerCase();
 
-    document.getElementById('StatsSTR').innerHTML = str.toString();
-    document.getElementById('StatsVIT').innerHTML = vit.toString();
-    document.getElementById('StatsMAG').innerHTML = mag.toString();
-    document.getElementById('StatsSPR').innerHTML = spr.toString();
-    document.getElementById('StatsFire').innerHTML = fire.toString() + '%';
-    document.getElementById('StatsIce').innerHTML = ice.toString() + '%';
-    document.getElementById('StatsLightning').innerHTML = lightning.toString() + '%';
-    document.getElementById('StatsDark').innerHTML = dark.toString() + '%';
-    document.getElementById('StatsShot').innerHTML = shot.toString() + '%';
+
+    document.getElementById('StatsHPRec').innerHTML = (hprec/10) + '%';
+    document.getElementById('StatsMPRec').innerHTML = (mprec/10) + '%';
+    document.getElementById('StatsCrit').innerHTML = displayDifferenceIfAny(critLimited,crit,'%');
+
+    document.getElementById('StatsSTR').innerHTML = displayDifferenceIfAny(strLimited,str,'');
+    document.getElementById('StatsVIT').innerHTML = displayDifferenceIfAny(vitLimited,vit,'');
+    document.getElementById('StatsMAG').innerHTML = displayDifferenceIfAny(magLimited,mag,'');
+    document.getElementById('StatsSPR').innerHTML = displayDifferenceIfAny(sprLimited,spr,'');
+    document.getElementById('StatsFire').innerHTML = displayDifferenceIfAny(fireLimited,fire,'%');
+    document.getElementById('StatsIce').innerHTML = displayDifferenceIfAny(iceLimited,ice,'%');
+    document.getElementById('StatsLightning').innerHTML = displayDifferenceIfAny(lightningLimited,
+    	lightning,'%');
+    document.getElementById('StatsDark').innerHTML = displayDifferenceIfAny(darkLimited,dark,'%');
+    document.getElementById('StatsShot').innerHTML = displayDifferenceIfAny(shotLimited,shot,'%');
 
     //Bonuses
-   	document.getElementById('BonusesIDR').innerHTML = itemDrop.toString() + '%';
-    document.getElementById('BonusesXP').innerHTML = xp.toString() + '%';
-    document.getElementById('BonusesPhase').innerHTML = phase.toString() + '%';
+   	document.getElementById('BonusesIDR').innerHTML = displayDifferenceIfAny(itemDropLimited,itemDrop,'%');
+    document.getElementById('BonusesXP').innerHTML = '+' + xp + '%';
+    document.getElementById('BonusesPhase').innerHTML = displayDifferenceIfAny(phaseLimited,phase,'%');
+
+    //BonusesImmunities
+    const immunitiesBox = document.getElementById('BonusesImmunities');
+    immunitiesBox.innerHTML = '';//Clear previous contents
+
+    if (attire.immunity != '') {
+    	immunitiesBox.innerHTML += '<strong>' + attire.name +
+            ':</strong> ' + attire.immunity + '<br>';
+    }
+
+    if (food.immunity != '') {
+    	immunitiesBox.innerHTML += '<strong>' + food.name +
+            ':</strong> ' + food.immunity + '<br>';
+    }
+
+    for (let i = 0; i < accessory.length; i++) {
+    	if (accessory[i].immunity != '') {
+    		immunitiesBox.innerHTML += '<strong>' + accessory[i].name +
+            ':</strong> ' + accessory[i].immunity + '<br>';
+    	}
+    }
 
     //Notes
-    document.getElementById('Notes').innerHTML = '';
-    
-    if (weapon[equipped].effect != '') {
-        document.getElementById('Notes').innerHTML += '<strong>' + weapon[equipped].name +
-            ':</strong> ' + weapon[equipped].effect + '<br>';
-    }
+    const notesBox = document.getElementById('Notes');
+    notesBox.innerHTML = '';//Clear previous contents
     
     if (attire.effect != '') {
-        document.getElementById('Notes').innerHTML += '<strong>' + attire.name +
+        notesBox.innerHTML += '<strong>' + attire.name +
             ':</strong> ' + attire.effect + '<br>';
     }
-        
-    if (accessory[0].effect != '') {
-        document.getElementById('Notes').innerHTML += '<strong>' + accessory[0].name +
-            ':</strong> ' + accessory[0].effect + '<br>';
-    }
     
-    if (accessory[1].effect != '') {
-        document.getElementById('Notes').innerHTML += '<strong>' + accessory[1].name +
-            ':</strong> ' + accessory[1].effect + '<br>';
+    if (food.effect != '') {
+        notesBox.innerHTML += '<strong>' + food.name + ':</strong> ' +
+        	food.effect + ' - ' + food.description + '<br>';
     }
 
-    if (accessory[2].effect != '') {
-        document.getElementById('Notes').innerHTML += '<strong>' + accessory[2].name +
-            ':</strong> ' + accessory[2].effect + '<br>';
+    if (weapon[equipped].effect != '') {
+        notesBox.innerHTML += '<strong>' + weapon[equipped].name +
+            ':</strong> ' + weapon[equipped].effect + '<br>';
     }
-    
-    if (food.effect != ''){
-        document.getElementById('Notes').innerHTML += '<strong>' + food.name + ':</strong> ' + food.effect + '<br>';
+
+    for (let i = 0; i < accessory.length; i++) {
+    	if (accessory[i].effect != '') {
+	    	notesBox.innerHTML += '<strong>' + accessory[i].name +
+	            ':</strong> ' + accessory[i].effect + '<br>';
+	    }
     }
 }
 
