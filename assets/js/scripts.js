@@ -16,7 +16,7 @@ class BaseStat {
 }
 
 class Character {
-	constructor(name, hprec, mprec, weaponType1, weaponType2, baseStats) {
+	constructor(name, hprec, mprec, weaponType1, weaponType2,baseStats) {         
 		this.name = name;
 		this.hprec = hprec;
 		this.mprec = mprec;
@@ -27,8 +27,8 @@ class Character {
 }
 
 class Attire {    
-    constructor(equip,name,hpBonus,mpBonus,strBonus,vitBonus,magBonus,sprBonus,fire,ice,lightning,dark,
-    	shot,hprec,mprec,crit,phase,itemDrop,immunity,effect) {
+    constructor(equip,name,hpBonus,mpBonus,strBonus,vitBonus,magBonus,sprBonus,fire,ice,lightning,
+    	dark,shot,hprec,mprec,crit,phase,itemDrop,immunity,effect) {
         this.equip = equip;
         this.name = name;
         this.hpBonus = hpBonus;
@@ -53,7 +53,7 @@ class Attire {
 }
 
 class Food {    
-    constructor(type,favorite,name,hp,str,vit,mag,spr,fire,ice,lightning,hprec,xp,crit,itemDrop,
+    constructor(type,favorite,name,hp,str,vit,mag,spr,fire,ice,lightning,hprec,xpBonus,crit,itemDrop,
     	immunity,effect,description) {
         this.type = type;
         this.favorite = favorite;
@@ -67,7 +67,7 @@ class Food {
         this.ice = ice;
         this.lightning = lightning;
         this.hprec = hprec;
-        this.xp = xp;
+        this.xpBonus = xpBonus;
         this.crit = crit;
 		this.itemDrop = itemDrop;
         this.immunity = immunity;
@@ -101,8 +101,8 @@ class Weapon {
 }
 
 class Accessory {    
-    constructor(category,equip,name,hp,mp,str,vit,mag,spr,fire,ice,lightning,dark,shot,
-        hprec,mprec,xp,crit,phase,itemDrop,immunity,effect) {
+    constructor(category,equip,name,hp,mp,str,vit,mag,spr,fire,ice,lightning,dark,shot,hprec,mprec,
+    	xpBonus,crit,phase,itemDrop,immunity,effect) {
     	this.category = category;
         this.equip = equip;
         this.name = name;
@@ -119,7 +119,7 @@ class Accessory {
         this.shot = shot;
         this.hprec = hprec;
         this.mprec = mprec;
-        this.xp = xp;
+        this.xpBonus = xpBonus;
         this.crit = crit;
         this.phase = phase;
         this.itemDrop = itemDrop;
@@ -134,13 +134,13 @@ class Accessory {
 
 //Experience required for level up at current level - 1.
 const xpRequired = [99,165,264,396,462,627,759,891,1023,1221,1386,1584,1815,2013,2244,2475,2739,
-3036,3300,3630,3927,4290,4620,5016,5379,5808,6237,6666,7128,7656,8118,8646,9207,9735,10329,10956,
-11583,12210,12903,13563,14322,15048,15840,16632,17457,18249,19173,20064,20988,21912,22935,23892,
-24948,26037,27093,28215,29337,30558,31779,33000,34254,35541,36927,38280,39699,41118,42603,44121,
-45606,47190,48774,50457,52140,53856,55572,57354,59235,61083,62964,64911,66891,68838,70917,73062,
-75207,77352,79596,81873,84117,86493,88869,91311,93786,96294,98709,101085,103417,105699,1079256,
-1100909,1121873,1142123,1161590,1180227,1197974,1214783,1230614,1245410,1259141,1271764,1284382,
-1296990,1309602,1322202,1334792,1347367,1359920,1372462,1384971];
+	3036,3300,3630,3927,4290,4620,5016,5379,5808,6237,6666,7128,7656,8118,8646,9207,9735,10329,
+	10956,11583,12210,12903,13563,14322,15048,15840,16632,17457,18249,19173,20064,20988,21912,22935,
+	23892,24948,26037,27093,28215,29337,30558,31779,33000,34254,35541,36927,38280,39699,41118,42603,
+	44121,45606,47190,48774,50457,52140,53856,55572,57354,59235,61083,62964,64911,66891,68838,70917,
+	73062,75207,77352,79596,81873,84117,86493,88869,91311,93786,96294,98709,101085,103417,105699,
+	1079256,1100909,1121873,1142123,1161590,1180227,1197974,1214783,1230614,1245410,1259141,1271764,
+	1284382,1296990,1309602,1322202,1334792,1347367,1359920,1372462,1384971];
 
 
 //Character stats
@@ -641,28 +641,37 @@ const attireList = [
 	new Attire ('Noctis','Prince\'s Fatigues',20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',''),
 	new Attire ('Noctis','Prince\'s Fatigues (No Jacket)',0,0,20,0,20,0,0,0,0,0,0,0,0,0,0,0,'',''),
 	new Attire ('All but Noctis','Crownsguard Fatigues',20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',''),
-	new Attire ('All but Noctis','Crownsguard Fatigues (No Jacket)',0,0,20,0,20,0,0,0,0,0,0,0,0,0,0,0,'',''),
+	new Attire ('All but Noctis','Crownsguard Fatigues (No Jacket)',0,0,20,0,20,0,0,0,0,0,0,0,0,0,0,
+		0,'',''),
 	new Attire ('Gladiolus','Rugged Attire',0,0,30,-30,0,0,0,0,0,0,0,0,0,0,0,30,'',''),
 	new Attire ('Ignis','Crownsguard Casual',0,0,30,0,0,0,0,0,0,0,0,0,0,0,0,0,'',''),
 	new Attire ('Ignis','Unkempt Crownsguard',0,0,35,0,0,0,0,0,0,0,0,0,0,0,0,0,'',''),
-	new Attire ('All','Casual Outfit',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'Enfeebled, Disenchanted, Burnt, Frozen, Shocked',''),
+	new Attire ('All','Casual Outfit',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		'Enfeebled, Disenchanted, Burnt, Frozen, Shocked',''),
 	new Attire ('All','Casual Outfit (No Jacket)',0,0,0,0,0,0,0,0,0,0,0,0,0,20,0,0,'',''),
-	new Attire ('Noctis','Trendy Outfit',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'Enfeebled, Disenchanted, Burnt, Frozen, Shocked',''),
+	new Attire ('Noctis','Trendy Outfit',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		'Enfeebled, Disenchanted, Burnt, Frozen, Shocked',''),
 	new Attire ('Noctis','Trendy Outfit (No Jacket)',0,0,0,0,0,0,0,0,0,0,0,0,0,20,0,0,'',''),
 	new Attire ('Noctis','Kingly Raiment',0,0,0,30,0,30,0,0,0,0,0,0,0,0,0,0,'',''),
 	new Attire ('Noctis','Kingly Raiment (No Jacket)',0,0,0,0,0,0,0,0,0,0,0,3,6,0,0,0,'',''),
 	new Attire ('All but Noctis','Kingsglaive Garb',0,0,0,30,0,30,0,0,0,0,0,0,0,0,0,0,'',''),
-	new Attire ('All but Noctis','Kingsglaive Garb (No Jacket)',0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,'',''),
+	new Attire ('All but Noctis','Kingsglaive Garb (No Jacket)',0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,'',
+		''),
 	new Attire ('Noctis','Royal Raiment',25,25,0,0,0,0,0,0,0,0,0,0,6,0,0,0,'',''),
-	new Attire ('Noctis','Royal Raiment (No Jacket)',0,0,0,0,30,0,0,0,0,0,0,0,0,0,0,0,'','Infinite stamina'),
-	new Attire ('Noctis','Ardyn\'s Ensemble',0,0,0,0,50,0,0,0,0,100,0,0,0,0,0,0,'','+100 Strength temporarily after taking Dark damage'),
-	new Attire ('All','Thermal Suit',20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'Burnt','Immune to Fire elemental damage'),
+	new Attire ('Noctis','Royal Raiment (No Jacket)',0,0,0,0,30,0,0,0,0,0,0,0,0,0,0,0,'',
+		'Infinite stamina'),
+	new Attire ('Noctis','Ardyn\'s Ensemble',0,0,0,0,50,0,0,0,0,100,0,0,0,0,0,0,'',
+		'+100 Strength temporarily after taking Dark damage'),
+	new Attire ('All','Thermal Suit',20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'Burnt',
+		'Immune to Fire elemental damage'),
 	new Attire ('Noctis','Choco-Mog Tee',0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,'',''),
 	new Attire ('Noctis','Festive Ensemble',20,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',''),
 	new Attire ('Noctis','Master Assassin\'s Robes',0,0,0,0,0,0,0,0,0,0,0,0,0,0,-40,0,'',''),
-	new Attire ('Noctis','Master Assassin\'s Robes (Hooded)',0,0,0,0,0,0,0,0,0,0,0,0,0,0,-40,0,'',''),
+	new Attire ('Noctis','Master Assassin\'s Robes (Hooded)',0,0,0,0,0,0,0,0,0,0,0,0,0,0,-40,0,'',
+		''),
 	new Attire ('All','Medjay Assassin\'s Robe',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'Instant Death',''),
-	new Attire ('Noctis','Medjay Assassin\'s Robe (Hooded)',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'Instant Death',''),
+	new Attire ('Noctis','Medjay Assassin\'s Robe (Hooded)',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		'Instant Death',''),
 	new Attire ('Prompto','Tundra Attire',20,0,0,20,0,0,-30,60,0,0,0,0,0,0,0,0,'',''),
 	new Attire ('Noctis','Noodle Helmet',0,0,0,0,0,0,0,0,0,0,0,20,0,0,0,0,'',''),
 	new Attire ('Noctis','King\'s Knight Tee',0,0,0,0,0,0,25,25,25,25,25,0,0,0,0,0,'',''),
@@ -676,7 +685,8 @@ const attireList = [
 	new Attire ('Gladiolus','Glamour Prism: Roegadyn',0,0,0,24,0,50,0,0,0,0,0,0,0,0,0,0,'',''),
 	new Attire ('Ignis','Glamour Prism: Elezen',0,0,0,24,0,50,0,0,0,0,0,0,0,0,0,0,'',''),
 	new Attire ('Prompto','Glamour Prism: Hyur',0,0,0,24,0,50,0,0,0,0,0,0,0,0,0,0,'',''),
-	new Attire ('All','Magitek Exosuit',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'','Makes the wearer invincible for a time.')];
+	new Attire ('All','Magitek Exosuit',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',
+		'Makes the wearer invincible for a time.')];
 
 //Food
 const foodList = [
@@ -690,7 +700,8 @@ const foodList = [
 	new Food ('Recipeh','Gladiolus','Prairie-Style Skewers',200,40,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Multi-Meat Sandwich',100,0,0,0,0,0,0,0,0,20,0,0,'','',''),
 	new Food ('Recipeh','','Oil-Drizzled Steamed Fish',200,60,0,50,0,0,0,0,0,0,0,0,'','',''),
-	new Food ('Recipeh','Noctis','Grease Monkey\'s Schnitzel Sandwich',200,80,0,0,0,0,0,0,0,0,0,0,'','',''),
+	new Food ('Recipeh','Noctis','Grease Monkey\'s Schnitzel Sandwich',200,80,0,0,0,0,0,0,0,0,0,0,
+		'','',''),
 	new Food ('Recipeh','Ignis','Breaded Cutlet with Tomato',250,60,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','Prompto','Spicy Long-Bone Rib Steak',200,50,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Classic Tomato & Egg Stir-Fry',100,0,0,0,0,0,0,0,50,0,0,0,'','',''),
@@ -705,7 +716,8 @@ const foodList = [
 	new Food ('Recipeh','','Creamy Crustacean Omelette',400,100,0,100,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Egg-Fried Crustacean Bowl',600,100,0,100,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Battered Barramundi',500,100,0,0,0,0,0,0,0,0,0,0,'','',''),
-	new Food ('Recipeh','','Crown City Dive-Style Dumplings',300,100,0,100,0,0,0,0,0,0,0,0,'','',''),
+	new Food ('Recipeh','','Crown City Dive-Style Dumplings',300,100,0,100,0,0,0,0,0,0,0,0,'','',
+		''),
 	new Food ('Recipeh','','Ace Hunter\'s Schnitzel',400,120,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Stacked Ham Sandwich',400,0,0,0,0,0,0,0,0,50,0,0,'','',''),
 	new Food ('Recipeh','Noctis','Grilled Wild Barramundi',500,80,0,80,0,0,0,0,0,0,0,0,'','',''),
@@ -713,92 +725,131 @@ const foodList = [
 	new Food ('Recipeh','','Cannedwich',300,100,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Garden Curry',500,80,0,0,0,50,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Triple Truffle Risotto',400,0,0,0,0,0,0,0,75,0,0,0,'Poison','',''),
-	new Food ('Recipeh','','Robust Bean Soup',600,0,0,0,0,0,0,0,50,0,0,0,'','Technician','For Noctis: +100% to tech bar fill rate; for allies: +100% tech leveling rate and always perform critical versions of techniques'),
-	new Food ('Recipeh','Prompto','Meat-and-Beet Bouillon',500,100,0,0,0,0,0,0,0,0,0,0,'Poison','',''),
+	new Food ('Recipeh','','Robust Bean Soup',600,0,0,0,0,0,0,0,50,0,0,0,'','Technician',
+		'For Noctis: +100% to tech bar fill rate; for allies: +100% tech leveling rate and always' +
+		' perform critical versions of techniques'),
+	new Food ('Recipeh','Prompto','Meat-and-Beet Bouillon',500,100,0,0,0,0,0,0,0,0,0,0,'Poison','',
+		''),
 	new Food ('Recipeh','','Free-Range Fowl over Rice',500,100,0,0,0,0,0,0,25,0,0,0,'','',''),
 	new Food ('Recipeh','','Creamy Milk Risotto',600,0,0,0,0,0,0,0,75,0,0,0,'Toad','',''),
 	new Food ('Recipeh','','Lestallum Stewed Tripe',0,0,0,200,0,0,0,0,75,0,0,0,'','',''),
 	new Food ('Recipeh','','Fried Rookie on Rice',400,100,0,0,0,0,0,0,0,0,0,0,'Poison','',''),
 	new Food ('Recipeh','','Toadsteak Drumsticks',500,120,0,100,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','Prompto','Meldacio Meat Pie',500,150,0,150,0,0,0,0,0,0,0,0,'','',''),
-	new Food ('Recipeh','Ignis','Fisherman\'s Favorite Paella',600,120,0,0,0,0,0,0,25,0,0,0,'','',''),
+	new Food ('Recipeh','Ignis','Fisherman\'s Favorite Paella',600,120,0,0,0,0,0,0,25,0,0,0,'','',
+		''),
 	new Food ('Recipeh','','Nebula Salmon Teriyaki',600,150,0,150,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Salmon-in-a-Suit',700,120,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Croaker in Brown Sauce',600,150,0,0,0,0,0,0,0,0,0,0,'Toad','',''),
 	new Food ('Recipeh','Gladiolus','Skewered Wild Trout',800,150,0,0,0,0,0,0,0,0,0,0,'Toad','',''),
-	new Food ('Recipeh','','Packed Mushroom Stew',0,700,0,700,0,0,0,0,0,0,0,0,'','Last Stand','Max HP reduced to 10% (truncated). Max HP possible is 999'),
+	new Food ('Recipeh','','Packed Mushroom Stew',0,700,0,700,0,0,0,0,0,0,0,0,'','Last Stand',
+		'Max HP reduced to 10% (truncated). Max HP possible is 999'),
 	new Food ('Recipeh','','Moist Tomato Cake',1000,0,200,0,300,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Crispy Fish Fritterwich',800,160,0,0,0,0,0,0,0,0,0,0,'','',''),
-	new Food ('Recipeh','','Hot Hopper Skewers',0,0,0,0,0,0,0,0,0,0,0,0,'Toad','Equalizer','+2% damage per level difference between attacker and higher-level target'),
-	new Food ('Recipeh','','Darkshells Marinières',0,100,0,0,0,0,0,0,0,0,0,0,'','Technician','For Noctis: +100% to tech bar fill rate; for allies: +100% tech leveling rate and always perform critical versions of techniques'),
+	new Food ('Recipeh','','Hot Hopper Skewers',0,0,0,0,0,0,0,0,0,0,0,0,'Toad','Equalizer',
+		'+2% damage per level difference between attacker and higher-level target'),
+	new Food ('Recipeh','','Darkshells Marinières',0,100,0,0,0,0,0,0,0,0,0,0,'','Technician',
+		'For Noctis: +100% to tech bar fill rate; for allies: +100% tech leveling rate and always' +
+		' perform critical versions of techniques'),
 	new Food ('Recipeh','','Paella de Pollo',500,150,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','Ignis','Tomalley-Filled Dumplings',300,100,0,200,0,0,0,0,0,0,0,0,'','',''),
-	new Food ('Recipeh','','Beanball Croquettes',500,0,0,0,0,0,0,0,0,0,0,0,'All but Instant Death','',''),
+	new Food ('Recipeh','','Beanball Croquettes',500,0,0,0,0,0,0,0,0,0,0,0,'All but Instant Death',
+		'',''),
 	new Food ('Recipeh','','Golden Egg Galette',400,120,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Sweet & Spicy Cygillan Crab',200,100,0,0,0,70,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','Ignis','Kenny\'s Original Recipe',0,150,200,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','Noctis','Mother & Child Rice Bowl',1000,0,0,0,0,0,0,0,0,30,0,50,'','',''),
-	new Food ('Recipeh','Gladiolus','Prime Garula Rib',500,0,0,0,0,0,0,0,0,0,0,0,'','Endurance','Infinite stamina'),
+	new Food ('Recipeh','Gladiolus','Prime Garula Rib',500,0,0,0,0,0,0,0,0,0,0,0,'','Endurance',
+		'Infinite stamina'),
 	new Food ('Recipeh','Noctis','Garulessandwich',600,120,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','Ignis','Horntooth Meat Pie',600,160,0,160,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Hunters\' Krazy Kebabs',800,200,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Creamy Bisque',0,160,0,0,0,0,0,0,100,0,0,0,'','',''),
-	new Food ('Recipeh','','Thick \'n\' Juicy Steak',1000,0,0,0,0,0,0,0,0,0,0,0,'','Endurance','Infinite stamina'),
-	new Food ('Recipeh','','Three-Mushroom Kebabs',800,150,0,0,0,0,0,0,0,0,0,0,'All but Instant Death','',''),
+	new Food ('Recipeh','','Thick \'n\' Juicy Steak',1000,0,0,0,0,0,0,0,0,0,0,0,'','Endurance',
+		'Infinite stamina'),
+	new Food ('Recipeh','','Three-Mushroom Kebabs',800,150,0,0,0,0,0,0,0,0,0,0,
+		'All but Instant Death','',''),
 	new Food ('Recipeh','Prompto','Green Soup Curry',800,160,0,0,0,70,0,0,0,0,0,0,'','',''),
-	new Food ('Recipeh','','Royal Road Paella',1000,150,0,0,0,0,0,0,0,0,0,0,'','Endurance','Infinite stamina'),
+	new Food ('Recipeh','','Royal Road Paella',1000,150,0,0,0,0,0,0,0,0,0,0,'','Endurance',
+		'Infinite stamina'),
 	new Food ('Recipeh','','Elegant Orange Cake',1000,0,250,0,400,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Blazing Braised Gizzard',0,0,300,0,0,0,0,0,50,0,0,0,'','',''),
 	new Food ('Recipeh','','Carp of the Diem',1500,100,0,0,0,0,0,0,0,0,0,0,'Poison','',''),
-	new Food ('Recipeh','Gladiolus','Grilled Mighty Barramundi',0,0,0,0,0,0,0,0,0,0,0,0,'All but Instant Death','Resistant','Immune to Fire, Ice, and Lightning elemental damage'),
+	new Food ('Recipeh','Gladiolus','Grilled Mighty Barramundi',0,0,0,0,0,0,0,0,0,0,0,0,
+		'All but Instant Death','Resistant','Immune to Fire, Ice, and Lightning elemental damage'),
 	new Food ('Recipeh','','Fire-Sauce Fillet',600,200,0,200,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Karlabos Cream Croquettes',1000,200,0,0,0,0,0,0,50,0,0,0,'','',''),
 	new Food ('Recipeh','','Taelpar Harvest Galette',1000,0,0,120,400,0,0,0,0,0,0,0,'','',''),
-	new Food ('Recipeh','','Sweet Saltwater Crustacean Curry',800,120,0,0,0,50,0,0,0,0,0,0,'','',''),
+	new Food ('Recipeh','','Sweet Saltwater Crustacean Curry',800,120,0,0,0,50,0,0,0,0,0,0,'','',
+		''),
 	new Food ('Recipeh','Noctis','Papa Bird & Baby Bowl',1000,0,0,0,0,0,0,0,0,40,0,100,'','',''),
 	new Food ('Recipeh','','Fishsticks on Sticks',1000,0,0,0,0,0,0,0,0,0,50,0,'','',''),
 	new Food ('Recipeh','','Sea Bass Sauté',1500,0,0,0,0,0,50,0,0,0,0,0,'Toad','',''),
 	new Food ('Recipeh','','Anointed Allural Sea Bass',1000,200,0,150,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Devilfin Soup',0,200,0,0,0,0,0,0,125,0,0,0,'','',''),
 	new Food ('Recipeh','','Marrowshroom Chowder',0,0,0,0,0,0,0,0,0,0,100,0,'','',''),
-	new Food ('Recipeh','','Smoked Behemoth',1000,400,0,0,0,0,0,0,0,0,0,0,'','Endurance','Infinite stamina'),
+	new Food ('Recipeh','','Smoked Behemoth',1000,400,0,0,0,0,0,0,0,0,0,0,'','Endurance',
+		'Infinite stamina'),
 	new Food ('Recipeh','','Hearty Cutlet on Rice',1500,250,0,0,0,0,0,0,0,0,0,0,'','',''),
-	new Food ('Recipeh','','Tide Grouper Carpaccio',1000,300,0,0,0,0,0,0,0,0,0,0,'Instant Death','',''),
+	new Food ('Recipeh','','Tide Grouper Carpaccio',1000,300,0,0,0,0,0,0,0,0,0,0,'Instant Death','',
+		''),
 	new Food ('Recipeh','','Crown City Roast',3000,400,0,0,0,0,0,0,0,0,0,0,'','',''),
-	new Food ('Recipeh','','Lasagna al Forno',4000,0,0,0,0,0,0,0,0,100,0,0,'','Resistant','Immune to Fire, Ice, and Lightning elemental damage'),
+	new Food ('Recipeh','','Lasagna al Forno',4000,0,0,0,0,0,0,0,0,100,0,0,'','Resistant',
+		'Immune to Fire, Ice, and Lightning elemental damage'),
 	new Food ('Recipeh','','Golden Tail Soup',0,0,0,0,0,0,0,0,150,0,100,0,'','',''),
-	new Food ('Recipeh','','Seasoned Midgardsormr',1000,350,0,0,0,0,0,0,0,0,0,0,'','Equalizer','+2% damage per level for level difference between attacker and higher-level target'),
-	new Food ('Recipeh','','Legendary Herb-Grilled Whopper',0,500,0,-Infinity,0,0,0,0,0,0,0,0,'','',''),
+	new Food ('Recipeh','','Seasoned Midgardsormr',1000,350,0,0,0,0,0,0,0,0,0,0,'',
+		'Equalizer','+2% damage per level for level difference between attacker and higher-level' +
+		' target'),
+	new Food ('Recipeh','','Legendary Herb-Grilled Whopper',0,500,0,-Infinity,0,0,0,0,0,0,0,0,'','',
+		''),
 	new Food ('Recipeh','','Fried Tide Grouper',0,500,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Roc of Ravatogh Rice',1500,300,0,0,0,0,0,0,0,0,0,0,'','',''),
-	new Food ('Recipeh','','Broiled King-on-a-Stick',1500,300,0,0,0,0,0,0,0,0,0,0,'All but Instant Death','',''),
+	new Food ('Recipeh','','Broiled King-on-a-Stick',1500,300,0,0,0,0,0,0,0,0,0,0,
+		'All but Instant Death','',''),
 	new Food ('Recipeh','Noctis','Memory Lane Pastry',0,-Infinity,0,500,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Excellent Oven-Roasted Trout',2000,350,0,0,0,50,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','King\'s Stew',2000,400,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Crispy Zu Skewers',2000,0,0,0,0,0,0,0,0,0,80,0,'','',''),
 	new Food ('Recipeh','','Kenny\'s Secret Recipe',0,400,300,300,0,0,0,0,0,0,0,0,'','',''),
-	new Food ('Recipeh','','Oak-Smoked Devil Gar',2000,0,0,0,0,0,0,0,0,0,0,0,'','Resistant','Immune to Fire, Ice, and Lightning elemental damage'),
-	new Food ('Recipeh','','Royal Banquet Canapé',0,0,0,0,0,0,0,0,0,50,0,0,'','Prime','Strength +75%, Magic +75%'),
+	new Food ('Recipeh','','Oak-Smoked Devil Gar',2000,0,0,0,0,0,0,0,0,0,0,0,'','Resistant',
+		'Immune to Fire, Ice, and Lightning elemental damage'),
+	new Food ('Recipeh','','Royal Banquet Canapé',0,0,0,0,0,0,0,0,0,50,0,0,'',
+		'Prime','Strength +75%, Magic +75%'),
 	new Food ('Recipeh','','Longwythe\'s Peak',4000,600,0,0,0,0,0,0,200,0,0,0,'','',''),
 	new Food ('Recipeh','','Chilled Food Tin',100,30,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','Gladiolus','Cup Noodles (Initial)',300,30,0,0,0,0,0,0,0,0,0,0,'','',''),
-	new Food ('Recipeh','Gladiolus','Cup Noodles (Behemoth Round)',300,30,0,0,0,0,0,0,0,0,0,0,'','',''),
-	new Food ('Recipeh','Gladiolus','Cup Noodles (Glimmering Zu Egg)',300,30,0,0,0,0,0,0,0,0,0,0,'','',''),
-	new Food ('Recipeh','Gladiolus','Cup Noodles (Karlabos Carapace)',300,30,0,0,0,0,0,0,0,0,0,0,'','',''),
-	new Food ('Recipeh','Gladiolus','Cup Noodles (Real Taste)',500,80,0,0,0,0,0,0,0,20,0,0,'','',''),
-	new Food ('Recipeh','','Crispy Cheese Pizza',0,100,0,0,0,0,0,0,0,0,0,0,'Poison','Endurance','Infinite stamina'),
-	new Food ('Recipeh','','Kupoberry Cheesecake',0,0,0,0,0,0,0,0,0,0,0,0,'','Line Boost','Fishing Line HP Damage Rate reduced by 25%'),
-	new Food ('Recipeh','','Golden Chocobo Tart',0,0,0,0,0,0,0,0,0,0,0,0,'','Chocobolster','Chocobo\'s Stamina Depletion Rate reduced by 25%'),
-	new Food ('Recipeh','','Plump \'n\' Pungent Tofu',0,500,0,500,0,0,0,0,0,10,0,0,'','Last Stand','Max HP reduced to 10% (truncated). Max HP possible is 999'),
-	new Food ('Recipeh','Noctis','Scientia-Style Sushi',0,0,0,0,0,0,0,0,0,50,100,0,'','Prime Endurance','Strength +75%, Magic +75%. Infinite stamina'),
-	new Food ('Recipeh','','Semur Skewers',0,0,0,0,0,0,0,0,100,0,0,0,'','Endurance','Infinite stamina'),
+	new Food ('Recipeh','Gladiolus','Cup Noodles (Behemoth Round)',300,30,0,0,0,0,0,0,0,0,0,0,'','',
+		''),
+	new Food ('Recipeh','Gladiolus','Cup Noodles (Glimmering Zu Egg)',300,30,0,0,0,0,0,0,0,0,0,0,'',
+		'',''),
+	new Food ('Recipeh','Gladiolus','Cup Noodles (Karlabos Carapace)',300,30,0,0,0,0,0,0,0,0,0,0,'',
+		'',''),
+	new Food ('Recipeh','Gladiolus','Cup Noodles (Real Taste)',500,80,0,0,0,0,0,0,0,20,0,0,'','',
+		''),
+	new Food ('Recipeh','','Crispy Cheese Pizza',0,100,0,0,0,0,0,0,0,0,0,0,'Poison','Endurance',
+		'Infinite stamina'),
+	new Food ('Recipeh','','Kupoberry Cheesecake',0,0,0,0,0,0,0,0,0,0,0,0,'','Line Boost',
+		'Fishing Line HP Damage Rate reduced by 25%'),
+	new Food ('Recipeh','','Golden Chocobo Tart',0,0,0,0,0,0,0,0,0,0,0,0,'','Chocobolster',
+		'Chocobo\'s Stamina Depletion Rate reduced by 25%'),
+	new Food ('Recipeh','','Plump \'n\' Pungent Tofu',0,500,0,500,0,0,0,0,0,10,0,0,'','Last Stand',
+		'Max HP reduced to 10% (truncated). Max HP possible is 999'),
+	new Food ('Recipeh','Noctis','Scientia-Style Sushi',0,0,0,0,0,0,0,0,0,50,100,0,'',
+		'Prime Endurance','Strength +75%, Magic +75%. Infinite stamina'),
+	new Food ('Recipeh','','Semur Skewers',0,0,0,0,0,0,0,0,100,0,0,0,'','Endurance',
+		'Infinite stamina'),
 	new Food ('Recipeh','Noctis','Pit Crew\'s Meat Wraps',750,180,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','Prompto','Keycatrich Salad',500,0,0,0,0,0,0,0,25,20,0,0,'','',''),
-	new Food ('Recipeh','','Moogle Mousse with Kupoberry Sauce',1000,0,250,0,400,0,0,0,0,0,0,0,'','',''),
+	new Food ('Recipeh','','Moogle Mousse with Kupoberry Sauce',1000,0,250,0,400,0,0,0,0,0,0,0,'',
+		'',''),
 	new Food ('Recipeh','Gladiolus','Military Man\'s Banquet',0,160,0,0,0,0,0,0,100,0,0,0,'','',''),
-	new Food ('Recipeh','','Miss Mercenary\'s Cassoulet',1000,120,0,0,0,0,0,0,0,0,0,0,'','Technician','For Noctis: +100% to tech bar fill rate; for allies: +100% tech leveling rate and always perform critical versions of techniques'),
-	new Food ('Recipeh','Ignis','Feast of the Divine',3000,0,0,0,0,0,100,0,0,0,0,0,'All but Instant Death','',''),
-	new Food ('Recipeh','','Hearty Stir-Fry',500,350,0,0,0,0,0,0,0,0,0,0,'','Endurance','Infinite stamina'),
+	new Food ('Recipeh','','Miss Mercenary\'s Cassoulet',1000,120,0,0,0,0,0,0,0,0,0,0,'',
+		'Technician','For Noctis: +100% to tech bar fill rate; for allies: +100% tech leveling ' +
+		'rate and always perform critical versions of techniques'),
+	new Food ('Recipeh','Ignis','Feast of the Divine',3000,0,0,0,0,0,100,0,0,0,0,0,
+		'All but Instant Death','',''),
+	new Food ('Recipeh','','Hearty Stir-Fry',500,350,0,0,0,0,0,0,0,0,0,0,'','Endurance',
+		'Infinite stamina'),
 	new Food ('Restaurant','','Chili con Carne',50,20,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Restaurant','','Leiden Jambalaya',200,150,0,0,0,0,0,0,25,0,0,0,'','',''),
 	new Food ('Restaurant','','Hammerhead Hot Sandwich',200,80,0,0,0,0,0,0,0,0,0,0,'','',''),
@@ -808,9 +859,11 @@ const foodList = [
 	new Food ('Restaurant','','Kenny\'s Salmon',0,150,200,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Restaurant','','Kenny\'s "Special" Salmon',0,400,300,300,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Restaurant','','Galdin Gratin',500,50,0,50,0,0,0,0,0,10,0,0,'','',''),
-	new Food ('Restaurant','','White Fish in Tomato Sauce',900,160,0,0,0,0,0,0,0,0,0,0,'Poison','',''),
+	new Food ('Restaurant','','White Fish in Tomato Sauce',900,160,0,0,0,0,0,0,0,0,0,0,'Poison','',
+		''),
 	new Food ('Restaurant','','Sea\'s Bounty Risotto',600,120,0,0,0,0,0,0,25,0,0,0,'','',''),
-	new Food ('Restaurant','','Steamed Crab with Rock Salt',0,0,0,0,0,0,0,0,0,0,0,0,'','Resistant','Immune to Fire, Ice, and Lightning elemental damage'),
+	new Food ('Restaurant','','Steamed Crab with Rock Salt',0,0,0,0,0,0,0,0,0,0,0,0,'',
+		'Resistant','Immune to Fire, Ice, and Lightning elemental damage'),
 	new Food ('Restaurant','','Tenebraen Berry Opera',0,-Infinity,0,500,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Restaurant','','Gysahl Chips',400,0,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Restaurant','','Green Smoothie',0,0,0,0,0,90,90,90,0,0,0,0,'','',''),
@@ -820,7 +873,8 @@ const foodList = [
 	new Food ('Restaurant','','Soup & Bread',0,150,0,0,0,0,0,0,100,0,0,0,'','',''),
 	new Food ('Restaurant','','Bird-Broth Rice with Curry',250,80,0,0,0,0,0,0,25,0,0,0,'','',''),
 	new Food ('Restaurant','','Offal Stew',0,0,200,0,0,0,0,0,75,0,0,0,'','',''),
-	new Food ('Restaurant','','Spicy Skewers',1000,350,0,0,0,0,0,0,0,0,0,0,'','Equalizer','+2% damage per level for level difference between attacker and higher-level target'),
+	new Food ('Restaurant','','Spicy Skewers',1000,350,0,0,0,0,0,0,0,0,0,0,'','Equalizer',
+		'+2% damage per level for level difference between attacker and higher-level target'),
 	new Food ('Restaurant','','Roti and Curry Plate',200,120,0,100,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Restaurant','','Soul Soup',0,120,0,0,200,70,0,0,0,0,0,0,'','',''),
 	new Food ('Restaurant','','Big Bread Buns',600,0,0,0,0,0,0,0,50,0,0,0,'','',''),
@@ -830,149 +884,271 @@ const foodList = [
 	new Food ('Restaurant','','Verinas Spuds',300,0,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Restaurant','','Tender Bird Fritters',400,120,0,0,0,50,0,0,0,0,0,0,'','',''),
 	new Food ('Restaurant','','Smoked Dualhorn Shank',1000,400,0,0,0,0,0,0,0,0,0,0,'','',''),
-	new Food ('Restaurant','','Fettini di Cernia',1000,300,0,0,0,0,0,0,0,0,0,0,'Instant Death','',''),
+	new Food ('Restaurant','','Fettini di Cernia',1000,300,0,0,0,0,0,0,0,0,0,0,'Instant Death','',
+		''),
 	new Food ('Restaurant','','Maagho Lasagna',4000,0,0,0,0,0,0,0,0,100,0,0,'','',''),
-	new Food ('Restaurant','','Fine Caviar Canapé',0,0,0,0,0,0,0,0,0,50,0,0,'','Prime','Strength +75%, Magic +75%'),
+	new Food ('Restaurant','','Fine Caviar Canapé',0,0,0,0,0,0,0,0,0,50,0,0,'','Prime',
+		'Strength +75%, Magic +75%'),
 	new Food ('Restaurant','','Wood-Smoked Fish',1500,0,0,0,0,0,50,0,0,0,0,0,'Toad','',''),
 	new Food ('Restaurant','','Set Dinner Course',500,0,0,0,0,0,0,0,0,0,0,0,'','',''),
-	new Food ('Restaurant','','Kupoberry Cheesecake',0,0,0,0,0,0,0,0,0,0,0,0,'','Line Boost','Fishing Line HP Damage Rate reduced by 25%'),
-	new Food ('Restaurant','','Golden Chocobo Tart',0,0,0,0,0,0,0,0,0,0,0,0,'','Chocobolster','Chocobo\'s Stamina Depletion Rate reduced by 25%'),
+	new Food ('Restaurant','','Kupoberry Cheesecake',0,0,0,0,0,0,0,0,0,0,0,0,'',
+		'Line Boost','Fishing Line HP Damage Rate reduced by 25%'),
+	new Food ('Restaurant','','Golden Chocobo Tart',0,0,0,0,0,0,0,0,0,0,0,0,'',
+		'Chocobolster','Chocobo\'s Stamina Depletion Rate reduced by 25%'),
 	new Food ('Restaurant','','Semur Skewers',0,0,0,0,0,0,0,0,100,0,0,0,'','','')];
 
 //Weapons
 const weaponList = [
 	new Weapon ('','None',0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',''),
-	new Weapon ('Sword','Engine Blade',28,2,0,5,0,0,5,0,0,0,0,0,0,0,'Non-Elemental','Absorbs elemental energy when dealing the finishing blow to an enemy'),
-	new Weapon ('Sword','Broadsword',42,2,0,6,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','+2% Critical Rate per combo hit'),
-	new Weapon ('Sword','Engine Blade II',42,2,0,15,0,0,12,0,0,0,0,0,0,0,'Non-Elemental','Absorbs elemental energy when dealing the finishing blow to an enemy'),
-	new Weapon ('Sword','Crowbar',58,2,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','+80% breakage on body parts/appendages'),
-	new Weapon ('Sword','Blazefire Saber',71,2,0,9,0,18,0,0,0,0,0,0,0,0,'Non-Elemental','-15% physical damage taken'),
-	new Weapon ('Sword','Blazefire Saber XV',72,2,0,9,0,18,0,0,0,0,0,0,0,0,'Non-Elemental','-15% physical damage taken'),
-	new Weapon ('Sword','Airstep Sword',83,2,0,7,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','Halves MP consumption in mid-air'),
+	new Weapon ('Sword','Engine Blade',28,2,0,5,0,0,5,0,0,0,0,0,0,0,'Non-Elemental',
+		'Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Sword','Broadsword',42,2,0,6,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'+2% Critical Rate per combo hit'),
+	new Weapon ('Sword','Engine Blade II',42,2,0,15,0,0,12,0,0,0,0,0,0,0,'Non-Elemental',
+		'Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Sword','Crowbar',58,2,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'+80% breakage on body parts/appendages'),
+	new Weapon ('Sword','Blazefire Saber',71,2,0,9,0,18,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'-15% physical damage taken'),
+	new Weapon ('Sword','Blazefire Saber XV',72,2,0,9,0,18,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'-15% physical damage taken'),
+	new Weapon ('Sword','Airstep Sword',83,2,0,7,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'Halves MP consumption in mid-air'),
 	new Weapon ('Sword','Rune Saber',103,2,48,8,0,8,12,9,0,0,0,0,0,0,'Non-Elemental',''),
 	new Weapon ('Sword','Flame Tongue',117,2,0,7,0,0,0,0,28,0,0,0,0,0,'Fire',''),
 	new Weapon ('Sword','Ice Brand',137,2,0,10,0,0,0,0,0,31,0,0,0,0,'Ice',''),
-	new Weapon ('Sword','Ragnarok',153,2,0,8,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','Boosted damage with warp-strike but the warp animation is slower'),
-	new Weapon ('Sword','Sarah\'s Shortsword',179,2,0,0,0,0,9,15,0,0,0,0,0,0,'Light','+50% damage at full HP'),
-	new Weapon ('Sword','Blood Sword',198,2,0,11,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','20% chance to recover 30 HP per hit'),
-	new Weapon ('Sword','Garuda\'s Gaze',200,2,0,6,16,17,21,14,0,0,0,0,0,0,'Non-Elemental','Strengthened aerial attacks'),
-	new Weapon ('Sword','Engine Blade III',207,2,0,25,0,0,18,0,0,0,0,0,0,0,'Non-Elemental','Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Sword','Ragnarok',153,2,0,8,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'Boosted damage with warp-strike but the warp animation is slower'),
+	new Weapon ('Sword','Sarah\'s Shortsword',179,2,0,0,0,0,9,15,0,0,0,0,0,0,'Light',
+		'+50% damage at full HP'),
+	new Weapon ('Sword','Blood Sword',198,2,0,11,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'20% chance to recover 30 HP per hit'),
+	new Weapon ('Sword','Garuda\'s Gaze',200,2,0,6,16,17,21,14,0,0,0,0,0,0,'Non-Elemental',
+		'Strengthened aerial attacks'),
+	new Weapon ('Sword','Engine Blade III',207,2,0,25,0,0,18,0,0,0,0,0,0,0,'Non-Elemental',
+		'Absorbs elemental energy when dealing the finishing blow to an enemy'),
 	new Weapon ('Sword','Durandal',232,2,0,11,0,0,0,0,0,0,0,33,0,0,'Light',''),
 	new Weapon ('Sword','Enhancer',276,2,0,12,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',''),
-	new Weapon ('Sword','Soul Saber',343,2,0,12,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','+4% damage for each 1% below 50% Stamina'),
-	new Weapon ('Sword','Ultima Blade',364,2,0,40,0,0,30,0,0,0,0,0,0,0,'Non-Elemental','Absorbs elemental energy when dealing the finishing blow to an enemy'),
-	new Weapon ('Sword','Gaze of the Vortex',430,100,0,60,22,22,22,15,0,0,0,0,0,0,'Non-Elemental','Deals 50% more damage with aerial attacks. Airstepping and aerial warping cost halved'),
-	new Weapon ('Sword','Balmung',446,2,0,11,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','-4% damage for every 1% of missing MP'),
-	new Weapon ('Greatsword','Two-Handed Sword',48,1,53,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','+15% damage per additional enemy within 65 feet (max 100%)'),
-	new Weapon ('Greatsword','War Sword',78,1,65,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','10% chance to inflict Compromised'),
-	new Weapon ('Greatsword','Dodanuki',80,1,0,0,46,0,0,0,0,0,0,0,0,0,'Non-Elemental','Reduces enemy defense with each slash'),
-	new Weapon ('Greatsword','Masamune',88,1,49,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','20% chance of inflicting 30% Max HP damage when the target\'s HP is full'),
+	new Weapon ('Sword','Soul Saber',343,2,0,12,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'+4% damage for each 1% below 50% Stamina'),
+	new Weapon ('Sword','Ultima Blade',364,2,0,40,0,0,30,0,0,0,0,0,0,0,'Non-Elemental',
+		'Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Sword','Gaze of the Vortex',430,100,0,60,22,22,22,15,0,0,0,0,0,0,'Non-Elemental',
+		'Deals 50% more damage with aerial attacks. Airstepping and aerial warping cost halved'),
+	new Weapon ('Sword','Balmung',446,2,0,11,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'-4% damage for every 1% of missing MP'),
+	new Weapon ('Greatsword','Two-Handed Sword',48,1,53,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'+15% damage per additional enemy within 65 feet (max 100%)'),
+	new Weapon ('Greatsword','War Sword',78,1,65,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'10% chance to inflict Compromised'),
+	new Weapon ('Greatsword','Dodanuki',80,1,0,0,46,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'Reduces enemy defense with each slash'),
+	new Weapon ('Greatsword','Masamune',88,1,49,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'20% chance of inflicting 30% Max HP damage when the target\'s HP is full'),
 	new Weapon ('Greatsword','Blade of Brennaere',131,1,82,0,0,0,0,0,27,0,0,0,0,0,'Fire',''),
 	new Weapon ('Greatsword','Claymore',156,1,98,0,0,32,0,0,0,0,0,0,0,0,'Non-Elemental',''),
-	new Weapon ('Greatsword','Force Stealer',210,1,202,6,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','Absorbs elemental energy when dealing the finishing blow to an enemy'),
-	new Weapon ('Greatsword','Hardedge',244,1,153,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','+80% breakage on body parts/appendages'),
-	new Weapon ('Greatsword','Mutant Rakshasa Blade',328,1,124,32,25,0,52,21,0,0,0,58,0,0,'Non-Elemental','The blade sends out three projections that damage the target before Noctis warps. The warp-strike also ignores greatsword resistances/weaknesses'),
+	new Weapon ('Greatsword','Force Stealer',210,1,202,6,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Greatsword','Hardedge',244,1,153,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'+80% breakage on body parts/appendages'),
+	new Weapon ('Greatsword','Mutant Rakshasa Blade',328,1,124,32,25,0,52,21,0,0,0,58,0,0,
+		'Non-Elemental','The blade sends out three projections that damage the target before ' +
+		'Noctis warps. The warp-strike also ignores greatsword resistances/weaknesses'),
 	new Weapon ('Greatsword','Thunderbolt',345,1,246,0,0,0,0,0,0,0,29,0,0,0,'Lightning',''),
-	new Weapon ('Greatsword','Duel Code',370,1,468,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','+50% damage to lone enemies within 65 feet'),
+	new Weapon ('Greatsword','Duel Code',370,1,468,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'+50% damage to lone enemies within 65 feet'),
 	new Weapon ('Greatsword','Genji Blade',426,1,357,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',''),
-	new Weapon ('Greatsword','Garuda\'s Pain',456,1,0,6,22,24,29,20,0,0,0,0,0,0,'Non-Elemental','Strengthened aerial attacks'),
-	new Weapon ('Greatsword','Force Stealer II',463,1,308,11,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','Absorbs elemental energy when dealing the finishing blow to an enemy'),
-	new Weapon ('Greatsword','Hyperion',496,1,310,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','+15% damage per additional enemy within 65 feet (max 100%)'),
-	new Weapon ('Greatsword','Afrosword',503,1,287,0,0,0,0,54,0,0,0,0,0,0,'Non-Elemental','Changes battle music to Timed Quest music when equipped and controlling the user'),
-	new Weapon ('Greatsword','Pain of the Vortex',572,100,0,60,31,31,31,22,0,0,0,0,0,0,'Non-Elemental','Deals 50% more damage with aerial attacks. Aerial warping MP cost halved'),
+	new Weapon ('Greatsword','Garuda\'s Pain',456,1,0,6,22,24,29,20,0,0,0,0,0,0,'Non-Elemental',
+		'Strengthened aerial attacks'),
+	new Weapon ('Greatsword','Force Stealer II',463,1,308,11,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Greatsword','Hyperion',496,1,310,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'+15% damage per additional enemy within 65 feet (max 100%)'),
+	new Weapon ('Greatsword','Afrosword',503,1,287,0,0,0,0,54,0,0,0,0,0,0,'Non-Elemental',
+		'Changes battle music to Timed Quest music when equipped and controlling the user'),
+	new Weapon ('Greatsword','Pain of the Vortex',572,100,0,60,31,31,31,22,0,0,0,0,0,0,
+		'Non-Elemental','Deals 50% more damage with aerial attacks. Aerial warping MP cost halved'),
 	new Weapon ('Greatsword','Iron Duke',581,1,153,0,20,0,0,0,0,0,0,0,0,0,'Non-Elemental',''),
 	new Weapon ('Greatsword','Dominator',583,1,298,0,0,0,0,0,0,0,0,32,0,0,'Light',''),
-	new Weapon ('Greatsword','Apocalypse',597,1,403,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','When below 30% HP: +30 damage and +9 damage for each 1% missing HP below 30%'),
-	new Weapon ('Polearm','Javelin',18,3,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','When below 30% HP: Critical +5% and another +1.5% per each 1% missing HP below 30%'),
-	new Weapon ('Polearm','Drain Lance',33,3,0,5,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','Absorbs elemental energy when dealing the finishing blow to an enemy'),
-	new Weapon ('Polearm','Drain Lance II',48,3,0,11,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Greatsword','Apocalypse',597,1,403,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'When below 30% HP: +30 damage and +9 damage for each 1% missing HP below 30%'),
+	new Weapon ('Polearm','Javelin',18,3,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'When below 30% HP: Critical +5% and another +1.5% per each 1% missing HP below 30%'),
+	new Weapon ('Polearm','Drain Lance',33,3,0,5,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Polearm','Drain Lance II',48,3,0,11,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'Absorbs elemental energy when dealing the finishing blow to an enemy'),
 	new Weapon ('Polearm','Mythril Lance',55,3,0,0,0,0,32,0,0,0,0,0,0,0,'Non-Elemental',''),
-	new Weapon ('Polearm','Rapier Lance',68,3,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','+80% breakage on body parts/appendages'),
-	new Weapon ('Polearm','Gae Bolg',75,3,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','+44% damage when using warp-strikes'),
+	new Weapon ('Polearm','Rapier Lance',68,3,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'+80% breakage on body parts/appendages'),
+	new Weapon ('Polearm','Gae Bolg',75,3,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'+44% damage when using warp-strikes'),
 	new Weapon ('Polearm','Storm Lance',113,3,0,0,0,0,0,0,0,0,0,0,0,0,'Lightning',''),
 	new Weapon ('Polearm','Ice Spear',133,3,0,0,0,0,0,0,0,0,0,0,0,0,'Ice',''),
-	new Weapon ('Polearm','Wyvern Lance',161,3,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','+50% damage in mid-air'),
-	new Weapon ('Polearm','Drain Lance III',195,3,0,11,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Polearm','Wyvern Lance',161,3,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'+50% damage in mid-air'),
+	new Weapon ('Polearm','Drain Lance III',195,3,0,11,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'Absorbs elemental energy when dealing the finishing blow to an enemy'),
 	new Weapon ('Polearm','Radiant Lance',205,3,0,0,0,0,0,0,0,0,0,0,0,0,'Light',''),
 	new Weapon ('Polearm','Dragoon Lance',246,3,0,0,0,0,0,0,15,14,16,0,0,0,'Non-Elemental',''),
 	new Weapon ('Polearm','Precision Lance',266,13,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',''),
-	new Weapon ('Polearm','Flayer',337,3,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','Finishers deal +80% damage'),
-	new Weapon ('Daggers','Daggers',20,7,0,4,0,0,5,0,0,0,0,0,0,0,'Non-Elemental','+50% damage to enemies in vulnerable status'),
-	new Weapon ('Daggers','Avengers',43,7,0,4,0,0,5,0,0,0,0,0,0,0,'Non-Elemental','When below 30% HP: Critical +5 and another +1.5 per each 1% missing HP below 30%'),
-	new Weapon ('Daggers','Cutlasses',58,7,0,6,0,0,10,0,0,0,0,0,0,0,'Non-Elemental','10% chance to inflict Enfeebled'),
+	new Weapon ('Polearm','Flayer',337,3,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'Finishers deal +80% damage'),
+	new Weapon ('Daggers','Daggers',20,7,0,4,0,0,5,0,0,0,0,0,0,0,'Non-Elemental',
+		'+50% damage to enemies in vulnerable status'),
+	new Weapon ('Daggers','Avengers',43,7,0,4,0,0,5,0,0,0,0,0,0,0,'Non-Elemental',
+		'When below 30% HP: Critical +5 and another +1.5 per each 1% missing HP below 30%'),
+	new Weapon ('Daggers','Cutlasses',58,7,0,6,0,0,10,0,0,0,0,0,0,0,'Non-Elemental',
+		'10% chance to inflict Enfeebled'),
 	new Weapon ('Daggers','Mythril Knives',62,7,0,6,0,0,50,0,0,0,0,0,0,0,'Non-Elemental',''),
 	new Weapon ('Daggers','Mage Mashers',66,7,0,13,0,0,32,0,30,30,30,0,0,0,'Non-Elemental',''),
-	new Weapon ('Daggers','Plunderers',111,7,0,10,0,0,10,0,0,0,0,0,0,0,'Non-Elemental','Absorbs elemental energy when dealing the finishing blow to an enemy'),
-	new Weapon ('Daggers','Assassin\'s Daggers',126,7,0,7,0,0,10,0,0,0,0,0,0,0,'Non-Elemental','10% chance to inflict Poisons'),
-	new Weapon ('Daggers','Delta Daggers',153,7,0,6,0,0,15,0,0,0,0,0,0,0,'Non-Elemental','10% chance to inflict Compromised'),
-	new Weapon ('Daggers','Garuda\'s Plumes',176,7,0,6,22,24,29,20,0,0,0,0,0,0,'Non-Elemental','Strengthened aerial attacks'),
-	new Weapon ('Daggers','Spelldaggers',178,7,0,0,28,0,0,16,0,0,0,0,0,0,'Non-Elemental','Exploits any enemy\'s elemental weakness'),
-	new Weapon ('Daggers','Plunderers II',183,7,0,15,0,0,30,0,0,0,0,0,0,0,'Non-Elemental','Absorbs elemental energy when dealing the finishing blow to an enemy'),
-	new Weapon ('Daggers','Main Gauches',192,7,0,7,0,0,21,0,0,0,0,0,0,0,'Non-Elemental','+50% damage to enemies in vulnerable status'),
+	new Weapon ('Daggers','Plunderers',111,7,0,10,0,0,10,0,0,0,0,0,0,0,'Non-Elemental',
+		'Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Daggers','Assassin\'s Daggers',126,7,0,7,0,0,10,0,0,0,0,0,0,0,'Non-Elemental',
+		'10% chance to inflict Poisons'),
+	new Weapon ('Daggers','Delta Daggers',153,7,0,6,0,0,15,0,0,0,0,0,0,0,'Non-Elemental',
+		'10% chance to inflict Compromised'),
+	new Weapon ('Daggers','Garuda\'s Plumes',176,7,0,6,22,24,29,20,0,0,0,0,0,0,'Non-Elemental',
+		'Strengthened aerial attacks'),
+	new Weapon ('Daggers','Spelldaggers',178,7,0,0,28,0,0,16,0,0,0,0,0,0,'Non-Elemental',
+		'Exploits any enemy\'s elemental weakness'),
+	new Weapon ('Daggers','Plunderers II',183,7,0,15,0,0,30,0,0,0,0,0,0,0,'Non-Elemental',
+		'Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Daggers','Main Gauches',192,7,0,7,0,0,21,0,0,0,0,0,0,0,'Non-Elemental',
+		'+50% damage to enemies in vulnerable status'),
 	new Weapon ('Daggers','Orichalcum',223,7,0,9,0,0,20,0,0,0,0,0,0,0,'Light',''),
-	new Weapon ('Daggers','Ulric\'s Kukris',234,12,282,24,8,15,48,20,5,7,4,19,21,1,'Non-Elemental',''),
+	new Weapon ('Daggers','Ulric\'s Kukris',234,12,282,24,8,15,48,20,5,7,4,19,21,1,'Non-Elemental',
+		''),
 	new Weapon ('Daggers','Organyx',248,7,0,10,0,25,23,32,10,10,10,10,0,0,'Non-Elemental',''),
-	new Weapon ('Daggers','Vigilantes',290,7,0,5,0,0,20,0,0,0,0,0,0,0,'Non-Elemental','5% chance to inflict Stop'),
-	new Weapon ('Daggers','Plumes of the Vortex',320,100,0,60,31,31,31,22,0,0,0,0,0,0,'Non-Elemental','Deal 50% more damage with aerial attacks. Aerial warping MP cost halved'),
-	new Weapon ('Daggers','Zwill Crossblade',345,7,0,5,0,0,25,0,0,0,0,0,0,0,'Non-Elemental','+80% damage at full HP'),
-	new Weapon ('Firearm','Handgun',32,1,0,0,0,0,0,4,0,0,0,0,0,0,'Shot','+80% breakage on body parts/appendages'),
+	new Weapon ('Daggers','Vigilantes',290,7,0,5,0,0,20,0,0,0,0,0,0,0,'Non-Elemental',
+		'5% chance to inflict Stop'),
+	new Weapon ('Daggers','Plumes of the Vortex',320,100,0,60,31,31,31,22,0,0,0,0,0,0,
+		'Non-Elemental','Deal 50% more damage with aerial attacks. Aerial warping MP cost halved'),
+	new Weapon ('Daggers','Zwill Crossblade',345,7,0,5,0,0,25,0,0,0,0,0,0,0,'Non-Elemental',
+		'+80% damage at full HP'),
+	new Weapon ('Firearm','Handgun',32,1,0,0,0,0,0,4,0,0,0,0,0,0,'Shot',
+		'+80% breakage on body parts/appendages'),
 	new Weapon ('Firearm','Cocytus',45,1,0,0,0,0,0,7,0,0,0,0,0,0,'Ice',''),
-	new Weapon ('Firearm','Calamity',53,1,0,0,0,0,0,5,0,0,0,0,0,0,'Shot','10% chance to inflict poison'),
+	new Weapon ('Firearm','Calamity',53,1,0,0,0,0,0,5,0,0,0,0,0,0,'Shot',
+		'10% chance to inflict poison'),
 	new Weapon ('Firearm','Mythril Pistol',96,1,0,0,0,0,42,11,0,0,0,0,0,0,'Shot',''),
-	new Weapon ('Firearm','Valiant',147,1,0,11,0,0,0,12,0,0,0,0,0,0,'Shot','Absorbs elemental energy when dealing the finishing blow to an enemy'),
-	new Weapon ('Firearm','Cerberus',156,1,0,0,0,0,0,6,0,0,0,0,0,0,'Shot','A rifle that can be manually-aimed in three different ways. It is only available to Noctis'),
-	new Weapon ('Firearm','Rebellion',167,1,0,0,0,0,0,15,0,0,0,0,0,0,'Shot','When below 30% HP: Critical +5 and another +1.5 per each 1% missing HP below 30%'),
-	new Weapon ('Firearm','Garuda\'s Abandon',193,1,0,6,22,24,29,20,0,0,0,0,0,0,'Shot','Strengthened enemy appendages breaking power'),
-	new Weapon ('Firearm','Valiant II',200,1,0,14,0,0,0,21,0,0,0,0,0,0,'Shot','Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Firearm','Valiant',147,1,0,11,0,0,0,12,0,0,0,0,0,0,'Shot',
+		'Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Firearm','Cerberus',156,1,0,0,0,0,0,6,0,0,0,0,0,0,'Shot',
+		'A rifle that can be manually-aimed in three different ways. It is only available to' +
+		' Noctis'),
+	new Weapon ('Firearm','Rebellion',167,1,0,0,0,0,0,15,0,0,0,0,0,0,'Shot',
+		'When below 30% HP: Critical +5 and another +1.5 per each 1% missing HP below 30%'),
+	new Weapon ('Firearm','Garuda\'s Abandon',193,1,0,6,22,24,29,20,0,0,0,0,0,0,'Shot',
+		'Strengthened enemy appendages breaking power'),
+	new Weapon ('Firearm','Valiant II',200,1,0,14,0,0,0,21,0,0,0,0,0,0,'Shot',
+		'Absorbs elemental energy when dealing the finishing blow to an enemy'),
 	new Weapon ('Firearm','Flame Gun',210,1,0,0,0,0,0,16,0,0,0,0,0,0,'Fire',''),
-	new Weapon ('Firearm','Quicksilver',222,1,0,0,0,0,0,18,0,0,0,0,0,0,'Shot','+80% breakage on body parts/appendages'),
+	new Weapon ('Firearm','Quicksilver',222,1,0,0,0,0,0,18,0,0,0,0,0,0,'Shot',
+		'+80% breakage on body parts/appendages'),
 	new Weapon ('Firearm','Enforcer',243,11,0,0,0,0,0,19,0,0,0,0,0,0,'Shot',''),
-	new Weapon ('Firearm','Lion Heart',262,1,0,0,9,0,0,14,0,0,0,0,0,0,'Shot','When below 30% HP: Critical +5 and another +1.5 per each 1% missing HP below 30%'),
-	new Weapon ('Firearm','Executioner',363,1,0,0,0,0,0,22,0,0,0,0,0,0,'Shot','+50% damage to lone enemies within 65 feet'),
+	new Weapon ('Firearm','Lion Heart',262,1,0,0,9,0,0,14,0,0,0,0,0,0,'Shot',
+		'When below 30% HP: Critical +5 and another +1.5 per each 1% missing HP below 30%'),
+	new Weapon ('Firearm','Executioner',363,1,0,0,0,0,0,22,0,0,0,0,0,0,'Shot',
+		'+50% damage to lone enemies within 65 feet'),
 	new Weapon ('Firearm','Hyper Magnum',388,1,0,0,0,0,0,21,0,0,0,0,0,0,'Shot',''),
-	new Weapon ('Firearm','Abandon of the Vortex',399,100,0,60,31,31,31,22,0,0,0,0,0,0,'Shot','Strengthened enemy appendage breaking power. Deals 50% more damage to vulnerable targets'),
-	new Weapon ('Firearm','Death Penalty',424,1,0,0,0,0,0,25,0,0,0,0,0,0,'Shot','1% chance to inflict Instant Death'),
-	new Weapon ('Shield','Kite Shield',52,0,0,0,0,15,0,0,0,0,0,0,8,0,'Non-Elemental','Recovers 50 HP per Blink'),
-	new Weapon ('Shield','Absorb Shield',83,0,0,10,0,30,0,0,0,0,0,0,12,0,'Non-Elemental','Absorbs elemental energy when dealing the finishing blow to an enemy'),
-	new Weapon ('Shield','Ice Shield',93,0,0,0,0,18,0,0,0,22,0,0,10,0,'Non-Elemental','+30% HP Recovery Rate for 5 seconds after taking Ice damage'),
-	new Weapon ('Shield','Thunder Shield',111,0,0,0,0,21,0,0,0,0,24,0,12,0,'Non-Elemental','x4 Critical Rate for 5 seconds after taking Lightning damage'),
-	new Weapon ('Shield','Flame Shield',126,0,0,0,0,22,0,0,21,0,0,0,9,0,'Non-Elemental','+300 Strength for 5 seconds after taking Fire damage'),
-	new Weapon ('Shield','Hero Shield',144,0,0,0,0,25,0,0,0,0,0,0,22,0,'Non-Elemental','-30% damage from bullets'),
-	new Weapon ('Shield','Absorb Shield II',167,0,0,15,0,38,0,0,0,0,0,0,12,0,'Non-Elemental','Absorbs elemental energy when dealing the finishing blow to an enemy'),
-	new Weapon ('Shield','Black Prince',175,0,0,0,0,32,0,0,0,0,0,22,13,0,'Non-Elemental','+300 Magic for 5 seconds after taking Darkness damage'),
+	new Weapon ('Firearm','Abandon of the Vortex',399,100,0,60,31,31,31,22,0,0,0,0,0,0,'Shot',
+		'Strengthened enemy appendage breaking power. Deals 50% more damage to vulnerable targets'),
+	new Weapon ('Firearm','Death Penalty',424,1,0,0,0,0,0,25,0,0,0,0,0,0,'Shot',
+		'1% chance to inflict Instant Death'),
+	new Weapon ('Shield','Kite Shield',52,0,0,0,0,15,0,0,0,0,0,0,8,0,'Non-Elemental',
+		'Recovers 50 HP per Blink'),
+	new Weapon ('Shield','Absorb Shield',83,0,0,10,0,30,0,0,0,0,0,0,12,0,'Non-Elemental',
+		'Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Shield','Ice Shield',93,0,0,0,0,18,0,0,0,22,0,0,10,0,'Non-Elemental',
+		'+30% HP Recovery Rate for 5 seconds after taking Ice damage'),
+	new Weapon ('Shield','Thunder Shield',111,0,0,0,0,21,0,0,0,0,24,0,12,0,'Non-Elemental',
+		'x4 Critical Rate for 5 seconds after taking Lightning damage'),
+	new Weapon ('Shield','Flame Shield',126,0,0,0,0,22,0,0,21,0,0,0,9,0,'Non-Elemental',
+		'+300 Strength for 5 seconds after taking Fire damage'),
+	new Weapon ('Shield','Hero Shield',144,0,0,0,0,25,0,0,0,0,0,0,22,0,'Non-Elemental',
+		'-30% damage from bullets'),
+	new Weapon ('Shield','Absorb Shield II',167,0,0,15,0,38,0,0,0,0,0,0,12,0,'Non-Elemental',
+		'Absorbs elemental energy when dealing the finishing blow to an enemy'),
+	new Weapon ('Shield','Black Prince',175,0,0,0,0,32,0,0,0,0,0,22,13,0,'Non-Elemental',
+		'+300 Magic for 5 seconds after taking Darkness damage'),
 	new Weapon ('Shield','Power Shield',176,0,0,0,0,6,0,0,0,0,0,0,11,0,'Non-Elemental',''),
-	new Weapon ('Shield','Medjay Assassin\'s Shield',202,0,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','+200 Strength for 3 seconds after Blocking'),
+	new Weapon ('Shield','Medjay Assassin\'s Shield',202,0,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'+200 Strength for 3 seconds after Blocking'),
 	new Weapon ('Shield','Wizard Shield',225,0,0,0,0,34,99,0,0,0,0,0,12,0,'Non-Elemental',''),
-	new Weapon ('Shield','Aegis Shield',292,0,0,0,0,55,0,0,0,0,0,0,11,0,'Non-Elemental','10% chance to nullify any incoming damage'),
+	new Weapon ('Shield','Aegis Shield',292,0,0,0,0,55,0,0,0,0,0,0,11,0,'Non-Elemental',
+		'10% chance to nullify any incoming damage'),
 	new Weapon ('Shield','Alien Shield',313,0,0,0,18,52,0,48,12,14,13,10,18,0,'Light',''),
-	new Weapon ('Shield','Ziedrich',327,0,0,0,0,50,0,0,0,0,0,0,14,0,'Non-Elemental','+200 Strength for 3 seconds after Blinking'),
-	new Weapon ('Machinery','Auto Crossbow',61,1,12,0,0,0,0,0,0,0,0,0,10,0,'Non-Elemental','Fires a barrage of crossbow bolts'),
-	new Weapon ('Machinery','Bioblaster',74,1,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','Disperses a poisonous mist'),
-	new Weapon ('Machinery','Circular Saw',90,1,0,0,0,9,0,0,0,0,0,0,7,0,'Non-Elemental','Inflicts repeated damage with spinning blades'),
-	new Weapon ('Machinery','Gravity Well',108,1,0,0,0,0,8,0,0,0,0,0,0,0,'Non-Elemental','Pulls foes in with a gravity sphere'),
-	new Weapon ('Machinery','Noiseblaster',153,1,0,0,0,0,0,11,0,0,0,0,0,0,'Non-Elemental','Emits a pummeling sonic wave over a wide area'),
-	new Weapon ('Machinery','Drillbreaker',181,1,7,0,0,5,0,0,0,0,0,0,8,0,'Non-Elemental','Inflicts repeated damage with piercing drills'),
-	new Weapon ('Machinery','Flamebreath Cannon',286,1,0,0,0,0,0,0,0,0,0,0,0,0,'Fire','Spews a constant stream of elemental flames towards enemies, constantly draining MP'),
-	new Weapon ('Machinery','Auto Crossbow Plus',323,1,18,0,0,0,0,0,0,0,0,0,22,0,'Non-Elemental','Fires a barrage of crossbow bolts'),
-	new Weapon ('Machinery','Bioblaster Plus',339,1,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','Disperses a poisonous mist'),
-	new Weapon ('Machinery','Circular Saw Plus',356,1,0,0,0,21,0,0,0,0,0,0,12,0,'Non-Elemental','Inflicts repeated damage with spinning blades'),
-	new Weapon ('Machinery','Gravity Well Plus',374,1,0,0,0,0,18,0,0,0,0,0,0,0,'Non-Elemental','Pulls foes in with a gravity sphere'),
-	new Weapon ('Machinery','Noiseblaster Plus',397,1,0,0,0,0,0,23,0,0,0,0,0,0,'Non-Elemental','Emits a pummeling sonic wave over a wide area'),
-	new Weapon ('Machinery','Drillbreaker Plus',432,1,12,0,0,13,0,0,0,0,0,0,13,0,'Non-Elemental','Inflicts repeated damage with piercing drills'),
-	new Weapon ('Royal Arm','Sword of the Wise',194,2,100,0,0,30,30,30,0,0,0,0,0,0,'Non-Elemental','A sword that performs short warp-strikes when near enemies'),
-	new Weapon ('Royal Arm','Axe of the Conqueror',483,1,0,0,60,-80,0,0,0,0,0,0,0,0,'Non-Elemental','A polearm that performs slow but powerful attacks, at the expense of defense and increased HP loss. Has a unique warp-strike, launching diagonally upward above the target then crashing down. Especially good at making enemies vulnerable'),
-	new Weapon ('Royal Arm','Bow of the Clever',203,6,0,0,0,0,80,0,0,0,0,0,50,0,'Non-Elemental','A bow that fires piercing arrows, and can fire while moving in any direction. Its damage is based on the Magic stat. Warp-strike fires multiple arrows upward'),
-	new Weapon ('Royal Arm','Swords of the Wanderer',153,3,0,0,0,50,0,50,0,0,0,0,0,0,'Non-Elemental','Dual swords functioning similar to daggers that can transform into a single weapon to deliver powerful blows'),
-	new Weapon ('Royal Arm','Blade of the Mystic',396,5,150,0,0,30,0,0,0,0,0,20,0,0,'Non-Elemental','A greatsword with the ability to briefly increase the wielder\'s Strength through a unique self-buff after swinging. The warp-strike fires three ranged energy beams before warping'),
-	new Weapon ('Royal Arm','Star of the Rogue',177,1,0,0,0,0,0,0,20,20,20,0,0,0,'Non-Elemental','A shuriken capable of dealing multiple piercing ranged hits in rapid succession either on different targets or on the various body parts of a single target'),
-	new Weapon ('Royal Arm','Sword of the Tall',518,1,200,0,0,0,0,-30,-40,-40,-40,-40,0,0,'Non-Elemental','A greatsword with a chainsaw effect, dealing multiple hits with each blow. The warp-strike is 3 horizontal swings'),
-	new Weapon ('Royal Arm','Shield of the Just',251,0,1000,-50,-100,200,0,0,10,10,10,10,10,0,'Non-Elemental','A shield that enables cover status when guarding, enabling HP recovery at the cost of MP. It can block normally unblockable attacks and negate most of the damage. The radius of its warp-strike is very wide'),
-	new Weapon ('Royal Arm','Mace of the Fierce',334,1,300,0,0,0,0,0,0,0,0,0,-50,0,'Non-Elemental','A mace with the ability to deal grievous breakage to body parts/appendages'),
-	new Weapon ('Royal Arm','Scepter of the Pious',237,2,0,0,0,0,150,0,0,0,0,50,0,0,'Non-Elemental','A scepter that takes on the forms of several other royal arms to perform a variety of attacks. Its damage is based on the magic stat.'),
-	new Weapon ('Royal Arm','Trident of the Oracle',388,4,0,60,0,0,0,0,0,0,0,0,0,0,'Non-Elemental','A polearm that produces afterimages after attacks that deal damage to nearby foes'),
-	new Weapon ('Royal Arm','Katana of the Warrior',361,2,0,0,0,0,0,100,25,25,25,-50,0,0,'Non-Elemental','A longsword that attacks quickly and relentlessly after startup. Can spam warp-strikes very quickly'),
-	new Weapon ('Royal Arm','Sword of the Father',141,5,0,0,100,0,100,0,0,0,0,0,0,0,'Non-Elemental','A sword that increases its wielder\'s Strength after Finishers. Drains less HP compared to other royal arms'),
-	new Weapon ('Ring','Ring of the Lucii',0,0,0,0,0,0,0,0,0,0,0,0,0,0,'Light','It lets the player use a special type of magic and cast three unique spells: Death, Holy and Alterna')];
+	new Weapon ('Shield','Ziedrich',327,0,0,0,0,50,0,0,0,0,0,0,14,0,'Non-Elemental',
+		'+200 Strength for 3 seconds after Blinking'),
+	new Weapon ('Machinery','Auto Crossbow',61,1,12,0,0,0,0,0,0,0,0,0,10,0,'Non-Elemental',
+		'Fires a barrage of crossbow bolts'),
+	new Weapon ('Machinery','Bioblaster',74,1,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'Disperses a poisonous mist'),
+	new Weapon ('Machinery','Circular Saw',90,1,0,0,0,9,0,0,0,0,0,0,7,0,'Non-Elemental',
+		'Inflicts repeated damage with spinning blades'),
+	new Weapon ('Machinery','Gravity Well',108,1,0,0,0,0,8,0,0,0,0,0,0,0,'Non-Elemental',
+		'Pulls foes in with a gravity sphere'),
+	new Weapon ('Machinery','Noiseblaster',153,1,0,0,0,0,0,11,0,0,0,0,0,0,'Non-Elemental',
+		'Emits a pummeling sonic wave over a wide area'),
+	new Weapon ('Machinery','Drillbreaker',181,1,7,0,0,5,0,0,0,0,0,0,8,0,'Non-Elemental',
+		'Inflicts repeated damage with piercing drills'),
+	new Weapon ('Machinery','Flamebreath Cannon',286,1,0,0,0,0,0,0,0,0,0,0,0,0,'Fire',
+		'Spews a constant stream of elemental flames towards enemies, constantly draining MP'),
+	new Weapon ('Machinery','Auto Crossbow Plus',323,1,18,0,0,0,0,0,0,0,0,0,22,0,'Non-Elemental',
+		'Fires a barrage of crossbow bolts'),
+	new Weapon ('Machinery','Bioblaster Plus',339,1,0,0,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'Disperses a poisonous mist'),
+	new Weapon ('Machinery','Circular Saw Plus',356,1,0,0,0,21,0,0,0,0,0,0,12,0,'Non-Elemental',
+		'Inflicts repeated damage with spinning blades'),
+	new Weapon ('Machinery','Gravity Well Plus',374,1,0,0,0,0,18,0,0,0,0,0,0,0,'Non-Elemental',
+		'Pulls foes in with a gravity sphere'),
+	new Weapon ('Machinery','Noiseblaster Plus',397,1,0,0,0,0,0,23,0,0,0,0,0,0,'Non-Elemental',
+		'Emits a pummeling sonic wave over a wide area'),
+	new Weapon ('Machinery','Drillbreaker Plus',432,1,12,0,0,13,0,0,0,0,0,0,13,0,'Non-Elemental',
+		'Inflicts repeated damage with piercing drills'),
+	new Weapon ('Royal Arm','Sword of the Wise',194,2,100,0,0,30,30,30,0,0,0,0,0,0,'Non-Elemental',
+		'A sword that performs short warp-strikes when near enemies'),
+	new Weapon ('Royal Arm','Axe of the Conqueror',483,1,0,0,60,-80,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'A polearm that performs slow but powerful attacks, at the expense of defense and '+ 
+		'increased HP loss. Has a unique warp-strike, launching diagonally upward above the ' +
+		'target then crashing down. Especially good at making enemies vulnerable'),
+	new Weapon ('Royal Arm','Bow of the Clever',203,6,0,0,0,0,80,0,0,0,0,0,50,0,'Non-Elemental',
+		'A bow that fires piercing arrows, and can fire while moving in any direction. Its ' +
+		'damage is based on the Magic stat. Warp-strike fires multiple arrows upward'),
+	new Weapon ('Royal Arm','Swords of the Wanderer',153,3,0,0,0,50,0,50,0,0,0,0,0,0,
+		'Non-Elemental','Dual swords functioning similar to daggers that can transform into a ' +
+		'single weapon to deliver powerful blows'),
+	new Weapon ('Royal Arm','Blade of the Mystic',396,5,150,0,0,30,0,0,0,0,0,20,0,0,'Non-Elemental',
+		'A greatsword with the ability to briefly increase the wielder\'s Strength through a ' +
+		'unique self-buff after swinging. The warp-strike fires three ranged energy beams before' +
+		' warping'),
+	new Weapon ('Royal Arm','Star of the Rogue',177,1,0,0,0,0,0,0,20,20,20,0,0,0,'Non-Elemental',
+		'A shuriken capable of dealing multiple piercing ranged hits in rapid succession either' +
+		' on different targets or on the various body parts of a single target'),
+	new Weapon ('Royal Arm','Sword of the Tall',518,1,200,0,0,0,0,-30,-40,-40,-40,-40,0,0,
+		'Non-Elemental','A greatsword with a chainsaw effect, dealing multiple hits with each ' +
+		'blow. The warp-strike is 3 horizontal swings'),
+	new Weapon ('Royal Arm','Shield of the Just',251,0,1000,-50,-100,200,0,0,10,10,10,10,10,0,
+		'Non-Elemental','A shield that enables cover status when guarding, enabling HP recovery ' +
+		'at the cost of MP. It can block normally unblockable attacks and negate most of the ' +
+		'damage. The radius of its warp-strike is very wide'),
+	new Weapon ('Royal Arm','Mace of the Fierce',334,1,300,0,0,0,0,0,0,0,0,0,-50,0,'Non-Elemental',
+		'A mace with the ability to deal grievous breakage to body parts/appendages'),
+	new Weapon ('Royal Arm','Scepter of the Pious',237,2,0,0,0,0,150,0,0,0,0,50,0,0,'Non-Elemental',
+		'A scepter that takes on the forms of several other royal arms to perform a variety of ' +
+		'attacks. Its damage is based on the magic stat.'),
+	new Weapon ('Royal Arm','Trident of the Oracle',388,4,0,60,0,0,0,0,0,0,0,0,0,0,'Non-Elemental',
+		'A polearm that produces afterimages after attacks that deal damage to nearby foes'),
+	new Weapon ('Royal Arm','Katana of the Warrior',361,2,0,0,0,0,0,100,25,25,25,-50,0,0,
+		'Non-Elemental','A longsword that attacks quickly and relentlessly after startup. Can ' +
+		'spam warp-strikes very quickly'),
+	new Weapon ('Royal Arm','Sword of the Father',141,5,0,0,100,0,100,0,0,0,0,0,0,0,'Non-Elemental',
+		'A sword that increases its wielder\'s Strength after Finishers. Drains less HP compared' +
+		' to other royal arms'),
+	new Weapon ('Ring','Ring of the Lucii',0,0,0,0,0,0,0,0,0,0,0,0,0,0,'Light',
+		'It lets the player use a special type of magic and cast three unique spells: Death, ' +
+		'Holy and Alterna')];
 
 //Accessories
 const accessoryList = [
@@ -993,12 +1169,16 @@ const accessoryList = [
 	new Accessory ('HP Recovery Rate','All','White Choker',0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,'',''),
 	new Accessory ('HP Recovery Rate','All','Green Choker',0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,'',''),
 	new Accessory ('HP Recovery Rate','All','Blue Choker',0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,'',''),
-	new Accessory ('HP Recovery Rate','All','HP-8700K Booster',0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,'',''),
+	new Accessory ('HP Recovery Rate','All','HP-8700K Booster',0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,'',
+		''),
 	new Accessory ('HP Recovery Rate','All','Red Choker',0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,'',''),
 	new Accessory ('HP Recovery Rate','All','Black Choker',0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,'',''),
-	new Accessory ('HP Recovery Rate','Gladiolus','Megaphone',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'','+10 HP Recovery Rate for the whole party'),
-	new Accessory ('MP Recovery Rate','Noctis','Robe of the Lord',0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,'',''),
-	new Accessory ('MP Recovery Rate','Noctis','MP-8700K Booster',0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,'',''),
+	new Accessory ('HP Recovery Rate','Gladiolus','Megaphone',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',
+		'+10 HP Recovery Rate for the whole party'),
+	new Accessory ('MP Recovery Rate','Noctis','Robe of the Lord',0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,
+		'',''),
+	new Accessory ('MP Recovery Rate','Noctis','MP-8700K Booster',0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,
+		0,'',''),
 	new Accessory ('STR','All','Garnet Bracelet',0,0,30,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',''),
 	new Accessory ('STR','All','Amethyst Bracelet',0,0,35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',''),
 	new Accessory ('STR','All','Heliodor Bracelet',0,0,40,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',''),
@@ -1032,252 +1212,132 @@ const accessoryList = [
 	new Accessory ('SPR','All','Lavender Oil',0,0,0,0,0,100,0,0,0,0,0,0,0,0,0,0,0,'',''),
 	new Accessory ('SPR','All','Purified Salt',0,0,0,0,0,120,0,0,0,0,0,0,0,0,0,0,0,'',''),
 	new Accessory ('SPR','All','Tarot Card',0,0,0,0,0,150,0,0,0,0,0,0,0,0,0,0,0,'',''),
-	new Accessory ('Multiple Stats','All','Assist Suit',500,0,30,20,0,0,0,0,0,0,0,0,0,0,0,0,0,'',''),
-	new Accessory ('Multiple Stats','All','Magitek Suit',1000,0,70,50,0,0,0,0,0,0,0,0,0,0,0,0,0,'',''),
-	new Accessory ('Multiple Stats','All','Magitek Suit V2',2000,0,100,70,0,0,0,0,0,0,0,0,0,0,0,0,0,'',''),
-	new Accessory ('Multiple Stats','All','Tempered Shield',800,0,0,40,0,0,0,0,0,0,0,0,0,0,0,0,0,'',''),
-	new Accessory ('Multiple Stats','All','Magitek Shield',1000,0,0,60,0,0,0,0,0,0,0,0,0,0,0,0,0,'',''),
-	new Accessory ('Multiple Stats','All','Trihead Heart',1000,0,0,0,0,0,100,0,0,0,0,0,0,0,0,0,0,'',''),
-	new Accessory ('Multiple Stats','Noctis','Auto-changer',100,0,30,30,0,0,0,0,0,0,0,0,0,0,0,0,0,'','Automatically switches to the next clockwise weapon after each attack or combo'),
-	new Accessory ('Multiple Stats','Noctis','Rare Metal',0,0,500,-500,0,0,0,0,0,0,0,0,0,0,0,0,0,'','Attacks can break the damage limit. HP reduced to 10% (rounded) before food or attire bonus'),
-	new Accessory ('Fire Resistance','All','Fireproof Inners',0,0,0,0,0,0,20,0,0,0,0,0,0,0,0,0,0,'',''),
+	new Accessory ('Multiple Stats','All','Assist Suit',500,0,30,20,0,0,0,0,0,0,0,0,0,0,0,0,0,'',
+		''),
+	new Accessory ('Multiple Stats','All','Magitek Suit',1000,0,70,50,0,0,0,0,0,0,0,0,0,0,0,0,0,'',
+		''),
+	new Accessory ('Multiple Stats','All','Magitek Suit V2',2000,0,100,70,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		'',''),
+	new Accessory ('Multiple Stats','All','Tempered Shield',800,0,0,40,0,0,0,0,0,0,0,0,0,0,0,0,0,'',
+		''),
+	new Accessory ('Multiple Stats','All','Magitek Shield',1000,0,0,60,0,0,0,0,0,0,0,0,0,0,0,0,0,'',
+		''),
+	new Accessory ('Multiple Stats','All','Trihead Heart',1000,0,0,0,0,0,100,0,0,0,0,0,0,0,0,0,0,'',
+		''),
+	new Accessory ('Multiple Stats','Noctis','Auto-changer',100,0,30,30,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		'','Automatically switches to the next clockwise weapon after each attack or combo'),
+	new Accessory ('Multiple Stats','Noctis','Rare Metal',0,0,500,-500,0,0,0,0,0,0,0,0,0,0,0,0,0,'',
+		'Attacks can break the damage limit. HP reduced to 10% (rounded) before food or attire ' +
+		'bonus'),
+	new Accessory ('Fire Resistance','All','Fireproof Inners',0,0,0,0,0,0,20,0,0,0,0,0,0,0,0,0,0,'',
+		''),
 	new Accessory ('Fire Resistance','All','Fire Crest',0,0,0,0,0,0,30,0,0,0,0,0,0,0,0,0,0,'',''),
 	new Accessory ('Ice Resistance','All','Warm Inners',0,0,0,0,0,0,0,20,0,0,0,0,0,0,0,0,0,'',''),
 	new Accessory ('Ice Resistance','All','Ice Crest',0,0,0,0,0,0,0,30,0,0,0,0,0,0,0,0,0,'',''),
-	new Accessory ('Lightning Resistance','All','Insulated Inners',0,0,0,0,0,0,0,0,20,0,0,0,0,0,0,0,0,'',''),
-	new Accessory ('Lightning Resistance','All','Lightning Crest',0,0,0,0,0,0,0,0,30,0,0,0,0,0,0,0,0,'',''),
-	new Accessory ('Dark Resistance','All','Anti-darkness Inners',0,0,0,0,0,0,0,0,0,20,0,0,0,0,0,0,0,'',''),
+	new Accessory ('Lightning Resistance','All','Insulated Inners',0,0,0,0,0,0,0,0,20,0,0,0,0,0,0,0,
+		0,'',''),
+	new Accessory ('Lightning Resistance','All','Lightning Crest',0,0,0,0,0,0,0,0,30,0,0,0,0,0,0,0,
+		0,'',''),
+	new Accessory ('Dark Resistance','All','Anti-darkness Inners',0,0,0,0,0,0,0,0,0,20,0,0,0,0,0,0,
+		0,'',''),
 	new Accessory ('Dark Resistance','All','Dark Crest',0,0,0,0,0,0,0,0,0,30,0,0,0,0,0,0,0,'',''),
-	new Accessory ('Shot Resistance','All','Bulletproof Vest',0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,'',''),
-	new Accessory ('Shot Resistance','All','Bulletproof Suit',0,0,0,0,0,0,0,0,0,0,20,0,0,0,0,0,0,'',''),
+	new Accessory ('Shot Resistance','All','Bulletproof Vest',0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,'',
+		''),
+	new Accessory ('Shot Resistance','All','Bulletproof Suit',0,0,0,0,0,0,0,0,0,0,20,0,0,0,0,0,0,'',
+		''),
 	new Accessory ('Shot Resistance','All','Chobham',0,0,0,0,0,0,0,0,0,0,30,0,0,0,0,0,0,'',''),
-	new Accessory ('Multiple Resistances','All','Celestriad',0,0,0,0,0,0,30,30,30,0,0,0,0,0,0,0,0,'',''),
-	new Accessory ('Multiple Resistances','All','Mighty Guard',0,0,0,0,0,0,30,30,30,30,0,0,0,0,0,0,0,'',''),
-	new Accessory ('Multiple Resistances','All','Stone Wall',0,0,0,0,0,0,30,30,0,0,30,0,0,0,0,0,0,'',''),
-	new Accessory ('Multiple Resistances','All','Genji Gloves',0,0,0,0,0,0,0,0,30,30,30,0,0,0,0,0,0,'',''),
-	new Accessory ('Multiple Stats & Resistances','Gladiolus','The Tall\'s Talisman',10,10,10,10,10,10,10,10,10,10,10,10,0,0,0,0,0,'','Increases the growth rate of the Valor gauge'),
-	new Accessory ('Multiple Stats & Resistances','Ignis','The Wanderer\'s Talisman',10,10,10,10,10,10,10,10,10,10,10,10,0,0,0,0,0,'','Increases growth rate of the Total Clarity gauge'),
-	new Accessory ('Multiple Stats & Resistances','Prompto','The Clever\'s Talisman',10,10,10,10,10,10,10,10,10,10,10,10,0,0,50,0,0,'','Rapidus SMG never runs out of ammo'),
+	new Accessory ('Multiple Resistances','All','Celestriad',0,0,0,0,0,0,30,30,30,0,0,0,0,0,0,0,0,
+		'',''),
+	new Accessory ('Multiple Resistances','All','Mighty Guard',0,0,0,0,0,0,30,30,30,30,0,0,0,0,0,0,
+		0,'',''),
+	new Accessory ('Multiple Resistances','All','Stone Wall',0,0,0,0,0,0,30,30,0,0,30,0,0,0,0,0,0,
+		'',''),
+	new Accessory ('Multiple Resistances','All','Genji Gloves',0,0,0,0,0,0,0,0,30,30,30,0,0,0,0,0,0,
+		'',''),
+	new Accessory ('Multiple Stats & Resistances','Gladiolus','The Tall\'s Talisman',10,10,10,10,10,
+		10,10,10,10,10,10,10,0,0,0,0,0,'','Increases the growth rate of the Valor gauge'),
+	new Accessory ('Multiple Stats & Resistances','Ignis','The Wanderer\'s Talisman',10,10,10,10,10,
+		10,10,10,10,10,10,10,0,0,0,0,0,'','Increases growth rate of the Total Clarity gauge'),
+	new Accessory ('Multiple Stats & Resistances','Prompto','The Clever\'s Talisman',10,10,10,10,10,
+		10,10,10,10,10,10,10,0,0,50,0,0,'','Rapidus SMG never runs out of ammo'),
 	new Accessory ('Immunities','All','Star Pendant',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'Poison',''),
-	new Accessory ('Immunities','All','Rainbow Pendant',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'Confusion',''),
+	new Accessory ('Immunities','All','Rainbow Pendant',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		'Confusion',''),
 	new Accessory ('Immunities','All','Moon Pendant',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'Toad',''),
 	new Accessory ('Immunities','All','Earth Pendant',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'Stone',''),
-	new Accessory ('Immunities','All','Golden Hourglass',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'Stop',''),
-	new Accessory ('Immunities','All','Safety Bit',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'Instant Death',''),
+	new Accessory ('Immunities','All','Golden Hourglass',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'Stop',
+		''),
+	new Accessory ('Immunities','All','Safety Bit',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		'Instant Death',''),
 	new Accessory ('Immunities','All','Ribbon',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'All',''),
-	new Accessory ('AP','All','Blitzer\'s Fanfare',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'','+2 AP when getting A+ in Time in non-training battle'),
-	new Accessory ('AP','All','Tactician\'s Fanfare',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'','+4 AP when getting A+ in Finesse in non-training battle'),
-	new Accessory ('AP','All','Warrior\'s Fanfare',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'','+1 AP when getting A+ in Offense in non-training battle'),
+	new Accessory ('AP','All','Blitzer\'s Fanfare',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',
+		'+2 AP when getting A+ in Time in non-training battle'),
+	new Accessory ('AP','All','Tactician\'s Fanfare',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',
+		'+4 AP when getting A+ in Finesse in non-training battle'),
+	new Accessory ('AP','All','Warrior\'s Fanfare',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',
+		'+1 AP when getting A+ in Offense in non-training battle'),
 	new Accessory ('EXP','All','Moogle Charm',0,0,0,0,0,0,0,0,0,0,0,0,0,20,0,0,0,'',''),
-	new Accessory ('EXP','All','Nixperience Band',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'','XP not tallied when resting'),
+	new Accessory ('EXP','All','Nixperience Band',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',
+		'xp not tallied when resting'),
 	new Accessory ('Phase Cost','Noctis','Thieves\' Way',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-20,0,'',''),
-	new Accessory ('Phase Cost','Noctis','Thieves\' Way II',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-40,0,'',''),
-	new Accessory ('Cosmetic','All','Towel',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'','No dirt accumulation'),
-	new Accessory ('Cosmetic','All','Handkerchief',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'','Reduced dirt accumulation'),
-	new Accessory ('Cosmetic','All','White Sneakers',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'','Increased dirt accumulation'),
-	new Accessory ('Cosmetic','All','Bandage',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'','Prevents bloodstains'),
-	new Accessory ('Cosmetic','All','Styling Gel',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'','Retains hairstyle in any weather'),
-	new Accessory ('Automatic Item Usage','Noctis','Field Medicine',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'','Automatically uses a Potion when HP falls to half'),
-	new Accessory ('Automatic Item Usage','Noctis','Applied Sorcery',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'','Automatically uses an Ether when MP falls to half'),
-	new Accessory ('Automatic Item Usage','Ignis','The Good Chamberlain',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'','Ignis automatically uses a Hi-Potion when the player-controlled character\'s HP falls to half'),
-	new Accessory ('Automatic Item Usage','Ignis','The Grand Chamberlain',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'','Ignis automatically uses an Elixir when the player-controlled character\'s maximum HP falls to half'),
-	new Accessory ('Other Utility','All','Ring of Resistance',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'','All allies become immune to friendly fire from Elemancy'),
-	new Accessory ('Other Utility','All','Key of Prosperity',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,'',''),
-	new Accessory ('Other Utility','All but Noctis','Friendship Band',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'','Increases link-strike activation radius'),
-	new Accessory ('Other Utility','Noctis','Black Hood',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'','Enables auto-parries and automatic phasing through attacks'),
-	new Accessory ('Other Utility','Noctis','Tech Turbocharger',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'','Doubles Tech bar increase rate. Prevents Armiger bar from increasing'),
-	new Accessory ('Other Utility','Noctis','Armiger Accelerator',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'','Doubles Armiger bar increase rate. Prevents Tech bar from increasing'),
-	new Accessory ('Other Utility','Noctis','Stamina Badge',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'','Infinite Stamina'),
-	new Accessory ('Other Utility','Noctis','The Founder King\'s Sigil',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'','Enables Armiger Unleashed'),
-	new Accessory ('Other Utility','Gladiolus','Black Belt',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'','+50% damage to larger enemies'),
-	new Accessory ('Other Utility','Prompto','Target Scope',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'','+50% damage to small enemies'),
-	new Accessory ('Other Utility','Prompto','Camera Strap',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'','+5 to max photos per day')];
+	new Accessory ('Phase Cost','Noctis','Thieves\' Way II',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-40,0,'',
+		''),
+	new Accessory ('Cosmetic','All','Towel',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',
+		'No dirt accumulation'),
+	new Accessory ('Cosmetic','All','Handkerchief',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',
+		'Reduced dirt accumulation'),
+	new Accessory ('Cosmetic','All','White Sneakers',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',
+		'Increased dirt accumulation'),
+	new Accessory ('Cosmetic','All','Bandage',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',
+		'Prevents bloodstains'),
+	new Accessory ('Cosmetic','All','Styling Gel',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',
+		'Retains hairstyle in any weather'),
+	new Accessory ('Automatic Item Usage','Noctis','Field Medicine',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,'','Automatically uses a Potion when HP falls to half'),
+	new Accessory ('Automatic Item Usage','Noctis','Applied Sorcery',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,'','Automatically uses an Ether when MP falls to half'),
+	new Accessory ('Automatic Item Usage','Ignis','The Good Chamberlain',0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,'','Ignis automatically uses a Hi-Potion when the player-controlled character\'s ' +
+		'HP falls to half'),
+	new Accessory ('Automatic Item Usage','Ignis','The Grand Chamberlain',0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,'','Ignis automatically uses an Elixir when the player-controlled character\'s ' +
+		'maximum HP falls to half'),
+	new Accessory ('Other Utility','All','Ring of Resistance',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',
+		'All allies become immune to friendly fire from Elemancy'),
+	new Accessory ('Other Utility','All','Key of Prosperity',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,'',
+		''),
+	new Accessory ('Other Utility','All but Noctis','Friendship Band',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,'','Increases link-strike activation radius'),
+	new Accessory ('Other Utility','Noctis','Black Hood',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',
+		'Enables auto-parries and automatic phasing through attacks'),
+	new Accessory ('Other Utility','Noctis','Tech Turbocharger',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		'','Doubles Tech bar increase rate. Prevents Armiger bar from increasing'),
+	new Accessory ('Other Utility','Noctis','Armiger Accelerator',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		'','Doubles Armiger bar increase rate. Prevents Tech bar from increasing'),
+	new Accessory ('Other Utility','Noctis','Stamina Badge',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',
+		'Infinite Stamina'),
+	new Accessory ('Other Utility','Noctis','The Founder King\'s Sigil',0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+		0,0,0,'','Enables Armiger Unleashed'),
+	new Accessory ('Other Utility','Gladiolus','Black Belt',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',
+		'+50% damage to larger enemies'),
+	new Accessory ('Other Utility','Prompto','Target Scope',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',
+		'+50% damage to small enemies'),
+	new Accessory ('Other Utility','Prompto','Camera Strap',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',
+		'+5 to max photos per day')];
 
 
 //--------------------------------------------------------------------
-//Initial fill up of dropdown menus
+//Helper functions. Very nice! :)
 //--------------------------------------------------------------------
 
-//Food
-//Never need to change this menu, so run it once and leave it.
-const foodBox = document.getElementById('food');
-let currentType = '';
-for (let i = 1; i < foodList.length; i++) {
-    if (currentType != foodList[i].type) {
-        foodBox.innerHTML += '<optgroup label="' +
-            '-' + foodList[i].type + '------"></optgroup>';
-        currentType = foodList[i].type;
-    }
-    foodBox.innerHTML += '\n<option value="' +
-        i + '">' + foodList[i].name + '</option>';
-}
-
-
-//--------------------------------------------------------------------
-//Calculations
-//--------------------------------------------------------------------
-
-//Update the dropdown lists to the currently selected character.
-function updateCharacter() {
-
-	const char = charList[document.getElementById('character').value];
-	const equippedRadios = document.getElementsByName('equipped');
-
-    //Attire dropdown menu
-    const attireBox =  document.getElementById('attire');
-   	attireBox.innerHTML = '<option value="0" selected>' + 
-    	attireList[0].name + '</option>';//Reset and place 'None' option.
-    	
-    for (let i = 1; i < attireList.length; i++) {
-        if (attireList[i].equip == char.name || attireList[i].equip == 'All') {
-            attireBox.innerHTML += '\n<option value="' +
-                i + '">' + attireList[i].name + '</option>';
-        }
-        else if (char.name != 'Noctis' && attireList[i].equip == 'All but Noctis') {
-        	attireBox.innerHTML += '\n<option value="' +
-                i + '">' + attireList[i].name + '</option>';
-        }
-    }
-
-
-    //Weapons dropdown menu
-    const weapon1Box = document.getElementById('weapon1');
-    const weapon2Box = document.getElementById('weapon2');
-    const weapon3Box = document.getElementById('weapon3');
-    const weapon4Box = document.getElementById('weapon4');
-
-    weapon1Box.innerHTML = '\n<option value="0" selected>' +
-    	weaponList[0].name + '</option>';//Reset and place 'None' option.
-    weapon2Box.innerHTML = '\n<option value="0" selected>' +
-    	weaponList[0].name + '</option>';//Reset and place 'None' option.
-    weapon3Box.innerHTML = '\n<option value="0" selected>' +
-    	weaponList[0].name + '</option>';//Reset and place 'None' option.
-    weapon4Box.innerHTML = '\n<option value="0" selected>' +
-    	weaponList[0].name + '</option>';//Reset and place 'None' option.
-
-    if (char.name == 'Noctis') {
-    	weapon3Box.disabled = false; //Only Noctis can use 4 weapons.
-    	weapon4Box.disabled = false; //Only Noctis can use 4 weapons.
-    	equippedRadios[2].disabled = false;
-    	equippedRadios[3].disabled = false;
-
-    	let currentType = '';
-    	for (let i = 1; i < weaponList.length; i++) {
-	        if (currentType != weaponList[i].type) {
-	            weapon1Box.innerHTML += '<optgroup label="' +
-	                '----' + weaponList[i].type + '----"></optgroup>';
-	            weapon2Box.innerHTML += '<optgroup label="' +
-	                '----' + weaponList[i].type + '----"></optgroup>';
-	            weapon3Box.innerHTML += '<optgroup label="' +
-	                '----' + weaponList[i].type + '----"></optgroup>';
-	            weapon4Box.innerHTML += '<optgroup label="' +
-	                '----' + weaponList[i].type + '----"></optgroup>';
-	            currentType = weaponList[i].type;
-	        }
-
-	        weapon1Box.innerHTML += '\n<option value="' + 
-	            i + '">' + weaponList[i].name + '</option>';
-	        weapon2Box.innerHTML += '\n<option value="' + 
-	            i + '">' + weaponList[i].name + '</option>';
-	        weapon3Box.innerHTML += '\n<option value="' + 
-	            i + '">' + weaponList[i].name + '</option>';
-	        weapon4Box.innerHTML += '\n<option value="' + 
-	            i + '">' + weaponList[i].name + '</option>';
-	    }
-    }
-    else { //Not Noctis.
-    	 weapon3Box.disabled = true; //Only Noctis can use 4 weapons.
-    	 weapon4Box.disabled = true; //Only Noctis can use 4 weapons.
-    	 equippedRadios[2].disabled = true;
-    	 equippedRadios[3].disabled = true;
-    	 if (equippedRadios[2].checked || equippedRadios[3].checked) {
-    	 	equippedRadios[0].checked = true; //Check weapon 1 when 3 or 4 are disabled.
-    	 }
-
-    	 //Set the option groups. The 2 weapon types for the character.
-    	 weapon1Box.innerHTML += '<optgroup label="' + '----' +
-    	 	char.weaponType1 + '----"></optgroup>';
-         weapon2Box.innerHTML += '<optgroup label="' + '----' + 
-         	char.weaponType2 + '----"></optgroup>';
-    	 for (let i = 1; i < weaponList.length; i++) {
-
-    	 	if (weaponList[i].type == char.weaponType1) {
-    	 		weapon1Box.innerHTML += '\n<option value="' + 
-	            	i + '">' + weaponList[i].name + '</option>';
-    	 	}
-    	 	else if (weaponList[i].type == char.weaponType2) {
-    	 		weapon2Box.innerHTML += '\n<option value="' + 
-	            	i + '">' + weaponList[i].name + '</option>';
-    	 	}
-	    }
-    }
-
-    //Accessories dropdown menu
-    const acc1Box = document.getElementById('accessory1');
-    const acc2Box = document.getElementById('accessory2');
-    const acc3Box = document.getElementById('accessory3');
-
-    acc1Box.innerHTML = '\n<option value="0" selected>' +
-     	accessoryList[0].name + '</option>';//Reset and place 'None' option.
-    acc2Box.innerHTML = '\n<option value="0" selected>' +
-     	accessoryList[0].name + '</option>';//Reset and place 'None' option.
-    acc3Box.innerHTML = '\n<option value="0" selected>' +
-     	accessoryList[0].name + '</option>';//Reset and place 'None' option.
-
-    let currentType = '';
-    for (let i = 1; i < accessoryList.length; i++) {
-        if (accessoryList[i].equip == char.name || accessoryList[i].equip == 'All') {
-	    	if (currentType != accessoryList[i].category) {
-	    		acc1Box.innerHTML += '<optgroup label="' +
-	                '----' + accessoryList[i].category + '----"></optgroup>';
-	            acc2Box.innerHTML += '<optgroup label="' +
-	                '----' + accessoryList[i].category + '----"></optgroup>';
-	            acc3Box.innerHTML += '<optgroup label="' +
-	                '----' + accessoryList[i].category + '----"></optgroup>';
-	            currentType = accessoryList[i].category;
-	    	}
-
-            acc1Box.innerHTML += '\n<option value="' + 
-                i + '">' + accessoryList[i].name + '</option>';
-            acc2Box.innerHTML += '\n<option value="' + 
-                i + '">' + accessoryList[i].name + '</option>';
-            acc3Box.innerHTML += '\n<option value="' + 
-                i + '">' + accessoryList[i].name + '</option>';
-        }
-        else if (char.name != 'Noctis' && accessoryList[i].equip == 'All but Noctis') {
-        	if (currentType != accessoryList[i].category) {
-	    		acc1Box.innerHTML += '<optgroup label="' +
-	                '----' + accessoryList[i].category + '----"></optgroup>';
-	            acc2Box.innerHTML += '<optgroup label="' +
-	                '----' + accessoryList[i].category + '----"></optgroup>';
-	            acc3Box.innerHTML += '<optgroup label="' +
-	                '----' + accessoryList[i].category + '----"></optgroup>';
-	            currentType = accessoryList[i].category;
-	    	}
-
-        	acc1Box.innerHTML += '\n<option value="' + 
-                i + '">' + accessoryList[i].name + '</option>';
-            acc2Box.innerHTML += '\n<option value="' + 
-                i + '">' + accessoryList[i].name + '</option>';
-            acc3Box.innerHTML += '\n<option value="' + 
-                i + '">' + accessoryList[i].name + '</option>';
-        }
-    }
-
-    updateData();
-}
-
-
-//Limit the value to some lower and higher bound.
+//Limit the value to some lower and higher bound, otherwise return the same number.
 function limit(someNumber, lowerBound, higherBound) {
-    if (someNumber < lowerBound) {
-        return lowerBound;
-    }
-    else if (someNumber > higherBound) {
-        return higherBound;
-    }
+    if (someNumber < lowerBound)
+    	return lowerBound;
+    else if (someNumber > higherBound)
+    	return higherBound;
     else
-        return someNumber;
+    	return someNumber;
 }
 
 //Replaces an infinite value with the infinity symbol, keeping the sign.
@@ -1290,24 +1350,291 @@ function replaceWithInfSymbol(someValue) {
 		return someValue.toString();
 }
 
-//If the limited value differs from the true value, make the displayed resutl have both values.
+//If the limited value differs from the true value, make the displayed result have both values.
 function displayDifferenceIfAny(valueLimited, actualValue, additionalSymbol) {
 	if (actualValue != valueLimited) {
-		return valueLimited + additionalSymbol + ' (' +
-			replaceWithInfSymbol(actualValue) + ')';
+		return valueLimited + additionalSymbol + ' (' + replaceWithInfSymbol(actualValue) + ')';
 	}
 	else {
 		return valueLimited + additionalSymbol;
 	}
 }
 
+//Check if the character can equip the given Attire.
+//Not used inside for-loops cause it would only worsen performance.
+function canEquipAttire (char, attire) {
+	if (char.name == 'Noctis') {
+		if (attire.equip == char.name || attire.equip == 'All')
+			return true;
+		else
+			return false;
+	}
+	else {//If not Noctis.
+		if (attire.equip == char.name || attire.equip == 'All' ||
+			attire.equip == 'All but Noctis')
+			return true;
+		else
+			return false;
+	}
+}
+
+//Check if the character can equip the given Weapon at the given weapon slot.
+//Not used inside for-loops cause it would only worsen performance.
+function canEquipWeapon (char, weapon, slot) {
+	if (char.name == 'Noctis')
+		return true;
+	else {//If not Noctis.
+		if (weapon.type == char.weaponType1 && slot == 0)
+			return true;
+		else if (weapon.type == char.weaponType2 && slot == 1)
+			return true;
+		else
+			return false;
+	}
+}
+
+//Check if the character can equip the given Attire.
+//Not used inside for-loops cause it would only worsen performance.
+function canEquipAccessory (char, accessory) {
+	if (char.name == 'Noctis') {
+		if (accessory.equip == char.name || accessory.equip == 'All')
+			return true;
+		else
+			return false;
+	}
+	else {//If not Noctis.
+		if (accessory.equip == char.name || accessory.equip == 'All' ||
+			accessory.equip == 'All but Noctis')
+			return true;
+		else
+			return false;
+	}
+}
+
+//Takes a number and returns a string of the number with commas inserted.
+function insertCommas (someNumber) {
+	//TODO: actually do what it says it should do.
+	return someNumber.toString();
+}
+
+//--------------------------------------------------------------------
+//Fill up Food dropdown list (never changes, so only run once).
+//--------------------------------------------------------------------
+
+const foodBox = document.getElementById('food');
+let foodBoxString = '';
+let currentFoodType = '';//Keep track of changing categories to add a new optgroup each time.
+for (let i = 0; i < foodList.length; i++) {//Read list of food and make option tags.
+    if (currentFoodType != foodList[i].type) {
+        foodBoxString += '<optgroup label="' + '-' + foodList[i].type +
+        	'------"></optgroup>\n';//Make optgroup tags
+        currentFoodType = foodList[i].type;
+    }
+    foodBoxString += '<option value="' +
+        i + '">' + foodList[i].name + '</option>\n';//Update string
+}
+foodBox.innerHTML = foodBoxString;//Fill up the dropdown list.
+
+//--------------------------------------------------------------------
+//Calculations
+//--------------------------------------------------------------------
+
+//Update the dropdown lists to the currently selected character.
+function updateCharacter() {
+
+	const char = charList[document.getElementById('character').value];
+	let newAttireListString = '';//Initialize new Attire dropdown list.
+	let newWeaponListString1 = '';//Initialize new Weapon dropdown list.
+	let newWeaponListString2 = '';//Only used when char is not Noctis.
+	let newAccessoryListString = '';//Initialize new Accessory dropdown list.
+	const noneOption = '<option value="0" selected>None</option>\n';
+
+   	//--------------------------------------------------------------------
+	//Compute strings to use as the new dropdown lists.
+	//--------------------------------------------------------------------
+    
+    //---Attire---
+    newAttireListString += noneOption;//Add "None" option.
+    for (let i = 1; i < attireList.length; i++) {
+        if (attireList[i].equip == char.name || attireList[i].equip == 'All') {
+            newAttireListString += '<option value="' + i + '">' + attireList[i].name +
+            	'</option>\n';
+        }
+        else if (char.name != 'Noctis' && attireList[i].equip == 'All but Noctis') {
+        	newAttireListString += '<option value="' + i + '">' + attireList[i].name +
+        		'</option>\n';
+        }
+    }
+
+    //---Weapons---
+    if (char.name == 'Noctis') {
+    	newWeaponListString1 += noneOption;//Add "None" option.
+    	let currentWepType = '';//Keep track of changing categories to add a new optgroup each time.
+    	for (let i = 1; i < weaponList.length; i++) {
+	        if (currentWepType != weaponList[i].type) {
+	            newWeaponListString1 += '<optgroup label="' + '----' + weaponList[i].type +
+	            	'----"></optgroup>\n';
+	            currentWepType = weaponList[i].type;
+	        }
+	        newWeaponListString1 += '<option value="' + i + '">' + weaponList[i].name +
+	        	'</option>\n';
+	    }
+    }
+    else { //Not Noctis.
+    	//Set the None option and the 2 weapon types for the character.
+    	newWeaponListString1 += '<option value="0">None</option>\n' + '<optgroup label="----' +
+    		char.weaponType1 + '----"></optgroup>\n';
+        newWeaponListString2 += '<option value="0">None</option>\n' + '<optgroup label="----' +
+        	char.weaponType2 + '----"></optgroup>\n';
+    	for (let i = 1; i < weaponList.length; i++) {
+    	 	if (weaponList[i].type == char.weaponType1) {
+    	 		newWeaponListString1 += '<option value="' + i + '">' + weaponList[i].name +
+    	 			'</option>\n';
+    	 	}
+    	 	else if (weaponList[i].type == char.weaponType2) {
+    	 		newWeaponListString2 += '<option value="' + i + '">' + weaponList[i].name +
+    	 			'</option>\n';
+    	 	}
+	    }
+    }
+
+    //---Accessories---
+    let currentAccType = '';//Keep track of changing categories to add a new optgroup each time.
+    newAccessoryListString += noneOption;//Add "None" option.
+    for (let i = 1; i < accessoryList.length; i++) {
+        if (accessoryList[i].equip == char.name || accessoryList[i].equip == 'All') {
+	    	if (currentAccType != accessoryList[i].category) {
+	    		newAccessoryListString += '<optgroup label="' + '----' + accessoryList[i].category +
+	    			'----"></optgroup>\n';
+	            currentAccType = accessoryList[i].category;
+	    	}
+
+            newAccessoryListString += '<option value="' + 
+                i + '">' + accessoryList[i].name + '</option>\n';
+        }
+        else if (char.name != 'Noctis' && accessoryList[i].equip == 'All but Noctis') {
+        	if (currentAccType != accessoryList[i].category) {
+	    		newAccessoryListString += '<optgroup label="' + '----' + accessoryList[i].category +
+	    			'----"></optgroup>\n';
+	            currentAccType = accessoryList[i].category;
+	    	}
+
+        	newAccessoryListString += '<option value="' + 
+                i + '">' + accessoryList[i].name + '</option>\n';
+        }
+    }
+
+   	//--------------------------------------------------------------------
+	//Update DOM with new dropdown lists
+	//--------------------------------------------------------------------
+
+	//---Attire---
+	//Get Attire dropdown list element.
+    const attireBox =  document.getElementById('attire');
+
+    //Save previous selection.
+    const oldAttireValue = attireBox.value;
+
+    //Replace dropdown list.
+    attireBox.innerHTML = newAttireListString;
+
+    //Restore old selection only if the new char can equip the same attire.
+    if (canEquipAttire(char, attireList[oldAttireValue])) {
+    	attireBox.value = oldAttireValue;
+    }
+
+    //---Weapons---
+	//Get Weapon dropdown list elements.
+    const weapon1Box = document.getElementById('weapon1');
+    const weapon2Box = document.getElementById('weapon2');
+    const weapon3Box = document.getElementById('weapon3');
+    const weapon4Box = document.getElementById('weapon4');
+    const equippedRadios = document.getElementsByName('equipped');
+
+    //Save previous selection.
+    const oldWeapon1BoxValue = weapon1Box.value;
+    const oldWeapon2BoxValue = weapon2Box.value;
+
+    if (char.name == 'Noctis') {
+    	weapon3Box.disabled = false;//Enable weapons 3 and 4 since Noctis can use 4 weapons.
+    	weapon4Box.disabled = false;
+    	equippedRadios[2].disabled = false;//Enable back radio buttons.
+    	equippedRadios[3].disabled = false;
+
+    	//Replace dropdown lists.
+    	weapon1Box.innerHTML = newWeaponListString1;
+    	weapon2Box.innerHTML = newWeaponListString1;
+    	weapon3Box.innerHTML = newWeaponListString1;
+    	weapon4Box.innerHTML = newWeaponListString1;
+    }
+    else {//Not Noctis
+		weapon3Box.disabled = true;//Disable Weapons 3 and 4 if not Noctis.
+		weapon4Box.disabled = true;
+		equippedRadios[2].disabled = true;//Disable respective radio buttons.
+		equippedRadios[3].disabled = true;
+
+		//Change checkmark to weapon 1, if 3 or 4 were checked.
+		if (equippedRadios[2].checked || equippedRadios[3].checked) {
+			equippedRadios[0].checked = true;
+		}
+
+    	//Replace dropdown lists.
+    	weapon1Box.innerHTML = newWeaponListString1;
+    	weapon2Box.innerHTML = newWeaponListString2;
+    	weapon3Box.innerHTML = noneOption;//To clear previous values if any.
+    	weapon4Box.innerHTML = noneOption;
+    }
+
+    //Restore old selection only if the new char can equip the same weapons.
+    if (canEquipWeapon(char, weaponList[oldWeapon1BoxValue],0)) {
+    	weapon1Box.value = oldWeapon1BoxValue;
+    }
+    if (canEquipWeapon(char, weaponList[oldWeapon2BoxValue,1])) {
+    	weapon2Box.value = oldWeapon2BoxValue;
+    }
+
+    //---Accessories---
+	//Get Accessory dropdown list elements.
+    const acc1Box = document.getElementById('accessory1');
+    const acc2Box = document.getElementById('accessory2');
+    const acc3Box = document.getElementById('accessory3');
+
+    //Save previous selection.
+    const oldAcc1BoxValue = acc1Box.value;
+    const oldAcc2BoxValue = acc2Box.value;
+    const oldAcc3BoxValue = acc3Box.value;
+
+    //Replace dropdown lists.
+    acc1Box.innerHTML = newAccessoryListString;
+    acc2Box.innerHTML = newAccessoryListString;
+    acc3Box.innerHTML = newAccessoryListString;
+
+    //Restore old selection only if the new char can equip the same accessories.
+    if (canEquipAccessory(char, accessoryList[oldAcc1BoxValue])) {
+    	acc1Box.value = oldAcc1BoxValue;
+    }
+    if (canEquipAccessory(char, accessoryList[oldAcc2BoxValue])) {
+    	acc2Box.value = oldAcc2BoxValue;
+    }
+    if (canEquipAccessory(char, accessoryList[oldAcc3BoxValue])) {
+    	acc3Box.value = oldAcc3BoxValue;
+    }
+
+    updateData();//Compute the result screen with the new values.
+}
+
 //Update the entire right-hand side of the screen.
 function updateData() {
 
-	//Limit level input to integers between 1-120, change the input to the range.
     const levelBox = document.getElementById('level');
+    //Limit level input to integers between [1,120], change the input to value in range.
     const level = Math.round(limit(levelBox.value,1,120));
     levelBox.value = level;
+
+    const xpBox = document.getElementById('xp');
+    //Limit xp input to integers between [0,Infinity], change the input to value in range.
+    let xp = Math.round(limit(xpBox.value,0,Infinity));
+    xpBox.value = xp;
 
     const char = charList[document.getElementById('character').value];
     const baseStats = char.baseStats[level - 1];
@@ -1343,14 +1670,13 @@ function updateData() {
     let hp, hprec, mp, mprec, attack, defense, crit;
     let str, vit, mag, spr;
     let fire, ice, lightning, dark, shot;
-    let itemDrop, xp, phase;
+    let itemDrop, xpBonus, phase, xpTo120;
     let tdaPhysical, tdaMagical, tdaFire, tdaIce, tdaLightning, tdaDark, tdaShot;
     let hpLimited, mpLimited, critLimited, itemDropLimited, phaseLimited;
     let strLimited, vitLimited, magLimited, sprLimited;
     let fireLimited, iceLimited, lightningLimited, darkLimited, shotLimited;
-
-
-    //Start computing
+    let immunitiesValueString = '';
+    let notesValueString = '';
 
     //HP,HPRec, MP, MPRec
    	let rareMetalHP = 0;
@@ -1364,7 +1690,8 @@ function updateData() {
 
     hp = Math.floor(baseStats.hp * (1 + attire.hpBonus/100)) + Math.round((1 + attire.hpBonus/100) *
     	(weapon[0].hp + weapon[1].hp + weapon[2].hp + weapon[3].hp + accessory[0].hp +
-        accessory[1].hp + accessory[2].hp + (healthLevel * baseStats.level))) + food.hp + rareMetalHP;
+        accessory[1].hp + accessory[2].hp + (healthLevel * baseStats.level))) + food.hp +
+    	rareMetalHP;
     hpLimited = limit(hp,1,9999);
 
     if (food.effect == 'Last Stand') {
@@ -1379,7 +1706,8 @@ function updateData() {
 		accessory[1].mp + accessory[2].mp + (experimagic * baseStats.level)));
     mpLimited = limit(mp,1,999);
 
-    mprec = char.mprec + accessory[0].mprec + accessory[1].mprec + accessory[2].mprec + attire.mprec;
+    mprec = char.mprec + accessory[0].mprec + accessory[1].mprec + accessory[2].mprec +
+    	attire.mprec;
 
 
     //Str,Vit,Mag,Spr
@@ -1387,28 +1715,32 @@ function updateData() {
         attire.strBonus/100) * (weapon[0].str + weapon[1].str + weapon[2].str + weapon[3].str +
         accessory[0].str + accessory[1].str + accessory[2].str + (strLevel * baseStats.level))) +
     	food.str;
-    strLimited = limit(str,0,Infinity);
+    strLimited = limit(str,0,9999);
 
     vit = Math.floor(baseStats.vit * (1 + attire.vitBonus/100)) + Math.round((1 +
         attire.vitBonus/100) * (weapon[0].vit + weapon[1].vit + weapon[2].vit + weapon[3].vit +
         accessory[0].vit + accessory[1].vit + accessory[2].vit + (vitLevel * baseStats.level))) +
     	food.vit;
-    vitLimited = limit(vit,0,Infinity);
+    vitLimited = limit(vit,0,9999);
 
-    mag = Math.floor(baseStats.mag * (1 + attire.magBonus/100)) + Math.round((1 + attire.magBonus/100) *
-        (weapon[0].mag + weapon[1].mag + weapon[2].mag + weapon[3].mag + accessory[0].mag +
-        accessory[1].mag + accessory[2].mag + (magLevel * baseStats.level))) + food.mag;
-    magLimited = limit(mag,0,Infinity);
+    mag = Math.floor(baseStats.mag * (1 + attire.magBonus/100)) + Math.round((1 +
+    	attire.magBonus/100) * (weapon[0].mag + weapon[1].mag + weapon[2].mag + weapon[3].mag +
+    	accessory[0].mag + accessory[1].mag + accessory[2].mag + (magLevel * baseStats.level))) +
+    	food.mag;
+    magLimited = limit(mag,0,9999);
 
-    spr = Math.floor(baseStats.spr * (1 + attire.sprBonus/100)) + Math.round((1 + attire.sprBonus/100) *
-        (weapon[0].spr + weapon[1].spr + weapon[2].spr + weapon[3].spr + accessory[0].spr +
-        accessory[1].spr + accessory[2].spr + (sprLevel * baseStats.level))) + food.spr;
-    sprLimited = limit(spr,0,Infinity);
+    spr = Math.floor(baseStats.spr * (1 + attire.sprBonus/100)) + Math.round((1 +
+    	attire.sprBonus/100) * (weapon[0].spr + weapon[1].spr + weapon[2].spr + weapon[3].spr +
+    	accessory[0].spr + accessory[1].spr + accessory[2].spr + (sprLevel * baseStats.level))) +
+    	food.spr;
+    sprLimited = limit(spr,0,9999);
 
     //Special Case - Prime Food Effect.
     if (food.effect == 'Prime' || food.effect == 'Prime Endurance') {
     	str = Math.round(str * 0.75);
+    	strLimited = limit(str,0,9999);
     	mag = Math.round(mag * 0.75);
+    	magLimited = limit(mag,0,9999);
     }
 
     //Attack, Defense, Crit
@@ -1421,24 +1753,24 @@ function updateData() {
     //Elemental
     fire = attire.fire + weapon[0].fire + weapon[1].fire + weapon[2].fire + weapon[3].fire +
         accessory[0].fire + accessory[1].fire + accessory[2].fire + food.fire;
-    fireLimited = limit(fire,0,100);
+    fireLimited = limit(fire,-899,100);
 
     ice = attire.ice + weapon[0].ice + weapon[1].ice + weapon[2].ice + weapon[3].ice +
         accessory[0].ice + accessory[1].ice + accessory[2].ice + food.ice;
-    iceLimited = limit(ice,0,100);
+    iceLimited = limit(ice,-899,100);
 
-    lightning = attire.lightning + weapon[0].lightning + weapon[1].lightning +
-        weapon[2].lightning + weapon[3].lightning + accessory[0].lightning +
-        accessory[1].lightning + accessory[2].lightning + food.lightning;
-    lightningLimited = limit(lightning,0,100);
+    lightning = attire.lightning + weapon[0].lightning + weapon[1].lightning + weapon[2].lightning +
+    	weapon[3].lightning + accessory[0].lightning + accessory[1].lightning +
+    	accessory[2].lightning + food.lightning;
+    lightningLimited = limit(lightning,-899,100);
 
     dark = attire.dark + weapon[0].dark + weapon[1].dark + weapon[2].dark + weapon[3].dark +
         accessory[0].dark + accessory[1].dark + accessory[2].dark;
-    darkLimited = limit(dark,0,100);
+    darkLimited = limit(dark,-899,100);
 
     shot = attire.shot + weapon[0].shot + weapon[1].shot + weapon[2].shot + weapon[3].shot +
         accessory[0].shot + accessory[1].shot + accessory[2].shot;
-    shotLimited = limit(shot,0,100);
+    shotLimited = limit(shot,-899,100);
 
     //TDA's
     tdaPhysical = hpLimited * (1 + vitLimited/100);
@@ -1459,24 +1791,85 @@ function updateData() {
     	tdaFire = Infinity;
     }
 
-    //Bonuses
+    //Extras
     itemDrop = accessory[0].itemDrop + accessory[1].itemDrop + accessory[2].itemDrop +
     	attire.itemDrop + food.itemDrop;
     itemDropLimited = limit(itemDrop,0,100);
 
-    xp = accessory[0].xp + accessory[1].xp + accessory[2].xp + food.xp;
+    xpBonus = accessory[0].xpBonus + accessory[1].xpBonus + accessory[2].xpBonus + food.xpBonus;
 
-   	phase = accessory[0].phase + accessory[1].phase + accessory[2].phase + attire.phase;
-   	phaseLimited = limit(phase,-100,0);
+   	phase = accessory[0].phase + accessory[1].phase + accessory[2].phase +
+   		attire.phase; phaseLimited = limit(phase,-100,0);
 
-    //Dump data on screen
+   	//Accumulated XP and XP to 120
+   	xpTo120 = -xp;//Remove the current XP from the total required to reach 120.
+
+    let j = 0;
+
+    //Add up all the accumulated XP from previous levels.
+    for (j; j < level - 1; j++) {
+    	xp += xpRequired[j];
+    }
+    //Add up all the XP required to reach 120.
+    for (j; j < xpRequired.length; j++) { //Continue same loop to the end
+    	xpTo120 += xpRequired[j];
+    }
+
+   	//Immunities
+    const immunitiesBox = document.getElementById('ExtrasImmunities');
+
+    if (attire.immunity != '') {
+    	immunitiesValueString += '<strong>' + attire.name + ':</strong> ' + attire.immunity +
+    		'<br>';
+    }
+
+    if (food.immunity != '') {
+    	immunitiesValueString += '<strong>' + food.name + ':</strong> ' + food.immunity + '<br>';
+    }
+
+    for (let i = 0; i < accessory.length; i++) {
+    	if (accessory[i].immunity != '') {
+    		immunitiesValueString += '<strong>' + accessory[i].name + ':</strong> ' +
+    			accessory[i].immunity + '<br>';
+    	}
+    }
+
+   	//Notes
+    const notesBox = document.getElementById('Notes');
+    notesValueString = '';//Initialize string
+    
+    if (attire.effect != '') {
+        notesValueString += '<strong>' + attire.name + ':</strong> ' + attire.effect + '<br>';
+    }
+    
+    if (food.effect != '') {
+        notesValueString += '<strong>' + food.name + ':</strong> ' +
+        	food.effect + ' - ' + food.description + '<br>';
+    }
+
+    if (weapon[equipped].effect != '') {
+        notesValueString += '<strong>' + weapon[equipped].name +
+            ':</strong> ' + weapon[equipped].effect + '<br>';
+    }
+
+    for (let i = 0; i < accessory.length; i++) {
+    	if (accessory[i].effect != '') {
+	    	notesValueString += '<strong>' + accessory[i].name +
+	            ':</strong> ' + accessory[i].effect + '<br>';
+	    }
+    }
+
+	//--------------------------------------------------------------------
+	//Dump all the data on screen at once
+	//--------------------------------------------------------------------
 
     //TDA
     document.getElementById('TDAPhysical').innerHTML = Math.round(tdaPhysical);
     document.getElementById('TDAMagical').innerHTML = Math.round(tdaMagical);
     document.getElementById('TDAFire').innerHTML = replaceWithInfSymbol(Math.round(tdaFire));
     document.getElementById('TDAIce').innerHTML = replaceWithInfSymbol(Math.round(tdaIce));
-    document.getElementById('TDALightning').innerHTML = replaceWithInfSymbol(Math.round(tdaLightning));
+    document.getElementById('TDALightning').innerHTML = replaceWithInfSymbol(Math.round(
+    	tdaLightning));
     document.getElementById('TDADark').innerHTML = replaceWithInfSymbol(Math.round(tdaDark));
     document.getElementById('TDAShot').innerHTML = replaceWithInfSymbol(Math.round(tdaShot));
 
@@ -1490,7 +1883,7 @@ function updateData() {
     //Change StatsDamageElement's color to the element it inflicts, if any.
     const statsDamageElementBox = document.getElementById('StatsDamageElement');
 	statsDamageElementBox.innerHTML = weapon[equipped].element;
-	statsDamageElementBox.className = 'result-box damage' + ' ' + weapon[equipped].element.toLowerCase();
+	statsDamageElementBox.className = 'result-box damage ' + weapon[equipped].element.toLowerCase();
 
 
     document.getElementById('StatsHPRec').innerHTML = (hprec/10) + '%';
@@ -1508,65 +1901,44 @@ function updateData() {
     document.getElementById('StatsDark').innerHTML = displayDifferenceIfAny(darkLimited,dark,'%');
     document.getElementById('StatsShot').innerHTML = displayDifferenceIfAny(shotLimited,shot,'%');
 
-    //Bonuses
-   	document.getElementById('BonusesIDR').innerHTML = displayDifferenceIfAny(itemDropLimited,itemDrop,'%');
-    document.getElementById('BonusesXP').innerHTML = '+' + xp + '%';
-    document.getElementById('BonusesPhase').innerHTML = displayDifferenceIfAny(phaseLimited,phase,'%');
+    //Extras
+   	document.getElementById('ExtrasIDR').innerHTML = displayDifferenceIfAny(itemDropLimited,
+   		itemDrop,'%');
+    document.getElementById('ExtrasXP').innerHTML = '+' + xpBonus + '%';
+    document.getElementById('ExtrasPhase').innerHTML = displayDifferenceIfAny(phaseLimited,phase,
+    	'%');
 
-    //BonusesImmunities
-    const immunitiesBox = document.getElementById('BonusesImmunities');
-    immunitiesBox.innerHTML = '';//Clear previous contents
+    document.getElementById('ExtrasAccumulatedXP').innerHTML = xp;
+    document.getElementById('ExtrasXP120').innerHTML = xpTo120;
 
-    if (attire.immunity != '') {
-    	immunitiesBox.innerHTML += '<strong>' + attire.name +
-            ':</strong> ' + attire.immunity + '<br>';
+    if (immunitiesValueString == '') {
+    	document.getElementById('ExtrasImmunitiesLabel').style.display = 'none';//Hide label
+    	immunitiesBox.innerHTML = '';//Clear contents if any were there
     }
-
-    if (food.immunity != '') {
-    	immunitiesBox.innerHTML += '<strong>' + food.name +
-            ':</strong> ' + food.immunity + '<br>';
-    }
-
-    for (let i = 0; i < accessory.length; i++) {
-    	if (accessory[i].immunity != '') {
-    		immunitiesBox.innerHTML += '<strong>' + accessory[i].name +
-            ':</strong> ' + accessory[i].immunity + '<br>';
-    	}
+    else {
+    	document.getElementById('ExtrasImmunitiesLabel').style.display = 'block';
+    	immunitiesBox.innerHTML = immunitiesValueString;
     }
 
     //Notes
-    const notesBox = document.getElementById('Notes');
-    notesBox.innerHTML = '';//Clear previous contents
-    
-    if (attire.effect != '') {
-        notesBox.innerHTML += '<strong>' + attire.name +
-            ':</strong> ' + attire.effect + '<br>';
+    if (notesValueString == '') {
+    	document.getElementById('NotesContainer').style.display = 'none';
+    	immunitiesBox.innerHTML = '';//Clear contents if any were there
     }
-    
-    if (food.effect != '') {
-        notesBox.innerHTML += '<strong>' + food.name + ':</strong> ' +
-        	food.effect + ' - ' + food.description + '<br>';
+    else {
+    	document.getElementById('NotesContainer').style.display = 'block';
+    	notesBox.innerHTML = notesValueString;
     }
 
-    if (weapon[equipped].effect != '') {
-        notesBox.innerHTML += '<strong>' + weapon[equipped].name +
-            ':</strong> ' + weapon[equipped].effect + '<br>';
-    }
 
-    for (let i = 0; i < accessory.length; i++) {
-    	if (accessory[i].effect != '') {
-	    	notesBox.innerHTML += '<strong>' + accessory[i].name +
-	            ':</strong> ' + accessory[i].effect + '<br>';
-	    }
-    }
 }
 
-updateCharacter();
-//updateData();//Run once to fill up result screen with initial data.
+updateCharacter();//Run once to fill up result screen with initial data.
 
 //Add event listeners
 document.getElementById('character').addEventListener('change', updateCharacter);
 document.getElementById('level').addEventListener('change', updateData);
+document.getElementById('xp').addEventListener('change', updateData);
 document.getElementById('attire').addEventListener('change', updateData);
 document.getElementById('food').addEventListener('change', updateData);
 

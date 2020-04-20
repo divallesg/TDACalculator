@@ -29,14 +29,16 @@
                             <div class="col"><select id="character" style="margin-top:3px;"><option value="0" selected="">Noctis</option><option value="1">Gladiolus</option><option value="2">Ignis</option><option value="3">Prompto</option></select></div>
                         </div>
                         <div class="row">
-                            <div class="col">
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <p>Level:</p>
-                                    </div>
-                                    <div class="col"><input type="number" value="1" placeholder="1-120" min="1" max="120" step="1" id="level" style="margin-top:3px;" pattern="[0-9]"></div>
-                                </div>
+                            <div class="col-lg-3">
+                                <p>Level:</p>
                             </div>
+                            <div class="col"><input type="number" value="1" placeholder="1-120" min="1" max="120" step="1" id="level" style="margin-top:3px;" pattern="[0-9]"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <p>Experience:</p>
+                            </div>
+                            <div class="col"><input type="number" value="0" placeholder="Current Exp" min="0" step="1" id="xp" class="dropdown" style="margin-top:3px;" pattern="[0-9]"></div>
                         </div>
                         <div class="row">
                             <div class="col-lg-4" style="max-width:14%;">
@@ -401,9 +403,9 @@
                             <div class="col">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <div class="row">
+                                        <div class="row" style="height:1.5rem;">
                                             <div class="col-lg-12">
-                                                <p id="StatsDamageElement" class="result-box damage non-elemental"></p>
+                                                <p id="StatsDamageElement" class="result-box damage non-elemental" style="margin-top:-1rem;"></p>
                                                 <p id="StatsDamageType" class="result-box damage" style="color:brown;text-shadow:1px 1px 10px white, 1px 1px 10px brown;"></p>
                                             </div>
                                         </div>
@@ -556,14 +558,14 @@
                     <div class="col">
                         <div class="row">
                             <div class="col">
-                                <h2 class="text-center">Bonuses</h2>
+                                <h2 class="text-center">Extras</h2>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <div class="row">
                                     <div class="col">
-                                        <p id="BonusesIDR" class="result-box"></p>
+                                        <p id="ExtrasIDR" class="result-box"></p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -575,7 +577,7 @@
                             <div class="col">
                                 <div class="row">
                                     <div class="col">
-                                        <p id="BonusesXP" class="result-box"></p>
+                                        <p id="ExtrasXP" class="result-box"></p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -587,7 +589,7 @@
                             <div class="col">
                                 <div class="row">
                                     <div class="col">
-                                        <p id="BonusesPhase" class="result-box"></p>
+                                        <p id="ExtrasPhase" class="result-box"></p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -599,28 +601,58 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <div class="row divider">
+                                <div class="row">
                                     <div class="col">
-                                        <h5>- - - - - - - - - - - - - -&nbsp;Immunities - - - - - - - - - - - - - -<br></h5>
+                                        <p id="ExtrasAccumulatedXP" class="result-box"></p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <p class="text-left" id="BonusesImmunities"></p>
+                                        <h6>Accumulated Exp</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        <p id="ExtrasXP120" class="result-box"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6>Exp to Level 120</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="row divider">
+                                    <div class="col">
+                                        <h5 id="ExtrasImmunitiesLabel" style="display:none;">- - - - - - - - - - - - - - Immunities - - - - - - - - - - - - - -<br></h5>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="text-left" id="ExtrasImmunities"></p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row" style="background-color:#FBFFB5;margin:6px;border-radius:12px;">
+                <div class="row" id="NotesContainer" style="background-color:#FBFFB5;margin:6px;border-radius:12px;display:none;">
                     <div class="col">
                         <div class="row">
                             <div class="col">
                                 <h2 class="text-center">Notes</h2>
                             </div>
                         </div>
-                        <p id="Notes"><br></p>
+                        <div class="row">
+                            <div class="col">
+                                <p id="Notes"><br></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
