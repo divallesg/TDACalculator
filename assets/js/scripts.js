@@ -1005,7 +1005,7 @@ const weaponList = [
 	new Weapon ('Daggers','Plunderers',111,7,0,10,0,0,10,0,0,0,0,0,0,0,'Non-Elemental',
 		'Absorbs elemental energy when dealing the finishing blow to an enemy'),
 	new Weapon ('Daggers','Assassin\'s Daggers',126,7,0,7,0,0,10,0,0,0,0,0,0,0,'Non-Elemental',
-		'10% chance to inflict Poisons'),
+		'10% chance to inflict Poison'),
 	new Weapon ('Daggers','Delta Daggers',153,7,0,6,0,0,15,0,0,0,0,0,0,0,'Non-Elemental',
 		'10% chance to inflict Compromised'),
 	new Weapon ('Daggers','Garuda\'s Plumes',176,7,0,6,22,24,29,20,0,0,0,0,0,0,'Non-Elemental',
@@ -1278,7 +1278,7 @@ const accessoryList = [
 		'+1 AP when getting A+ in Offense in non-training battle'),
 	new Accessory ('EXP','All','Moogle Charm',0,0,0,0,0,0,0,0,0,0,0,0,0,20,0,0,0,'',''),
 	new Accessory ('EXP','All','Nixperience Band',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',
-		'xp not tallied when resting'),
+		'XP not tallied when resting'),
 	new Accessory ('Phase Cost','Noctis','Thieves\' Way',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-20,0,'',''),
 	new Accessory ('Phase Cost','Noctis','Thieves\' Way II',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,-40,0,'',
 		''),
@@ -1350,16 +1350,6 @@ function replaceWithInfSymbol(someValue) {
 		return someValue.toString();
 }
 
-//If the limited value differs from the true value, make the displayed result have both values.
-function displayDifferenceIfAny(valueLimited, actualValue, additionalSymbol) {
-	if (actualValue != valueLimited) {
-		return valueLimited + additionalSymbol + ' (' + replaceWithInfSymbol(actualValue) + ')';
-	}
-	else {
-		return valueLimited + additionalSymbol;
-	}
-}
-
 //Check if the character can equip the given Attire.
 //Not used inside for-loops cause it would only worsen performance.
 function canEquipAttire (char, attire) {
@@ -1411,10 +1401,30 @@ function canEquipAccessory (char, accessory) {
 	}
 }
 
-//Takes a number and returns a string of the number with commas inserted.
-function insertCommas (someNumber) {
-	//TODO: actually do what it says it should do.
-	return someNumber.toString();
+//Takes the string of a number and returns a string with commas inserted every 3 digits.
+function insertCommas (someNumberString) {
+	return someNumberString.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+//If the limited value differs from the true value, make the displayed result have both values
+//separated by parentheses.
+function displayDifferenceIfAny (valueLimited, actualValue, additionalSymbol) {
+	if (actualValue != valueLimited) {
+		return valueLimited + additionalSymbol + ' (' + replaceWithInfSymbol(actualValue) + ')';
+	}
+	else {
+		return valueLimited + additionalSymbol;
+	}
+}
+
+//Format the string to include the amount of leftover XP after reaching level 120.
+function displayXpDifferenceIfAny (xp) {
+	if (xp < 0) {
+		return '0 (' + insertCommas((-xp).toString()) + ' left over)';
+	}
+	else {
+		return insertCommas(xp.toString());
+	}
 }
 
 //--------------------------------------------------------------------
@@ -1628,15 +1638,14 @@ function updateData() {
 
     const levelBox = document.getElementById('level');
     //Limit level input to integers between [1,120], change the input to value in range.
-    const level = Math.round(limit(levelBox.value,1,120));
-    levelBox.value = level;
-
-    const xpBox = document.getElementById('xp');
-    //Limit xp input to integers between [0,Infinity], change the input to value in range.
-    let xp = Math.round(limit(xpBox.value,0,Infinity));
-    xpBox.value = xp;
+    const level = Math.round(limit(levelBox.value,1,120));//Limit input to int range [1,120].
+    levelBox.value = level;//Change the input to value in range.
 
     const char = charList[document.getElementById('character').value];
+
+    //Change the pixel image of character to the new image.
+    document.getElementById('CharacterImage').src = 'assets/img/' + char.name + 'Pixel.png';
+
     const baseStats = char.baseStats[level - 1];
     const attire = attireList[document.getElementById('attire').value];
     const food = foodList[document.getElementById('food').value];
@@ -1708,7 +1717,6 @@ function updateData() {
 
     mprec = char.mprec + accessory[0].mprec + accessory[1].mprec + accessory[2].mprec +
     	attire.mprec;
-
 
     //Str,Vit,Mag,Spr
     str = Math.floor(baseStats.str * (1 + attire.strBonus/100)) + Math.round((1 +
@@ -1801,17 +1809,24 @@ function updateData() {
    	phase = accessory[0].phase + accessory[1].phase + accessory[2].phase +
    		attire.phase; phaseLimited = limit(phase,-100,0);
 
-   	//Accumulated XP and XP to 120
-   	xpTo120 = -xp;//Remove the current XP from the total required to reach 120.
-
-    let j = 0;
+   	//Accumulated XP and XP needed to reach level 120.
+   	const xpBox = document.getElementById('xp');//Get current XP.
+    const currentXp = Math.round(limit(xpBox.value,0,Infinity));//Limit input to int range [0,Inf].
+    xpBox.value = currentXp;//Change the input to value in range.
+    const currentXpWithLodgingBonus = Math.round(currentXp *
+    	document.getElementById('LodgingXPBonus').value);//Rounded to nearest integer.
 
     //Add up all the accumulated XP from previous levels.
+    let xp = 0;
+    let j = 0;//Gonna re-use this index.
     for (j; j < level - 1; j++) {
     	xp += xpRequired[j];
     }
+    xp += currentXpWithLodgingBonus;//Add the current XP with lodging bonus.
+
     //Add up all the XP required to reach 120.
-    for (j; j < xpRequired.length; j++) { //Continue same loop to the end
+    xpTo120 = -currentXpWithLodgingBonus;//Start by removing current XP with lodging bonus.
+    for (j; j < xpRequired.length; j++) {//Continue previous loop to the end for XP left to acquire.
     	xpTo120 += xpRequired[j];
     }
 
@@ -1864,14 +1879,20 @@ function updateData() {
 	//--------------------------------------------------------------------
 
     //TDA
-    document.getElementById('TDAPhysical').innerHTML = Math.round(tdaPhysical);
-    document.getElementById('TDAMagical').innerHTML = Math.round(tdaMagical);
-    document.getElementById('TDAFire').innerHTML = replaceWithInfSymbol(Math.round(tdaFire));
-    document.getElementById('TDAIce').innerHTML = replaceWithInfSymbol(Math.round(tdaIce));
-    document.getElementById('TDALightning').innerHTML = replaceWithInfSymbol(Math.round(
-    	tdaLightning));
-    document.getElementById('TDADark').innerHTML = replaceWithInfSymbol(Math.round(tdaDark));
-    document.getElementById('TDAShot').innerHTML = replaceWithInfSymbol(Math.round(tdaShot));
+    document.getElementById('TDAPhysical').innerHTML = insertCommas(
+    	Math.round(tdaPhysical).toString());
+    document.getElementById('TDAMagical').innerHTML = insertCommas(
+    	Math.round(tdaMagical).toString());
+    document.getElementById('TDAFire').innerHTML = insertCommas(replaceWithInfSymbol(
+    	Math.round(tdaFire)));
+    document.getElementById('TDAIce').innerHTML = insertCommas(replaceWithInfSymbol(
+    	Math.round(tdaIce)));
+    document.getElementById('TDALightning').innerHTML = insertCommas(replaceWithInfSymbol(
+    	Math.round(tdaLightning)));
+    document.getElementById('TDADark').innerHTML = insertCommas(replaceWithInfSymbol(
+    	Math.round(tdaDark)));
+    document.getElementById('TDAShot').innerHTML = insertCommas(replaceWithInfSymbol(
+    	Math.round(tdaShot)));
 
     //Stats
     document.getElementById('StatsHP').innerHTML = displayDifferenceIfAny(hpLimited,hp,'');
@@ -1908,22 +1929,23 @@ function updateData() {
     document.getElementById('ExtrasPhase').innerHTML = displayDifferenceIfAny(phaseLimited,phase,
     	'%');
 
-    document.getElementById('ExtrasAccumulatedXP').innerHTML = xp;
-    document.getElementById('ExtrasXP120').innerHTML = xpTo120;
+    document.getElementById('ExtrasAccumulatedXP').innerHTML = insertCommas(xp.toString());
+    document.getElementById('ExtrasXP120').innerHTML = displayXpDifferenceIfAny(xpTo120);
 
     if (immunitiesValueString == '') {
-    	document.getElementById('ExtrasImmunitiesLabel').style.display = 'none';//Hide label
+    	document.getElementById('ExtrasImmunitiesLabel').innerHTML = '';//Remove title of section.
     	immunitiesBox.innerHTML = '';//Clear contents if any were there
     }
     else {
-    	document.getElementById('ExtrasImmunitiesLabel').style.display = 'block';
+    	document.getElementById('ExtrasImmunitiesLabel').innerHTML = '- - - - - - - - - - - - - ' +
+    		'- Immunities - - - - - - - - - - - - - -';//write title of section.
     	immunitiesBox.innerHTML = immunitiesValueString;
     }
 
     //Notes
     if (notesValueString == '') {
     	document.getElementById('NotesContainer').style.display = 'none';
-    	immunitiesBox.innerHTML = '';//Clear contents if any were there
+    	notesBox.innerHTML = '';//Clear contents if any were there
     }
     else {
     	document.getElementById('NotesContainer').style.display = 'block';
@@ -1939,6 +1961,7 @@ updateCharacter();//Run once to fill up result screen with initial data.
 document.getElementById('character').addEventListener('change', updateCharacter);
 document.getElementById('level').addEventListener('change', updateData);
 document.getElementById('xp').addEventListener('change', updateData);
+document.getElementById('LodgingXPBonus').addEventListener('change', updateData);
 document.getElementById('attire').addEventListener('change', updateData);
 document.getElementById('food').addEventListener('change', updateData);
 
