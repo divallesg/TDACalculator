@@ -1,5 +1,39 @@
+.leftside {
+  margin:0px;
+  padding-left:15px;
+  padding-right:0px;
+  flex-shrink:0;
+  max-width:427px;
+  min-width:427px;
+}
+
+.rightside {
+  margin:0px;
+  padding:0px;
+  max-width:600px;
+  min-width:600px;
+  /*flex-shrink:0;*/
+  flex:0 0 600px;
+}
+
 .dropdown {
   max-width:15rem;
+}
+
+.accessory-dropdown {
+  margin-left:-15px;
+}
+
+.weapon-dropdown {
+  margin-left:-5px;
+}
+
+.ascension-row {
+  margin-bottom:-5px;
+}
+
+.ascension-column {
+  padding-bottom:0px;
 }
 
 .col-lg-4.weapon-column {

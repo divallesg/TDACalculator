@@ -13,13 +13,13 @@
     <header>
         <div class="row">
             <div class="col">
-                <h1 style="padding-left:22px;padding-top:8px;">TDA Calculator for FFXV</h1>
+                <h1 style="padding-left:22px;padding-top:8px;">TDA &amp; Stat Calculator for FFXV</h1>
             </div>
         </div>
     </header>
     <main>
         <div class="row">
-            <div class="col-lg-5 offset-lg-0" style="max-width:427px;">
+            <div class="col leftside">
                 <div class="row" style="background-color:#FEE5D5;margin:6px;border-radius:12px;">
                     <div class="col">
                         <div class="row">
@@ -49,7 +49,7 @@
                                     <div class="col-lg-5"><select id="LodgingXPBonus" style="margin-top:3px;"><option value="1.0" selected="">1.0</option><option value="1.1">1.1</option><option value="1.2">1.2</option><option value="1.5">1.5</option><option value="2.0">2.0</option><option value="3.0">3.0</option></select></div>
                                 </div>
                             </div>
-                            <div class="col-lg-4" style="height:10rem;"><img id="CharacterImage" style="margin-top:18px;margin-left:-15px;"></div>
+                            <div class="col-lg-3" style="height:10rem;"><img id="CharacterImage" style="margin-top:18px;margin-left:-15px;"></div>
                         </div>
                         <div class="row">
                             <div class="col-lg-4" style="max-width:14%;">
@@ -73,7 +73,7 @@
                             </div>
                         </div>
                         <div class="row" style="height:21px;">
-                            <div class="col-lg-12" style="height:27px;">
+                            <div class="col-lg-12">
                                 <p style="font-size:14px;">▼ Equipped<br></p>
                             </div>
                         </div>
@@ -82,28 +82,28 @@
                             <div class="col-lg-4 weapon-column">
                                 <p>Weapon 1:</p>
                             </div>
-                            <div class="col"><select id="weapon1" class="dropdown"><option value="0" selected="">None</option></select></div>
+                            <div class="col"><select id="weapon1" class="dropdown weapon-dropdown"><option value="0" selected="">None</option></select></div>
                         </div>
                         <div class="row">
                             <div class="col-lg-1"><input type="radio" name="equipped" value="1"></div>
                             <div class="col-lg-4 weapon-column">
                                 <p>Weapon 2:</p>
                             </div>
-                            <div class="col"><select id="weapon2" class="dropdown"><option value="0" selected="">None</option></select></div>
+                            <div class="col"><select id="weapon2" class="dropdown weapon-dropdown"><option value="0" selected="">None</option></select></div>
                         </div>
                         <div class="row">
                             <div class="col-lg-1"><input type="radio" name="equipped" value="2"></div>
                             <div class="col-lg-4 weapon-column">
                                 <p>Weapon 3:</p>
                             </div>
-                            <div class="col"><select id="weapon3" class="dropdown"><option value="0" selected="">None</option></select></div>
+                            <div class="col"><select id="weapon3" class="dropdown weapon-dropdown"><option value="0" selected="">None</option></select></div>
                         </div>
                         <div class="row">
                             <div class="col-lg-1"><input type="radio" name="equipped" value="3"></div>
                             <div class="col-lg-4 weapon-column">
                                 <p>Weapon 4:</p>
                             </div>
-                            <div class="col"><select id="weapon4" class="dropdown"><option value="0" selected="">None</option></select></div>
+                            <div class="col"><select id="weapon4" class="dropdown weapon-dropdown"><option value="0" selected="">None</option></select></div>
                         </div>
                     </div>
                 </div>
@@ -118,19 +118,19 @@
                             <div class="col-lg-5 accessory-column">
                                 <p>Accessory Slot 1:</p>
                             </div>
-                            <div class="col"><select id="accessory1" class="dropdown"><option value="0" selected="">None</option></select></div>
+                            <div class="col"><select id="accessory1" class="dropdown accessory-dropdown"><option value="0" selected="">None</option></select></div>
                         </div>
                         <div class="row">
                             <div class="col-lg-5 accessory-column">
                                 <p>Accessory Slot 2:</p>
                             </div>
-                            <div class="col"><select id="accessory2" class="dropdown"><option value="0" selected="">None</option></select></div>
+                            <div class="col"><select id="accessory2" class="dropdown accessory-dropdown"><option value="0" selected="">None</option></select></div>
                         </div>
                         <div class="row">
                             <div class="col-lg-5 accessory-column">
                                 <p>Accessory Slot 3:</p>
                             </div>
-                            <div class="col"><select id="accessory3" class="dropdown"><option value="0" selected="">None</option></select></div>
+                            <div class="col"><select id="accessory3" class="dropdown accessory-dropdown"><option value="0" selected="">None</option></select></div>
                         </div>
                     </div>
                 </div>
@@ -141,37 +141,37 @@
                                 <h4>Ascension</h4>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row ascension-row">
                             <div class="col ascension-column">
                                 <p>Health Level:</p>
                             </div>
                             <div class="col"><select id="healthLevel" class="dropdown"><optgroup label="Ascension upgrade"><option value="0" selected="">None</option><option value="2">Health Level</option><option value="5">Health Level II</option><option value="10">Health Level III</option></optgroup></select></div>
                         </div>
-                        <div class="row">
+                        <div class="row ascension-row">
                             <div class="col ascension-column">
                                 <p>Experimagic:</p>
                             </div>
                             <div class="col"><input type="checkbox" id="experimagic"></div>
                         </div>
-                        <div class="row">
+                        <div class="row ascension-row">
                             <div class="col ascension-column">
                                 <p>Strength Level:</p>
                             </div>
                             <div class="col"><input type="checkbox" id="strLevel"></div>
                         </div>
-                        <div class="row">
+                        <div class="row ascension-row">
                             <div class="col ascension-column">
                                 <p>Vitality Level:</p>
                             </div>
                             <div class="col"><input type="checkbox" id="vitLevel"></div>
                         </div>
-                        <div class="row">
+                        <div class="row ascension-row">
                             <div class="col ascension-column">
                                 <p>Magic Level:</p>
                             </div>
                             <div class="col"><select id="magLevel" class="dropdown"><optgroup label="Ascension upgrade"><option value="0" selected="">None</option><option value="1">Magic Level</option><option value="3">Magic Level II</option></optgroup></select></div>
                         </div>
-                        <div class="row">
+                        <div class="row ascension-row">
                             <div class="col ascension-column">
                                 <p>Spirit Level:</p>
                             </div>
@@ -180,7 +180,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-7" style="max-width:596px;">
+            <div class="col rightside">
                 <div class="row" style="background-color:#C4C0FF;margin:6px;border-radius:12px;text-align:center;">
                     <div class="col">
                         <div class="row">
