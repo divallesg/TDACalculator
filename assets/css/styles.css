@@ -1,19 +1,10 @@
 .leftside {
-  margin:0px;
-  padding-left:15px;
-  padding-right:0px;
-  flex-shrink:0;
-  max-width:427px;
-  min-width:427px;
+  padding-right:0rem;
+  flex:0 0 26rem;
 }
 
 .rightside {
-  margin:0px;
-  padding:0px;
-  max-width:600px;
-  min-width:600px;
-  /*flex-shrink:0;*/
-  flex:0 0 600px;
+  flex:0 0 37rem;
 }
 
 .dropdown {
@@ -29,23 +20,32 @@
 }
 
 .ascension-row {
-  margin-bottom:-5px;
+  margin-bottom:-0.5rem;
 }
 
 .ascension-column {
-  padding-bottom:0px;
+  padding-bottom:0rem;
 }
 
-.col-lg-4.weapon-column {
-  max-width:28%;
+.divider-column {
+  max-width:10px;
+  padding:0px;
 }
 
-.col.ascension-column {
-  max-width:35%;
+.weapon-column {
+  max-width:106px;
 }
 
-.col-lg-5.accessory-column {
-  max-width:39%;
+.equipped-radio {
+  max-width:32px;
+}
+
+.ascension-column {
+  max-width:8.4rem;
+}
+
+.accessory-column {
+  max-width:148px;
 }
 
 .result-box {

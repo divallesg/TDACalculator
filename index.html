@@ -25,40 +25,40 @@
                         <div class="row">
                             <div class="col">
                                 <div class="row">
-                                    <div class="col-lg-4">
+                                    <div class="col" style="max-width:77px;">
                                         <p>Character:</p>
                                     </div>
                                     <div class="col"><select id="character" style="margin-top:3px;"><option value="0" selected="">Noctis</option><option value="1">Gladiolus</option><option value="2">Ignis</option><option value="3">Prompto</option></select></div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-3">
+                                    <div class="col" style="max-width:61px;">
                                         <p>Level:</p>
                                     </div>
                                     <div class="col"><input type="number" value="1" placeholder="1-120" min="1" max="120" step="1" id="level" style="margin-left:-15px;" pattern="[0-9]"></div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-4">
+                                    <div class="col" style="max-width:86px;">
                                         <p>Experience:</p>
                                     </div>
-                                    <div class="col-lg-8"><input type="number" value="0" placeholder="Current Exp" min="0" step="100" id="xp" class="dropdown" style="max-width:7rem;" pattern="[0-9]"></div>
+                                    <div class="col"><input type="number" value="0" placeholder="Current Exp" min="0" step="100" id="xp" class="dropdown" style="max-width:7rem;" pattern="[0-9]"></div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-7">
+                                    <div class="col" style="max-width:138px;">
                                         <p class="text-nowrap">Lodging XP Bonus:</p>
                                     </div>
-                                    <div class="col-lg-5"><select id="LodgingXPBonus" style="margin-top:3px;"><option value="1.0" selected="">1.0</option><option value="1.1">1.1</option><option value="1.2">1.2</option><option value="1.5">1.5</option><option value="2.0">2.0</option><option value="3.0">3.0</option></select></div>
+                                    <div class="col"><select id="LodgingXPBonus" style="margin-top:3px;"><option value="1.0" selected="">1.0</option><option value="1.1">1.1</option><option value="1.2">1.2</option><option value="1.5">1.5</option><option value="2.0">2.0</option><option value="3.0">3.0</option></select></div>
                                 </div>
                             </div>
-                            <div class="col-lg-3" style="height:10rem;"><img id="CharacterImage" style="margin-top:18px;margin-left:-15px;"></div>
+                            <div class="col" style="max-width:125px;"><img id="CharacterImage" style="margin-top:18px;margin-left:-15px;"></div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-4" style="max-width:14%;">
+                            <div class="col" style="max-width:54px;">
                                 <p>Attire:</p>
                             </div>
                             <div class="col"><select id="attire" class="dropdown" style="max-width:17rem;"><option value="0" selected="">None</option></select></div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-3" style="max-width:14%;">
+                            <div class="col" style="max-width:54px;">
                                 <p>Food:</p>
                             </div>
                             <div class="col"><select id="food" class="dropdown" style="max-width:19rem;"><option value="0" selected="">None</option></select></div>
@@ -69,38 +69,38 @@
                     <div class="col">
                         <div class="row">
                             <div class="col" style="height:29px;">
-                                <h4 style="height:-20px;">Weapons</h4>
+                                <h4>Weapons</h4>
                             </div>
                         </div>
                         <div class="row" style="height:21px;">
-                            <div class="col-lg-12">
+                            <div class="col">
                                 <p style="font-size:14px;">▼ Equipped<br></p>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-1"><input type="radio" name="equipped" value="0" checked=""></div>
-                            <div class="col-lg-4 weapon-column">
+                            <div class="col equipped-radio"><input type="radio" name="equipped" value="0" checked=""></div>
+                            <div class="col weapon-column">
                                 <p>Weapon 1:</p>
                             </div>
                             <div class="col"><select id="weapon1" class="dropdown weapon-dropdown"><option value="0" selected="">None</option></select></div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-1"><input type="radio" name="equipped" value="1"></div>
-                            <div class="col-lg-4 weapon-column">
+                            <div class="col equipped-radio"><input type="radio" name="equipped" value="1"></div>
+                            <div class="col weapon-column">
                                 <p>Weapon 2:</p>
                             </div>
                             <div class="col"><select id="weapon2" class="dropdown weapon-dropdown"><option value="0" selected="">None</option></select></div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-1"><input type="radio" name="equipped" value="2"></div>
-                            <div class="col-lg-4 weapon-column">
+                            <div class="col equipped-radio"><input type="radio" name="equipped" value="2"></div>
+                            <div class="col weapon-column">
                                 <p>Weapon 3:</p>
                             </div>
                             <div class="col"><select id="weapon3" class="dropdown weapon-dropdown"><option value="0" selected="">None</option></select></div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-1"><input type="radio" name="equipped" value="3"></div>
-                            <div class="col-lg-4 weapon-column">
+                            <div class="col equipped-radio"><input type="radio" name="equipped" value="3"></div>
+                            <div class="col weapon-column">
                                 <p>Weapon 4:</p>
                             </div>
                             <div class="col"><select id="weapon4" class="dropdown weapon-dropdown"><option value="0" selected="">None</option></select></div>
@@ -115,19 +115,19 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-5 accessory-column">
+                            <div class="col accessory-column">
                                 <p>Accessory Slot 1:</p>
                             </div>
                             <div class="col"><select id="accessory1" class="dropdown accessory-dropdown"><option value="0" selected="">None</option></select></div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-5 accessory-column">
+                            <div class="col accessory-column">
                                 <p>Accessory Slot 2:</p>
                             </div>
                             <div class="col"><select id="accessory2" class="dropdown accessory-dropdown"><option value="0" selected="">None</option></select></div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-5 accessory-column">
+                            <div class="col accessory-column">
                                 <p>Accessory Slot 3:</p>
                             </div>
                             <div class="col"><select id="accessory3" class="dropdown accessory-dropdown"><option value="0" selected="">None</option></select></div>
@@ -323,7 +323,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-1">
+                            <div class="col divider-column">
                                 <div class="row divider">
                                     <div class="col">
                                         <p>|</p>
@@ -368,7 +368,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col">
                                         <div class="row">
                                             <div class="col">
                                                 <p id="StatsHPRec" class="result-box"></p>
@@ -380,7 +380,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col">
                                         <div class="row">
                                             <div class="col">
                                                 <p id="StatsMPRec" class="result-box"></p>
@@ -394,7 +394,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-1">
+                            <div class="col divider-column">
                                 <div class="row divider">
                                     <div class="col">
                                         <p>|</p>
@@ -413,20 +413,20 @@
                             </div>
                             <div class="col">
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col">
                                         <div class="row" style="height:1.5rem;">
-                                            <div class="col-lg-12">
+                                            <div class="col">
                                                 <p id="StatsDamageElement" class="result-box damage non-elemental" style="margin-top:-1rem;"></p>
                                                 <p id="StatsDamageType" class="result-box damage" style="color:brown;text-shadow:1px 1px 10px white, 1px 1px 10px brown;"></p>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-lg-12">
+                                            <div class="col">
                                                 <h6>Damage Types</h6>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col">
                                         <div class="row">
                                             <div class="col">
                                                 <p id="StatsCrit" class="result-box"></p>
