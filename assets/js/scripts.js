@@ -1352,16 +1352,16 @@ function replaceWithInfSymbol(someValue) {
 
 //Check if the character can equip the given Attire.
 //Not used inside for-loops cause it would only worsen performance.
-function canEquipAttire (char, attire) {
-	if (char.name == 'Noctis') {
-		if (attire.equip == char.name || attire.equip == 'All')
+function canEquipAttire (charName, attireEquip) {
+	if (charName == 'Noctis') {
+		if (attireEquip == charName || attireEquip == 'All')
 			return true;
 		else
 			return false;
 	}
 	else {//If not Noctis.
-		if (attire.equip == char.name || attire.equip == 'All' ||
-			attire.equip == 'All but Noctis')
+		if (attireEquip == charName || attireEquip == 'All' ||
+			attireEquip == 'All but Noctis')
 			return true;
 		else
 			return false;
@@ -1370,31 +1370,27 @@ function canEquipAttire (char, attire) {
 
 //Check if the character can equip the given Weapon at the given weapon slot.
 //Not used inside for-loops cause it would only worsen performance.
-function canEquipWeapon (char, weapon, slot) {
-	if (char.name == 'Noctis')
+function canEquipWeapon (charEquipType, weaponType) {
+	if (charEquipType == '')//Noctis case, can use all weapons.
 		return true;
-	else {//If not Noctis.
-		if (weapon.type == char.weaponType1 && slot == 0)
-			return true;
-		else if (weapon.type == char.weaponType2 && slot == 1)
-			return true;
-		else
-			return false;
-	}
+	else if (charEquipType == weaponType)
+		return true;
+	else
+		return false;
 }
 
 //Check if the character can equip the given Attire.
 //Not used inside for-loops cause it would only worsen performance.
-function canEquipAccessory (char, accessory) {
-	if (char.name == 'Noctis') {
-		if (accessory.equip == char.name || accessory.equip == 'All')
+function canEquipAccessory (charName, accessoryEquip) {
+	if (charName == 'Noctis') {
+		if (accessoryEquip == charName || accessoryEquip == 'All')
 			return true;
 		else
 			return false;
 	}
 	else {//If not Noctis.
-		if (accessory.equip == char.name || accessory.equip == 'All' ||
-			accessory.equip == 'All but Noctis')
+		if (accessoryEquip == charName || accessoryEquip == 'All' ||
+			accessoryEquip == 'All but Noctis')
 			return true;
 		else
 			return false;
@@ -1549,7 +1545,7 @@ function updateCharacter() {
     attireBox.innerHTML = newAttireListString;
 
     //Restore old selection only if the new char can equip the same attire.
-    if (canEquipAttire(char, attireList[oldAttireValue])) {
+    if (canEquipAttire(char.name, attireList[oldAttireValue].equip)) {
     	attireBox.value = oldAttireValue;
     }
 
@@ -1596,12 +1592,10 @@ function updateCharacter() {
     }
 
     //Restore old selection only if the new char can equip the same weapons.
-    if (canEquipWeapon(char, weaponList[oldWeapon1BoxValue],0)) {
+    if (canEquipWeapon(char.weaponType1, weaponList[oldWeapon1BoxValue].type))
     	weapon1Box.value = oldWeapon1BoxValue;
-    }
-    if (canEquipWeapon(char, weaponList[oldWeapon2BoxValue,1])) {
+    if (canEquipWeapon(char.weaponType2, weaponList[oldWeapon2BoxValue].type))
     	weapon2Box.value = oldWeapon2BoxValue;
-    }
 
     //---Accessories---
 	//Get Accessory dropdown list elements.
@@ -1620,15 +1614,12 @@ function updateCharacter() {
     acc3Box.innerHTML = newAccessoryListString;
 
     //Restore old selection only if the new char can equip the same accessories.
-    if (canEquipAccessory(char, accessoryList[oldAcc1BoxValue])) {
+    if (canEquipAccessory(char.name, accessoryList[oldAcc1BoxValue].equip))
     	acc1Box.value = oldAcc1BoxValue;
-    }
-    if (canEquipAccessory(char, accessoryList[oldAcc2BoxValue])) {
+    if (canEquipAccessory(char.name, accessoryList[oldAcc2BoxValue].equip))
     	acc2Box.value = oldAcc2BoxValue;
-    }
-    if (canEquipAccessory(char, accessoryList[oldAcc3BoxValue])) {
+    if (canEquipAccessory(char.name, accessoryList[oldAcc3BoxValue].equip))
     	acc3Box.value = oldAcc3BoxValue;
-    }
 
     updateData();//Compute the result screen with the new values.
 }
@@ -1858,8 +1849,7 @@ function updateData() {
     }
     
     if (food.effect != '') {
-        notesValueString += '<strong>' + food.name + ':</strong> ' +
-        	food.effect + ' - ' + food.description + '<br>';
+        notesValueString += '<strong>' + food.name + ':</strong> ' + food.description + '<br>';
     }
 
     if (weapon[equipped].effect != '') {

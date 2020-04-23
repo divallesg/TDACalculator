@@ -3,12 +3,14 @@
   flex:0 0 26rem;
 }
 
-.titled-container {
-  margin:6px;
+.rightside {
+  padding-right:0rem;
+  flex:0 0 37rem;
 }
 
-.rightside {
-  flex:0 0 37rem;
+.titled-container {
+  margin:0.3rem;
+  border-radius:1rem;
 }
 
 .dropdown {
@@ -37,7 +39,7 @@
 }
 
 .weapon-column {
-  max-width:106px;
+  max-width:6.7rem;
 }
 
 .equipped-radio {
@@ -53,42 +55,42 @@
 }
 
 .result-box {
-  margin-bottom:0px;
+  margin-bottom:0rem;
 }
 
 .fire {
   color:red;
-  text-shadow:1px 1px 10px white, 1px 1px 10px red;
+  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 1.0rem red;
 }
 
 .ice {
   color:blue;
-  text-shadow:1px 1px 10px white, 1px 1px 10px blue;
+  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 1.0rem blue;
 }
 
 .lightning {
   color:yellow;
-  text-shadow:1px 1px 10px white, 1px 1px 10px yellow;
+  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 1.0rem yellow;
 }
 
 .dark {
   color:black;
-  text-shadow:1px 1px 10px white, 1px 1px 10px black;
+  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 1.0rem black;
 }
 
 .shot {
   color:green;
-  text-shadow:1px 1px 10px white, 1px 1px 10px green;
+  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 1.0rem green;
 }
 
 .light {
   color:white;
-  text-shadow:1px 1px 10px white, 1px 1px 10px white;
+  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 1.0rem white;
 }
 
 .non-elemental {
   color:gray;
-  text-shadow:1px 1px 10px white, 1px 1px 10px gray;
+  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 1.0rem gray;
 }
 
 .row.divider {
