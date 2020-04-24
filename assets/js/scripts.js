@@ -1,4 +1,9 @@
-"use strict";
+"use strict";//Cause that's how I roll.
+
+//Enable tooltips.
+//$(function () {
+//  $('[data-toggle="tooltip"]').tooltip();
+//});
 
 //--------------------------------------------------------------------
 //Classes
@@ -50,11 +55,54 @@ class Attire {
         this.immunity = immunity;
         this.effect = effect;
     }
+	getTooltipMessage() {
+		let tooltipMessage = '';
+		if (this.hpBonus != 0)
+	    	tooltipMessage += 'HP: +' + this.hpBonus + '% | ';
+	    if (this.hprec != 0)
+	    	tooltipMessage += 'HPRec: ' + this.hprec + ' | ';
+	    if (this.mpBonus != 0)
+	    	tooltipMessage += 'MP: +' + this.mpBonus + '% | ';
+	    if (this.mprec != 0)
+	    	tooltipMessage += 'MPRec: ' + this.mprec + ' | ';
+	   	if (this.strBonus != 0)
+	   		tooltipMessage += 'STR: +' + this.strBonus + '% | ';
+	   	if (this.vitBonus != 0)
+	   		tooltipMessage += 'VIT: +' + this.vitBonus + '% | ';
+	   	if (this.magBonus != 0)
+	   		tooltipMessage += 'MAG: +' + this.magBonus + '% | ';
+	   	if (this.sprBonus != 0)
+	   		tooltipMessage += 'SPR: +' + this.sprBonus + '% | ';
+	   	if (this.crit != 0)
+	   		tooltipMessage += 'Crit: ' + this.crit + ' | ';
+	   	if (this.fire != 0)
+	   		tooltipMessage += 'FireRes: ' + this.fire + ' | ';
+	   	if (this.ice != 0)
+	   		tooltipMessage += 'IceRes: ' + this.ice + ' | ';
+	   	if (this.lightning != 0)
+	   		tooltipMessage += 'LightningRes: ' + this.lightning + ' | ';
+	   	if (this.dark != 0)
+	   		tooltipMessage += 'DarkRes: ' + this.dark + ' | ';
+	   	if (this.shot != 0)
+	   		tooltipMessage += 'ShotRes: ' + this.shot + ' | ';
+	   	if (this.phase != 0)
+	   		tooltipMessage += 'Phase Cost: ' + this.phase + ' | ';
+	   	if (this.itemDrop != 0)
+	   		tooltipMessage += 'Item Drop: ' + this.itemDrop + ' | ';
+	   	if (this.immunity != '')
+	   		tooltipMessage += 'Immunities: ' + this.immunity + ' | ';
+	   	if (this.effect != '')
+	   		tooltipMessage += 'Extra Effect: ' + this.effect + ' | ';
+
+	   	tooltipMessage = tooltipMessage.slice(0,-3);//Remove the last spaces and pipe symbol.
+
+		return tooltipMessage;
+	}
 }
 
 class Food {    
-    constructor(type,favorite,name,hp,str,vit,mag,spr,fire,ice,lightning,hprec,xpBonus,crit,itemDrop,
-    	immunity,effect,description) {
+    constructor(type,favorite,name,hp,str,vit,mag,spr,fire,ice,lightning,hprec,xpBonus,crit,
+    	itemDrop,immunity,effect,description) {
         this.type = type;
         this.favorite = favorite;
         this.name = name;
@@ -74,6 +122,43 @@ class Food {
         this.effect = effect;
         this.description = description;
     }
+    getTooltipMessage() {
+		let tooltipMessage = '';
+		if (this.hp != 0)
+	    	tooltipMessage += 'HP: ' + this.hp + ' | ';
+	    if (this.hprec != 0)
+	    	tooltipMessage += 'HPRec: ' + this.hprec + ' | ';
+	   	if (this.str != 0)
+	   		tooltipMessage += 'STR: ' + this.str + ' | ';
+	   	if (this.vit != 0)
+	   		tooltipMessage += 'VIT: ' + this.vit + ' | ';
+	   	if (this.mag != 0)
+	   		tooltipMessage += 'MAG: ' + this.mag + ' | ';
+	   	if (this.spr != 0)
+	   		tooltipMessage += 'SPR: ' + this.spr + ' | ';
+	   	if (this.crit != 0)
+	   		tooltipMessage += 'Crit: ' + this.crit + ' | ';
+	   	if (this.fire != 0)
+	   		tooltipMessage += 'FireRes: ' + this.fire + ' | ';
+	   	if (this.ice != 0)
+	   		tooltipMessage += 'IceRes: ' + this.ice + ' | ';
+	   	if (this.lightning != 0)
+	   		tooltipMessage += 'LightningRes: ' + this.lightning + ' | ';
+	   	if (this.favorite != 0)
+	   		tooltipMessage += 'Favorite of: ' + this.favorite + ' | ';
+	   	if (this.xpBonus != 0)
+	   		tooltipMessage += 'XP Bonus: ' + this.xpBonus + ' | ';
+	   	if (this.itemDrop != 0)
+	   		tooltipMessage += 'Item Drop: ' + this.itemDrop + ' | ';
+	   	if (this.immunity != '')
+	   		tooltipMessage += 'Immunities: ' + this.immunity + ' | ';
+	   	if (this.description != '')
+	   		tooltipMessage += 'Extra Effect: ' + this.description + ' | ';
+
+	   	tooltipMessage = tooltipMessage.slice(0,-3);//Remove the last spaces and pipe symbol.
+
+		return tooltipMessage;
+	}
 }
 
 class Weapon {
@@ -98,6 +183,45 @@ class Weapon {
         this.element = element;
         this.effect = effect;
     }
+    getTooltipMessage() {
+		let tooltipMessage = '';
+		if (this.attack != 0)
+	    	tooltipMessage += 'ATK: ' + this.attack + ' | ';
+	    if (this.crit != 0)
+	   		tooltipMessage += 'Crit: ' + this.crit + ' | ';
+	   	if (this.hp != 0)
+	    	tooltipMessage += 'HP: ' + this.hp + ' | ';
+	    if (this.hprec != 0)
+	    	tooltipMessage += 'HPRec: ' + this.hprec + ' | ';
+	    if (this.mp != 0)
+	    	tooltipMessage += 'MP: ' + this.mp + ' | ';
+	   	if (this.str != 0)
+	   		tooltipMessage += 'STR: ' + this.str + ' | ';
+	   	if (this.vit != 0)
+	   		tooltipMessage += 'VIT: ' + this.vit + ' | ';
+	   	if (this.mag != 0)
+	   		tooltipMessage += 'MAG: ' + this.mag + ' | ';
+	   	if (this.spr != 0)
+	   		tooltipMessage += 'SPR: ' + this.spr + ' | ';
+	   	if (this.fire != 0)
+	   		tooltipMessage += 'FireRes: ' + this.fire + ' | ';
+	   	if (this.ice != 0)
+	   		tooltipMessage += 'IceRes: ' + this.ice + ' | ';
+	   	if (this.lightning != 0)
+	   		tooltipMessage += 'LightningRes: ' + this.lightning + ' | ';
+	   	if (this.dark != 0)
+	   		tooltipMessage += 'DarkRes: ' + this.dark + ' | ';
+	   	if (this.shot != 0)
+	   		tooltipMessage += 'ShotRes: ' + this.shot + ' | ';
+	   	if (this.element != '' && this.element != 'Non-Elemental')
+	   		tooltipMessage += 'Elemental Effect: ' + this.element + ' | ';
+	   	if (this.effect != '')
+	   		tooltipMessage += 'Extra Effect: ' + this.effect + ' | ';
+
+	   	tooltipMessage = tooltipMessage.slice(0,-3);//Remove the last spaces and pipe symbol.
+
+		return tooltipMessage;
+	}
 }
 
 class Accessory {    
@@ -126,6 +250,51 @@ class Accessory {
         this.immunity = immunity;
         this.effect = effect;
     }
+    getTooltipMessage() {
+		let tooltipMessage = '';
+	   	if (this.hp != 0)
+	    	tooltipMessage += 'HP: ' + this.hp + ' | ';
+	    if (this.hprec != 0)
+	    	tooltipMessage += 'HPRec: ' + this.hprec + ' | ';
+	    if (this.mp != 0)
+	    	tooltipMessage += 'MP: ' + this.mp + ' | ';
+	    if (this.mprec != 0)
+	    	tooltipMessage += 'MPRec: ' + this.mprec + ' | ';
+	   	if (this.str != 0)
+	   		tooltipMessage += 'STR: ' + this.str + ' | ';
+	   	if (this.vit != 0)
+	   		tooltipMessage += 'VIT: ' + this.vit + ' | ';
+	   	if (this.mag != 0)
+	   		tooltipMessage += 'MAG: ' + this.mag + ' | ';
+	   	if (this.spr != 0)
+	   		tooltipMessage += 'SPR: ' + this.spr + ' | ';
+	   	if (this.fire != 0)
+	   		tooltipMessage += 'FireRes: ' + this.fire + ' | ';
+	   	if (this.ice != 0)
+	   		tooltipMessage += 'IceRes: ' + this.ice + ' | ';
+	   	if (this.lightning != 0)
+	   		tooltipMessage += 'LightningRes: ' + this.lightning + ' | ';
+	   	if (this.dark != 0)
+	   		tooltipMessage += 'DarkRes: ' + this.dark + ' | ';
+	   	if (this.shot != 0)
+	   		tooltipMessage += 'ShotRes: ' + this.shot + ' | ';
+	    if (this.crit != 0)
+	   		tooltipMessage += 'Crit: ' + this.crit + ' | ';
+	   	if (this.xpBonus != 0)
+	   		tooltipMessage += 'XP Bonus: ' + this.xpBonus + ' | ';
+	   	if (this.phase != 0)
+	   		tooltipMessage += 'Phase Cost: ' + this.phase + ' | ';
+	   	if (this.itemDrop != 0)
+	   		tooltipMessage += 'Item Drop: ' + this.itemDrop + ' | ';
+	   	if (this.immunity != '')
+	   		tooltipMessage += 'Immunities: ' + this.immunity + ' | ';
+	   	if (this.effect != '')
+	   		tooltipMessage += 'Extra Effect: ' + this.effect + ' | ';
+
+	   	tooltipMessage = tooltipMessage.slice(0,-3);//Remove the last spaces and pipe symbol.
+
+		return tooltipMessage;
+	}
 }
 
 //--------------------------------------------------------------------
@@ -1428,17 +1597,21 @@ function displayXpDifferenceIfAny (xp) {
 //--------------------------------------------------------------------
 
 const foodBox = document.getElementById('food');
-let foodBoxString = '';
+let foodBoxString = '';//The total string to use as the inner HTML.
 let currentFoodType = '';//Keep track of changing categories to add a new optgroup each time.
-for (let i = 0; i < foodList.length; i++) {//Read list of food and make option tags.
+
+foodBoxString += '<option value="0" selected>None</option>\n';//Add 'None' option.
+for (let i = 1; i < foodList.length; i++) {//Read list of food and make option tags.
     if (currentFoodType != foodList[i].type) {
         foodBoxString += '<optgroup label="' + '-' + foodList[i].type +
         	'------"></optgroup>\n';//Make optgroup tags
         currentFoodType = foodList[i].type;
     }
-    foodBoxString += '<option value="' +
-        i + '">' + foodList[i].name + '</option>\n';//Update string
+
+   	foodBoxString += '<option value="' + i + '" data-toggle="tooltip" data-placement="right"' +
+    	' title="' + foodList[i].getTooltipMessage() + '">' + foodList[i].name + '</option>\n';
 }
+
 foodBox.innerHTML = foodBoxString;//Fill up the dropdown list.
 
 //--------------------------------------------------------------------
@@ -1463,12 +1636,14 @@ function updateCharacter() {
     newAttireListString += noneOption;//Add "None" option.
     for (let i = 1; i < attireList.length; i++) {
         if (attireList[i].equip == char.name || attireList[i].equip == 'All') {
-            newAttireListString += '<option value="' + i + '">' + attireList[i].name +
-            	'</option>\n';
+            newAttireListString += '<option value="' + i + '" data-toggle="tooltip" ' +
+            	'data-placement="right" title="' + attireList[i].getTooltipMessage() + '">' +
+            	attireList[i].name + '</option>\n';
         }
         else if (char.name != 'Noctis' && attireList[i].equip == 'All but Noctis') {
-        	newAttireListString += '<option value="' + i + '">' + attireList[i].name +
-        		'</option>\n';
+        	newAttireListString += '<option value="' + i + '" data-toggle="tooltip" ' +
+            	'data-placement="right" title="' + attireList[i].getTooltipMessage() + '">' +
+            	attireList[i].name + '</option>\n';
         }
     }
 
@@ -1482,8 +1657,9 @@ function updateCharacter() {
 	            	'----"></optgroup>\n';
 	            currentWepType = weaponList[i].type;
 	        }
-	        newWeaponListString1 += '<option value="' + i + '">' + weaponList[i].name +
-	        	'</option>\n';
+	        newWeaponListString1 += '<option value="' + i + '" data-toggle="tooltip" ' +
+            	'data-placement="right" title="' + weaponList[i].getTooltipMessage() + '">' +
+            	weaponList[i].name + '</option>\n';
 	    }
     }
     else { //Not Noctis.
@@ -1494,12 +1670,14 @@ function updateCharacter() {
         	char.weaponType2 + '----"></optgroup>\n';
     	for (let i = 1; i < weaponList.length; i++) {
     	 	if (weaponList[i].type == char.weaponType1) {
-    	 		newWeaponListString1 += '<option value="' + i + '">' + weaponList[i].name +
-    	 			'</option>\n';
+    	 		newWeaponListString1 += '<option value="' + i + '" data-toggle="tooltip" ' +
+	            	'data-placement="right" title="' + weaponList[i].getTooltipMessage() + '">' +
+	            	weaponList[i].name + '</option>\n';
     	 	}
     	 	else if (weaponList[i].type == char.weaponType2) {
-    	 		newWeaponListString2 += '<option value="' + i + '">' + weaponList[i].name +
-    	 			'</option>\n';
+    	 		newWeaponListString2 += '<option value="' + i + '" data-toggle="tooltip" ' +
+	            	'data-placement="right" title="' + weaponList[i].getTooltipMessage() + '">' +
+	            	weaponList[i].name + '</option>\n';
     	 	}
 	    }
     }
@@ -1515,18 +1693,20 @@ function updateCharacter() {
 	            currentAccType = accessoryList[i].category;
 	    	}
 
-            newAccessoryListString += '<option value="' + 
-                i + '">' + accessoryList[i].name + '</option>\n';
+            newAccessoryListString += '<option value="' + i + '" data-toggle="tooltip" ' +
+	            	'data-placement="right" title="' + accessoryList[i].getTooltipMessage() + '">' +
+	            	accessoryList[i].name + '</option>\n';
         }
-        else if (char.name != 'Noctis' && accessoryList[i].equip == 'All but Noctis') {
+        else if (char.name != 'Noctis' && accessoryList[i].equip == 'All but Noctis') {//Not Noctis.
         	if (currentAccType != accessoryList[i].category) {
 	    		newAccessoryListString += '<optgroup label="' + '----' + accessoryList[i].category +
 	    			'----"></optgroup>\n';
 	            currentAccType = accessoryList[i].category;
 	    	}
 
-        	newAccessoryListString += '<option value="' + 
-                i + '">' + accessoryList[i].name + '</option>\n';
+        	newAccessoryListString += '<option value="' + i + '" data-toggle="tooltip" ' +
+	            	'data-placement="right" title="' + accessoryList[i].getTooltipMessage() + '">' +
+	            	accessoryList[i].name + '</option>\n';
         }
     }
 
@@ -1844,13 +2024,11 @@ function updateData() {
     const notesBox = document.getElementById('Notes');
     notesValueString = '';//Initialize string
     
-    if (attire.effect != '') {
+    if (attire.effect != '')
         notesValueString += '<strong>' + attire.name + ':</strong> ' + attire.effect + '<br>';
-    }
-    
-    if (food.effect != '') {
+
+    if (food.effect != '')
         notesValueString += '<strong>' + food.name + ':</strong> ' + food.description + '<br>';
-    }
 
     if (weapon[equipped].effect != '') {
         notesValueString += '<strong>' + weapon[equipped].name +
