@@ -1,9 +1,101 @@
 "use strict";//Cause that's how I roll.
 
-//Enable tooltips.
-//$(function () {
-//  $('[data-toggle="tooltip"]').tooltip();
-//});
+//--------------------------------------------------------------------
+//Helper functions. Very nice! :)
+//--------------------------------------------------------------------
+
+//Limit the value to some lower and higher bound, otherwise return the same number.
+function limit(someNumber, lowerBound, higherBound) {
+    if (someNumber < lowerBound)
+    	return lowerBound;
+    else if (someNumber > higherBound)
+    	return higherBound;
+    else
+    	return someNumber;
+}
+
+//Replaces an infinite value with the infinity symbol, keeping the sign.
+function replaceWithInfSymbol(someValue) {
+	if (someValue == Infinity)
+		return '∞';
+	else if (someValue == -Infinity)
+		return '-∞';
+	else
+		return someValue.toString();
+}
+
+//Check if the character can equip the given Attire.
+//Not used inside for-loops cause it would only worsen performance.
+function canEquipAttire (charName, attireEquip) {
+	if (charName == 'Noctis') {
+		if (attireEquip == charName || attireEquip == 'All')
+			return true;
+		else
+			return false;
+	}
+	else {//If not Noctis.
+		if (attireEquip == charName || attireEquip == 'All' ||
+			attireEquip == 'All but Noctis')
+			return true;
+		else
+			return false;
+	}
+}
+
+//Check if the character can equip the given Weapon at the given weapon slot.
+//Not used inside for-loops cause it would only worsen performance.
+function canEquipWeapon (charEquipType, weaponType) {
+	if (charEquipType == '')//Noctis case, can use all weapons.
+		return true;
+	else if (charEquipType == weaponType)
+		return true;
+	else
+		return false;
+}
+
+//Check if the character can equip the given Attire.
+//Not used inside for-loops cause it would only worsen performance.
+function canEquipAccessory (charName, accessoryEquip) {
+	if (charName == 'Noctis') {
+		if (accessoryEquip == charName || accessoryEquip == 'All')
+			return true;
+		else
+			return false;
+	}
+	else {//If not Noctis.
+		if (accessoryEquip == charName || accessoryEquip == 'All' ||
+			accessoryEquip == 'All but Noctis')
+			return true;
+		else
+			return false;
+	}
+}
+
+//Takes the string of a number and returns a string with commas inserted every 3 digits.
+function insertCommas (someNumberString) {
+	return someNumberString.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+//If the limited value differs from the true value, make the displayed result have both values
+//separated by parentheses.
+function displayDifferenceIfAny (valueLimited, actualValue, additionalSymbol) {
+	if (actualValue != valueLimited) {
+		return valueLimited + additionalSymbol + ' (' + replaceWithInfSymbol(actualValue) + ')';
+	}
+	else {
+		return valueLimited + additionalSymbol;
+	}
+}
+
+//Format the string to include the amount of leftover XP after reaching level 120.
+function displayXpDifferenceIfAny (xp) {
+	if (xp < 0) {
+		return '0 (' + insertCommas((-xp).toString()) + ' left over)';
+	}
+	else {
+		return insertCommas(xp.toString());
+	}
+}
 
 //--------------------------------------------------------------------
 //Classes
@@ -129,11 +221,11 @@ class Food {
 	    if (this.hprec != 0)
 	    	tooltipMessage += 'HPRec: ' + this.hprec + ' | ';
 	   	if (this.str != 0)
-	   		tooltipMessage += 'STR: ' + this.str + ' | ';
+	   		tooltipMessage += 'STR: ' + replaceWithInfSymbol(this.str) + ' | ';
 	   	if (this.vit != 0)
 	   		tooltipMessage += 'VIT: ' + this.vit + ' | ';
 	   	if (this.mag != 0)
-	   		tooltipMessage += 'MAG: ' + this.mag + ' | ';
+	   		tooltipMessage += 'MAG: ' + replaceWithInfSymbol(this.mag) + ' | ';
 	   	if (this.spr != 0)
 	   		tooltipMessage += 'SPR: ' + this.spr + ' | ';
 	   	if (this.crit != 0)
@@ -1494,104 +1586,6 @@ const accessoryList = [
 	new Accessory ('Other Utility','Prompto','Camera Strap',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',
 		'+5 to max photos per day')];
 
-
-//--------------------------------------------------------------------
-//Helper functions. Very nice! :)
-//--------------------------------------------------------------------
-
-//Limit the value to some lower and higher bound, otherwise return the same number.
-function limit(someNumber, lowerBound, higherBound) {
-    if (someNumber < lowerBound)
-    	return lowerBound;
-    else if (someNumber > higherBound)
-    	return higherBound;
-    else
-    	return someNumber;
-}
-
-//Replaces an infinite value with the infinity symbol, keeping the sign.
-function replaceWithInfSymbol(someValue) {
-	if (someValue == Infinity)
-		return '∞';
-	else if (someValue == -Infinity)
-		return '-∞';
-	else
-		return someValue.toString();
-}
-
-//Check if the character can equip the given Attire.
-//Not used inside for-loops cause it would only worsen performance.
-function canEquipAttire (charName, attireEquip) {
-	if (charName == 'Noctis') {
-		if (attireEquip == charName || attireEquip == 'All')
-			return true;
-		else
-			return false;
-	}
-	else {//If not Noctis.
-		if (attireEquip == charName || attireEquip == 'All' ||
-			attireEquip == 'All but Noctis')
-			return true;
-		else
-			return false;
-	}
-}
-
-//Check if the character can equip the given Weapon at the given weapon slot.
-//Not used inside for-loops cause it would only worsen performance.
-function canEquipWeapon (charEquipType, weaponType) {
-	if (charEquipType == '')//Noctis case, can use all weapons.
-		return true;
-	else if (charEquipType == weaponType)
-		return true;
-	else
-		return false;
-}
-
-//Check if the character can equip the given Attire.
-//Not used inside for-loops cause it would only worsen performance.
-function canEquipAccessory (charName, accessoryEquip) {
-	if (charName == 'Noctis') {
-		if (accessoryEquip == charName || accessoryEquip == 'All')
-			return true;
-		else
-			return false;
-	}
-	else {//If not Noctis.
-		if (accessoryEquip == charName || accessoryEquip == 'All' ||
-			accessoryEquip == 'All but Noctis')
-			return true;
-		else
-			return false;
-	}
-}
-
-//Takes the string of a number and returns a string with commas inserted every 3 digits.
-function insertCommas (someNumberString) {
-	return someNumberString.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
-//If the limited value differs from the true value, make the displayed result have both values
-//separated by parentheses.
-function displayDifferenceIfAny (valueLimited, actualValue, additionalSymbol) {
-	if (actualValue != valueLimited) {
-		return valueLimited + additionalSymbol + ' (' + replaceWithInfSymbol(actualValue) + ')';
-	}
-	else {
-		return valueLimited + additionalSymbol;
-	}
-}
-
-//Format the string to include the amount of leftover XP after reaching level 120.
-function displayXpDifferenceIfAny (xp) {
-	if (xp < 0) {
-		return '0 (' + insertCommas((-xp).toString()) + ' left over)';
-	}
-	else {
-		return insertCommas(xp.toString());
-	}
-}
-
 //--------------------------------------------------------------------
 //Fill up Food dropdown list (never changes, so only run once).
 //--------------------------------------------------------------------
@@ -2067,7 +2061,11 @@ function updateData() {
     document.getElementById('StatsMP').innerHTML = displayDifferenceIfAny(mpLimited,mp,'');
     document.getElementById('StatsAttack').innerHTML = attack;
     document.getElementById('StatsDefense').innerHTML = defense;
-    document.getElementById('StatsDamageType').innerHTML = weapon[equipped].type;
+
+    if (weapon[equipped].type == 'Ring')
+    	document.getElementById('StatsDamageType').innerHTML = 'Magical';
+    else
+    	document.getElementById('StatsDamageType').innerHTML = weapon[equipped].type;
 
     //Change StatsDamageElement's color to the element it inflicts, if any.
     const statsDamageElementBox = document.getElementById('StatsDamageElement');
