@@ -60,37 +60,77 @@
 
 .fire {
   color:red;
-  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 1.0rem red;
+  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 0.6rem red;
 }
 
 .ice {
   color:blue;
-  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 1.0rem blue;
+  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 0.6rem blue;
 }
 
 .lightning {
   color:yellow;
-  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 1.0rem yellow;
+  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 0.6rem yellow;
 }
 
 .dark {
   color:black;
-  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 1.0rem black;
+  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 0.6rem black;
 }
 
 .shot {
   color:green;
-  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 1.0rem green;
+  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 0.6rem green;
+}
+
+.sword {
+  color:darkcyan;
+  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 0.6rem darkcyan;
+}
+
+.greatsword {
+  color:purple;
+  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 0.6rem purple;
+}
+
+.polearm {
+  color:orange;
+  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 0.6rem orange;
+}
+
+.daggers {
+  color:navy;
+  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 0.6rem navy;
+}
+
+.firearm {
+  color:green;
+  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 0.6rem green;
+}
+
+.shield {
+  color:fuchsia;
+  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 0.6rem fuchsia;
+}
+
+.machinery {
+  color:brown;
+  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 0.6rem brown;
+}
+
+.royal-arm {
+  color:cyan;
+  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 0.6rem cyan;
 }
 
 .light {
   color:white;
-  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 1.0rem white;
+  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 0.6rem white;
 }
 
-.non-elemental {
+.death {
   color:gray;
-  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 1.0rem gray;
+  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 0.6rem gray;
 }
 
 .row.divider {
@@ -98,7 +138,15 @@
   color:grey;
 }
 
+.col.small-column {
+  max-width:5.82rem;
+  min-width:5.82rem;
+}
+
 .damage {
   font-size:small;
+  margin-left:-100%;
+  margin-right:-100%;
+  white-space:nowrap;
 }
 
