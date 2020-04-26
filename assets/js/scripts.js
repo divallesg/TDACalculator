@@ -14,6 +14,14 @@ function limit(someNumber, lowerBound, higherBound) {
     	return someNumber;
 }
 
+//Receives a number and applies a plus sign if it's 0 or positive. Returns otherwise.
+function addPlusSign(someValue) {
+	if (someValue >= 0)
+		return '+' + someValue;
+	else
+		return someValue.toString();
+}
+
 //Replaces an infinite value with the infinity symbol, keeping the sign.
 function replaceWithInfSymbol(someValue) {
 	if (someValue == Infinity)
@@ -44,11 +52,14 @@ function canEquipAttire (charName, attireEquip) {
 
 //Check if the character can equip the given Weapon at the given weapon slot.
 //Not used inside for-loops cause it would only worsen performance.
-function canEquipWeapon (charEquipType, weaponType) {
+function canEquipWeapon (charEquipType, weapon) {
 	if (charEquipType == '')//Noctis case, can use all weapons.
 		return true;
-	else if (charEquipType == weaponType)
-		return true;
+	else if (charEquipType == weapon.type)
+		if (weapon.name == 'Cerberus')
+			return false;//Special case, Prompto can't use Cerberus.
+		else
+			return true;
 	else
 		return false;
 }
@@ -150,21 +161,21 @@ class Attire {
 	getTooltipMessage() {
 		let tooltipMessage = '';
 		if (this.hpBonus != 0)
-	    	tooltipMessage += 'HP: +' + this.hpBonus + '% | ';
+	    	tooltipMessage += 'HP: ' + addPlusSign(this.hpBonus) + '% | ';
 	    if (this.hprec != 0)
 	    	tooltipMessage += 'HPRec: ' + this.hprec + ' | ';
 	    if (this.mpBonus != 0)
-	    	tooltipMessage += 'MP: +' + this.mpBonus + '% | ';
+	    	tooltipMessage += 'MP: ' + addPlusSign(this.mpBonus) + '% | ';
 	    if (this.mprec != 0)
 	    	tooltipMessage += 'MPRec: ' + this.mprec + ' | ';
 	   	if (this.strBonus != 0)
-	   		tooltipMessage += 'STR: +' + this.strBonus + '% | ';
+	   		tooltipMessage += 'STR: ' + addPlusSign(this.strBonus) + '% | ';
 	   	if (this.vitBonus != 0)
-	   		tooltipMessage += 'VIT: +' + this.vitBonus + '% | ';
+	   		tooltipMessage += 'VIT: ' + this.vitBonus + '% | ';//TODO
 	   	if (this.magBonus != 0)
-	   		tooltipMessage += 'MAG: +' + this.magBonus + '% | ';
+	   		tooltipMessage += 'MAG: ' + addPlusSign(this.magBonus) + '% | ';
 	   	if (this.sprBonus != 0)
-	   		tooltipMessage += 'SPR: +' + this.sprBonus + '% | ';
+	   		tooltipMessage += 'SPR: ' + addPlusSign(this.sprBonus) + '% | ';
 	   	if (this.crit != 0)
 	   		tooltipMessage += 'Crit: ' + this.crit + ' | ';
 	   	if (this.fire != 0)
@@ -987,7 +998,7 @@ const foodList = [
 	new Food ('Recipeh','','Garden Curry',500,80,0,0,0,50,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Triple Truffle Risotto',400,0,0,0,0,0,0,0,75,0,0,0,'Poison','',''),
 	new Food ('Recipeh','','Robust Bean Soup',600,0,0,0,0,0,0,0,50,0,0,0,'','Technician',
-		'For Noctis: +100% to tech bar fill rate; for allies: +100% tech leveling rate and always' +
+		'For Noctis: +100% to tech bar fill rate; for allies: +100% to tech leveling rate and always' +
 		' perform critical versions of techniques'),
 	new Food ('Recipeh','Prompto','Meat-and-Beet Bouillon',500,100,0,0,0,0,0,0,0,0,0,0,'Poison','',
 		''),
@@ -1010,7 +1021,7 @@ const foodList = [
 	new Food ('Recipeh','','Hot Hopper Skewers',0,0,0,0,0,0,0,0,0,0,0,0,'Toad','Equalizer',
 		'+2% damage per level difference between attacker and higher-level target'),
 	new Food ('Recipeh','','Darkshells Marinières',0,100,0,0,0,0,0,0,0,0,0,0,'','Technician',
-		'For Noctis: +100% to tech bar fill rate; for allies: +100% tech leveling rate and always' +
+		'For Noctis: +100% to tech bar fill rate; for allies: +100% to tech leveling rate and always' +
 		' perform critical versions of techniques'),
 	new Food ('Recipeh','','Paella de Pollo',500,150,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','Ignis','Tomalley-Filled Dumplings',300,100,0,200,0,0,0,0,0,0,0,0,'','',''),
@@ -1408,7 +1419,7 @@ const weaponList = [
 	new Weapon ('Royal Arm','Sword of the Father',141,5,0,0,100,0,100,0,0,0,0,0,0,0,'',
 		'A sword that increases its wielder\'s Strength after Finishers. Drains less HP compared' +
 		' to other royal arms'),
-	new Weapon ('Ring','Ring of the Lucii',0,0,0,0,0,0,0,0,0,0,0,0,0,0,'Light',
+	new Weapon ('Ring','Ring of the Lucii',0,0,0,0,0,0,0,0,0,0,0,0,0,0,'Death/Light',
 		'It lets the player use a special type of magic and cast three unique spells: Death, ' +
 		'Holy and Alterna')];
 
@@ -1617,10 +1628,6 @@ foodBox.innerHTML = foodBoxString;//Fill up the dropdown list.
 function updateCharacter() {
 
 	const char = charList[document.getElementById('character').value];
-	let newAttireListString = '';//Initialize new Attire dropdown list.
-	let newWeaponListString1 = '';//Initialize new Weapon dropdown list.
-	let newWeaponListString2 = '';//Only used when char is not Noctis.
-	let newAccessoryListString = '';//Initialize new Accessory dropdown list.
 	const noneOption = '<option value="0" selected>None</option>\n';
 
    	//--------------------------------------------------------------------
@@ -1628,7 +1635,7 @@ function updateCharacter() {
 	//--------------------------------------------------------------------
     
     //---Attire---
-    newAttireListString += noneOption;//Add "None" option.
+    let newAttireListString = noneOption;//Initialize Attire dropdown list with "None" option.
     for (let i = 1; i < attireList.length; i++) {
         if (attireList[i].equip == char.name || attireList[i].equip == 'All') {
             newAttireListString += '<option value="' + i + '" data-toggle="tooltip" ' +
@@ -1643,8 +1650,9 @@ function updateCharacter() {
     }
 
     //---Weapons---
+	let newWeaponListString1 = noneOption;//Initialize new Weapon dropdown list with "None" option.
+	let newWeaponListString2 = noneOption;//Only used when character is not Noctis.
     if (char.name == 'Noctis') {
-    	newWeaponListString1 += noneOption;//Add "None" option.
     	let currentWepType = '';//Keep track of changing categories to add a new optgroup each time.
     	for (let i = 1; i < weaponList.length; i++) {
 	        if (currentWepType != weaponList[i].type) {
@@ -1658,16 +1666,18 @@ function updateCharacter() {
 	    }
     }
     else { //Not Noctis.
-    	//Set the None option and the 2 weapon types for the character.
-    	newWeaponListString1 += '<option value="0">None</option>\n' + '<optgroup label="----' +
-    		char.weaponType1 + '----"></optgroup>\n';
-        newWeaponListString2 += '<option value="0">None</option>\n' + '<optgroup label="----' +
-        	char.weaponType2 + '----"></optgroup>\n';
+    	//Set the 2 weapon types for the character.
+    	newWeaponListString1 += '<optgroup label="----' + char.weaponType1 + '----"></optgroup>\n';
+        newWeaponListString2 += '<optgroup label="----' + char.weaponType2 + '----"></optgroup>\n';
     	for (let i = 1; i < weaponList.length; i++) {
     	 	if (weaponList[i].type == char.weaponType1) {
-    	 		newWeaponListString1 += '<option value="' + i + '" data-toggle="tooltip" ' +
-	            	'data-placement="right" title="' + weaponList[i].getTooltipMessage() + '">' +
-	            	weaponList[i].name + '</option>\n';
+    	 		if (weaponList[i].name == 'Cerberus')
+    	 			;//Do nothing and skip it cause only Noctis an equip it.
+    	 		else {
+    	 			newWeaponListString1 += '<option value="' + i + '" data-toggle="tooltip" ' +
+		            	'data-placement="right" title="' + weaponList[i].getTooltipMessage() +
+		            	'">' + weaponList[i].name + '</option>\n';
+    	 		}
     	 	}
     	 	else if (weaponList[i].type == char.weaponType2) {
     	 		newWeaponListString2 += '<option value="' + i + '" data-toggle="tooltip" ' +
@@ -1679,7 +1689,7 @@ function updateCharacter() {
 
     //---Accessories---
     let currentAccType = '';//Keep track of changing categories to add a new optgroup each time.
-    newAccessoryListString += noneOption;//Add "None" option.
+    let newAccessoryListString = noneOption;//Initialize Accessory dropdown list with "None" option.
     for (let i = 1; i < accessoryList.length; i++) {
         if (accessoryList[i].equip == char.name || accessoryList[i].equip == 'All') {
 	    	if (currentAccType != accessoryList[i].category) {
@@ -1767,9 +1777,9 @@ function updateCharacter() {
     }
 
     //Restore old selection only if the new char can equip the same weapons.
-    if (canEquipWeapon(char.weaponType1, weaponList[oldWeapon1BoxValue].type))
+    if (canEquipWeapon(char.weaponType1, weaponList[oldWeapon1BoxValue]))
     	weapon1Box.value = oldWeapon1BoxValue;
-    if (canEquipWeapon(char.weaponType2, weaponList[oldWeapon2BoxValue].type))
+    if (canEquipWeapon(char.weaponType2, weaponList[oldWeapon2BoxValue]))
     	weapon2Box.value = oldWeapon2BoxValue;
 
     //---Accessories---
@@ -1807,11 +1817,12 @@ function updateData() {
     const level = Math.round(limit(levelBox.value,1,120));//Limit input to int range [1,120].
     levelBox.value = level;//Change the input to value in range.
 
-    const char = charList[document.getElementById('character').value];
+    const char = charList[document.getElementById('character').value];//Get selected character.
 
-    //Change the pixel image of character to the new image.
+    //Change the pixel image of the character to the new character.
     document.getElementById('CharacterImage').src = 'assets/img/' + char.name + 'Pixel.png';
 
+    //Get base stats for the character and all equipped items.
     const baseStats = char.baseStats[level - 1];
     const attire = attireList[document.getElementById('attire').value];
     const food = foodList[document.getElementById('food').value];
@@ -1835,23 +1846,13 @@ function updateData() {
         }
     }
 
+    //Get ascencion upgrades selected.
     const healthLevel = document.getElementById('healthLevel').value;
     const experimagic = +document.getElementById('experimagic').checked;
     const strLevel = +document.getElementById('strLevel').checked;
     const vitLevel = +document.getElementById('vitLevel').checked;
     const magLevel = document.getElementById('magLevel').value;
     const sprLevel = +document.getElementById('sprLevel').checked;
-
-    let hp, hprec, mp, mprec, attack, defense, crit;
-    let str, vit, mag, spr;
-    let fire, ice, lightning, dark, shot;
-    let itemDrop, xpBonus, phase, xpTo120;
-    let tdaPhysical, tdaMagical, tdaFire, tdaIce, tdaLightning, tdaDark, tdaShot;
-    let hpLimited, mpLimited, critLimited, itemDropLimited, phaseLimited;
-    let strLimited, vitLimited, magLimited, sprLimited;
-    let fireLimited, iceLimited, lightningLimited, darkLimited, shotLimited;
-    let immunitiesValueString = '';
-    let notesValueString = '';
 
     //HP,HPRec, MP, MPRec
    	let rareMetalHP = 0;
@@ -1863,51 +1864,51 @@ function updateData() {
     		baseStats.level)) * 0.9));
     }
 
-    hp = Math.floor(baseStats.hp * (1 + attire.hpBonus/100)) + Math.round((1 + attire.hpBonus/100) *
+    let hp = Math.floor(baseStats.hp * (1 + attire.hpBonus/100)) + Math.round((1 + attire.hpBonus/100) *
     	(weapon[0].hp + weapon[1].hp + weapon[2].hp + weapon[3].hp + accessory[0].hp +
         accessory[1].hp + accessory[2].hp + (healthLevel * baseStats.level))) + food.hp +
     	rareMetalHP;
-    hpLimited = limit(hp,1,9999);
+    let hpLimited = limit(hp,1,9999);
 
     if (food.effect == 'Last Stand') {
     	hpLimited = Math.floor(hpLimited/10);
     }
 
-    hprec = char.hprec + weapon[0].hprec + weapon[1].hprec + weapon[2].hprec + weapon[3].hprec +
+    let hprec = char.hprec + weapon[0].hprec + weapon[1].hprec + weapon[2].hprec + weapon[3].hprec +
     	accessory[0].hprec + accessory[1].hprec + accessory[2].hprec + attire.hprec + food.hprec;
 
-    mp = Math.floor(baseStats.mp * (1 + attire.mpBonus/100)) + Math.round((1 + attire.mpBonus/100) *
+    let mp = Math.floor(baseStats.mp * (1 + attire.mpBonus/100)) + Math.round((1 + attire.mpBonus/100) *
     	(weapon[0].mp + weapon[1].mp + weapon[2].mp + weapon[3].mp + accessory[0].mp +
 		accessory[1].mp + accessory[2].mp + (experimagic * baseStats.level)));
-    mpLimited = limit(mp,1,999);
+    let mpLimited = limit(mp,1,999);
 
-    mprec = char.mprec + accessory[0].mprec + accessory[1].mprec + accessory[2].mprec +
+    let mprec = char.mprec + accessory[0].mprec + accessory[1].mprec + accessory[2].mprec +
     	attire.mprec;
 
     //Str,Vit,Mag,Spr
-    str = Math.floor(baseStats.str * (1 + attire.strBonus/100)) + Math.round((1 +
+    let str = Math.floor(baseStats.str * (1 + attire.strBonus/100)) + Math.round((1 +
         attire.strBonus/100) * (weapon[0].str + weapon[1].str + weapon[2].str + weapon[3].str +
         accessory[0].str + accessory[1].str + accessory[2].str + (strLevel * baseStats.level))) +
     	food.str;
-    strLimited = limit(str,0,9999);
+    let strLimited = limit(str,0,9999);
 
-    vit = Math.floor(baseStats.vit * (1 + attire.vitBonus/100)) + Math.round((1 +
+    let vit = Math.floor(baseStats.vit * (1 + attire.vitBonus/100)) + Math.round((1 +
         attire.vitBonus/100) * (weapon[0].vit + weapon[1].vit + weapon[2].vit + weapon[3].vit +
         accessory[0].vit + accessory[1].vit + accessory[2].vit + (vitLevel * baseStats.level))) +
     	food.vit;
-    vitLimited = limit(vit,0,9999);
+    let vitLimited = limit(vit,0,9999);
 
-    mag = Math.floor(baseStats.mag * (1 + attire.magBonus/100)) + Math.round((1 +
+    let mag = Math.floor(baseStats.mag * (1 + attire.magBonus/100)) + Math.round((1 +
     	attire.magBonus/100) * (weapon[0].mag + weapon[1].mag + weapon[2].mag + weapon[3].mag +
     	accessory[0].mag + accessory[1].mag + accessory[2].mag + (magLevel * baseStats.level))) +
     	food.mag;
-    magLimited = limit(mag,0,9999);
+    let magLimited = limit(mag,0,9999);
 
-    spr = Math.floor(baseStats.spr * (1 + attire.sprBonus/100)) + Math.round((1 +
+    let spr = Math.floor(baseStats.spr * (1 + attire.sprBonus/100)) + Math.round((1 +
     	attire.sprBonus/100) * (weapon[0].spr + weapon[1].spr + weapon[2].spr + weapon[3].spr +
     	accessory[0].spr + accessory[1].spr + accessory[2].spr + (sprLevel * baseStats.level))) +
     	food.spr;
-    sprLimited = limit(spr,0,9999);
+    let sprLimited = limit(spr,0,9999);
 
     //Special Case - Prime Food Effect.
     if (food.effect == 'Prime' || food.effect == 'Prime Endurance') {
@@ -1918,22 +1919,22 @@ function updateData() {
     }
 
     //Attack, Defense, Crit
-    attack = weapon[equipped].attack + strLimited;
-    defense = vitLimited;
-    crit = weapon[equipped].crit + accessory[0].crit + accessory[1].crit + accessory[2].crit +
+    let attack = weapon[equipped].attack + strLimited;
+    let defense = vitLimited;
+    let crit = weapon[equipped].crit + accessory[0].crit + accessory[1].crit + accessory[2].crit +
     	attire.crit + food.crit;
-    critLimited = limit(crit,0,100);
+    let critLimited = limit(crit,0,100);
 
     //Physical Damage
-    let physicalDamageValueString;
+    let physicalDamageValueString = '';
     if (weapon[equipped].type == 'Ring'){
     	physicalDamageValueString = '';//Add nothing
     }
-    else if (weapon[equipped].type == 'Firearm') {
+    else if (weapon[equipped].type == 'Firearm') {//Add the word 'Shot' as well on Firearms.
     	physicalDamageValueString = '<span class="firearm">Firearm</span>/<span class="shot">' +
     		'Shot</span>';
     }
-    else if (weapon[equipped].type == 'Royal Arm') {
+    else if (weapon[equipped].type == 'Royal Arm') {//Write in the 'royal-arm' class correctly.
     	physicalDamageValueString = '<span class="royal-arm">Royal Arm</span>';
     }
     else {
@@ -1953,35 +1954,35 @@ function updateData() {
     }
 
     //Elemental
-    fire = attire.fire + weapon[0].fire + weapon[1].fire + weapon[2].fire + weapon[3].fire +
+    let fire = attire.fire + weapon[0].fire + weapon[1].fire + weapon[2].fire + weapon[3].fire +
         accessory[0].fire + accessory[1].fire + accessory[2].fire + food.fire;
-    fireLimited = limit(fire,-899,100);
+    let fireLimited = limit(fire,-899,100);
 
-    ice = attire.ice + weapon[0].ice + weapon[1].ice + weapon[2].ice + weapon[3].ice +
+    let ice = attire.ice + weapon[0].ice + weapon[1].ice + weapon[2].ice + weapon[3].ice +
         accessory[0].ice + accessory[1].ice + accessory[2].ice + food.ice;
-    iceLimited = limit(ice,-899,100);
+    let iceLimited = limit(ice,-899,100);
 
-    lightning = attire.lightning + weapon[0].lightning + weapon[1].lightning + weapon[2].lightning +
+    let lightning = attire.lightning + weapon[0].lightning + weapon[1].lightning + weapon[2].lightning +
     	weapon[3].lightning + accessory[0].lightning + accessory[1].lightning +
     	accessory[2].lightning + food.lightning;
-    lightningLimited = limit(lightning,-899,100);
+    let lightningLimited = limit(lightning,-899,100);
 
-    dark = attire.dark + weapon[0].dark + weapon[1].dark + weapon[2].dark + weapon[3].dark +
+    let dark = attire.dark + weapon[0].dark + weapon[1].dark + weapon[2].dark + weapon[3].dark +
         accessory[0].dark + accessory[1].dark + accessory[2].dark;
-    darkLimited = limit(dark,-899,100);
+    let darkLimited = limit(dark,-899,100);
 
-    shot = attire.shot + weapon[0].shot + weapon[1].shot + weapon[2].shot + weapon[3].shot +
+    let shot = attire.shot + weapon[0].shot + weapon[1].shot + weapon[2].shot + weapon[3].shot +
         accessory[0].shot + accessory[1].shot + accessory[2].shot;
-    shotLimited = limit(shot,-899,100);
+    let shotLimited = limit(shot,-899,100);
 
     //TDA's
-    tdaPhysical = hpLimited * (1 + vitLimited/100);
-    tdaMagical = hpLimited * (1 + sprLimited/100);
-    tdaFire = tdaMagical / (1 - fireLimited/100);
-    tdaIce = tdaMagical / (1 - iceLimited/100);
-    tdaLightning = tdaMagical / (1 - lightningLimited/100);
-    tdaDark = tdaMagical / (1 - darkLimited/100);
-    tdaShot = tdaPhysical / (1 - shotLimited/100);
+    let tdaPhysical = hpLimited * (1 + vitLimited/100);
+    let tdaMagical = hpLimited * (1 + sprLimited/100);
+    let tdaFire = tdaMagical / (1 - fireLimited/100);
+    let tdaIce = tdaMagical / (1 - iceLimited/100);
+    let tdaLightning = tdaMagical / (1 - lightningLimited/100);
+    let tdaDark = tdaMagical / (1 - darkLimited/100);
+    let tdaShot = tdaPhysical / (1 - shotLimited/100);
 
     //Special Cases - Resistant Food Effect, Thermal Suit.
     if (food.effect == 'Resistant') {
@@ -1994,14 +1995,15 @@ function updateData() {
     }
 
     //Extras
-    itemDrop = accessory[0].itemDrop + accessory[1].itemDrop + accessory[2].itemDrop +
+    let itemDrop = accessory[0].itemDrop + accessory[1].itemDrop + accessory[2].itemDrop +
     	attire.itemDrop + food.itemDrop;
-    itemDropLimited = limit(itemDrop,0,100);
+    let itemDropLimited = limit(itemDrop,0,100);
 
-    xpBonus = accessory[0].xpBonus + accessory[1].xpBonus + accessory[2].xpBonus + food.xpBonus;
+    let xpBonus = accessory[0].xpBonus + accessory[1].xpBonus + accessory[2].xpBonus + food.xpBonus;
 
-   	phase = accessory[0].phase + accessory[1].phase + accessory[2].phase +
-   		attire.phase; phaseLimited = limit(phase,-100,0);
+   	let phase = accessory[0].phase + accessory[1].phase + accessory[2].phase +
+   		attire.phase;
+   	let phaseLimited = limit(phase,-100,0);
 
    	//Accumulated XP and XP needed to reach level 120.
    	const xpBox = document.getElementById('xp');//Get current XP.
@@ -2019,13 +2021,14 @@ function updateData() {
     xp += currentXpWithLodgingBonus;//Add the current XP with lodging bonus.
 
     //Add up all the XP required to reach 120.
-    xpTo120 = -currentXpWithLodgingBonus;//Start by removing current XP with lodging bonus.
+    let xpTo120 = -currentXpWithLodgingBonus;//Start by removing current XP with lodging bonus.
     for (j; j < xpRequired.length; j++) {//Continue previous loop to the end for XP left to acquire.
     	xpTo120 += xpRequired[j];
     }
 
    	//Immunities
     const immunitiesBox = document.getElementById('ExtrasImmunities');
+    let immunitiesValueString = '';
 
     if (attire.immunity != '') {
     	immunitiesValueString += '<strong>' + attire.name + ':</strong> ' + attire.immunity +
@@ -2045,23 +2048,34 @@ function updateData() {
 
    	//Notes
     const notesBox = document.getElementById('Notes');
-    notesValueString = '';//Initialize string
+    let notesValueString = '';//Initialize string
     
     if (attire.effect != '')
-        notesValueString += '<strong>' + attire.name + ':</strong> ' + attire.effect + '<br>';
+        notesValueString += '<strong>' + attire.name + ':</strong> ' + attire.effect + '.<br>';
 
     if (food.effect != '')
-        notesValueString += '<strong>' + food.name + ':</strong> ' + food.description + '<br>';
+        notesValueString += '<strong>' + food.name + ':</strong> ' + food.description + '.<br>';
+
+    if (food.favorite == char.name) {
+    	if (char.name == 'Noctis') {
+    		notesValueString += '<strong>Favorite Food:</strong> +100% to tech bar fill ' +
+    			'rate.<br>';
+    	}
+    	else {
+    		notesValueString += '<strong>Favorite Food:</strong> +100% to tech leveling rate ' +
+    			'and always perform critical versions of techniques.<br>';
+    	}
+    }
 
     if (weapon[equipped].effect != '') {
         notesValueString += '<strong>' + weapon[equipped].name +
-            ':</strong> ' + weapon[equipped].effect + '<br>';
+            ':</strong> ' + weapon[equipped].effect + '.<br>';
     }
 
     for (let i = 0; i < accessory.length; i++) {
     	if (accessory[i].effect != '') {
 	    	notesValueString += '<strong>' + accessory[i].name +
-	            ':</strong> ' + accessory[i].effect + '<br>';
+	            ':</strong> ' + accessory[i].effect + '.<br>';
 	    }
     }
 
