@@ -86,8 +86,8 @@
 }
 
 .sword {
-  color:darkcyan;
-  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 0.6rem darkcyan;
+  color:dodgerblue;
+  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 0.6rem dodgerblue;
 }
 
 .greatsword {
@@ -96,8 +96,8 @@
 }
 
 .polearm {
-  color:orange;
-  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 0.6rem orange;
+  color:tomato;
+  text-shadow:0.1rem 0.1rem 1.0rem white, 0.1rem 0.1rem 0.6rem tomato;
 }
 
 .daggers {
