@@ -1,5 +1,5 @@
 "use strict";//Cause that's how I roll.
-/*jshint esversion: 6 */ 
+
 //--------------------------------------------------------------------
 //Helper functions. Very nice! :)
 //--------------------------------------------------------------------
@@ -14,7 +14,7 @@ function limit(someNumber, lowerBound, higherBound) {
     	return someNumber;
 }
 
-//Receives a number and applies a plus sign if it's 0 or positive. Returns otherwise.
+//Receives a number and applies a plus sign if it's 0 or positive. Returns string.
 function addPlusSign(someValue) {
 	if (someValue >= 0)
 		return '+' + someValue;
@@ -1004,8 +1004,8 @@ const foodList = [
 	new Food ('Recipeh','','Garden Curry',500,80,0,0,0,50,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Triple Truffle Risotto',400,0,0,0,0,0,0,0,3,0,0,0,'Poison','',''),
 	new Food ('Recipeh','','Robust Bean Soup',600,0,0,0,0,0,0,0,2,0,0,0,'','Technician',
-		'For Noctis: +100% to tech bar fill rate; for allies: +100% to tech leveling rate and always' +
-		' perform critical versions of techniques'),
+		'For Noctis: +100% to tech bar fill rate; for allies: +100% to tech leveling rate ' +
+		'and always perform critical versions of techniques.'),
 	new Food ('Recipeh','Prompto','Meat-and-Beet Bouillon',500,100,0,0,0,0,0,0,0,0,0,0,'Poison','',
 		''),
 	new Food ('Recipeh','','Free-Range Fowl over Rice',500,100,0,0,0,0,0,0,1,0,0,0,'','',''),
@@ -1027,8 +1027,8 @@ const foodList = [
 	new Food ('Recipeh','','Hot Hopper Skewers',0,0,0,0,0,0,0,0,0,0,0,0,'Toad','Equalizer',
 		'+2% damage per level difference between attacker and higher-level target'),
 	new Food ('Recipeh','','Darkshells Marinières',0,100,0,0,0,0,0,0,0,0,0,0,'','Technician',
-		'For Noctis: +100% to tech bar fill rate; for allies: +100% to tech leveling rate and always' +
-		' perform critical versions of techniques'),
+		'For Noctis: +100% to tech bar fill rate; for allies: +100% to tech leveling rate ' +
+		'and always perform critical versions of techniques.'),
 	new Food ('Recipeh','','Paella de Pollo',500,150,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','Ignis','Tomalley-Filled Dumplings',300,100,0,200,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Beanball Croquettes',500,0,0,0,0,0,0,0,0,0,0,0,'All but Instant Death',
@@ -1038,23 +1038,23 @@ const foodList = [
 	new Food ('Recipeh','Ignis','Kenny\'s Original Recipe',0,150,200,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','Noctis','Mother & Child Rice Bowl',1000,0,0,0,0,0,0,0,0,30,0,50,'','',''),
 	new Food ('Recipeh','Gladiolus','Prime Garula Rib',500,0,0,0,0,0,0,0,0,0,0,0,'','Endurance',
-		'Infinite stamina'),
+		'Infinite stamina.'),
 	new Food ('Recipeh','Noctis','Garulessandwich',600,120,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','Ignis','Horntooth Meat Pie',600,160,0,160,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Hunters\' Krazy Kebabs',800,200,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Creamy Bisque',0,160,0,0,0,0,0,0,4,0,0,0,'','',''),
 	new Food ('Recipeh','','Thick \'n\' Juicy Steak',1000,0,0,0,0,0,0,0,0,0,0,0,'','Endurance',
-		'Infinite stamina'),
+		'Infinite stamina.'),
 	new Food ('Recipeh','','Three-Mushroom Kebabs',800,150,0,0,0,0,0,0,0,0,0,0,
 		'All but Instant Death','',''),
 	new Food ('Recipeh','Prompto','Green Soup Curry',800,160,0,0,0,70,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Royal Road Paella',1000,150,0,0,0,0,0,0,0,0,0,0,'','Endurance',
-		'Infinite stamina'),
+		'Infinite stamina.'),
 	new Food ('Recipeh','','Elegant Orange Cake',1000,0,250,0,400,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Blazing Braised Gizzard',0,0,300,0,0,0,0,0,2,0,0,0,'','',''),
 	new Food ('Recipeh','','Carp of the Diem',1500,100,0,0,0,0,0,0,0,0,0,0,'Poison','',''),
 	new Food ('Recipeh','Gladiolus','Grilled Mighty Barramundi',0,0,0,0,0,0,0,0,0,0,0,0,
-		'All but Instant Death','Resistant','Immune to Fire, Ice, and Lightning elemental damage'),
+		'All but Instant Death','Resistant','Immune to Fire, Ice, and Lightning elemental damage.'),
 	new Food ('Recipeh','','Fire-Sauce Fillet',600,200,0,200,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Karlabos Cream Croquettes',1000,200,0,0,0,0,0,0,2,0,0,0,'','',''),
 	new Food ('Recipeh','','Taelpar Harvest Galette',1000,0,0,120,400,0,0,0,0,0,0,0,'','',''),
@@ -1067,17 +1067,17 @@ const foodList = [
 	new Food ('Recipeh','','Devilfin Soup',0,200,0,0,0,0,0,0,5,0,0,0,'','',''),
 	new Food ('Recipeh','','Marrowshroom Chowder',0,0,0,0,0,0,0,0,0,0,100,0,'','',''),
 	new Food ('Recipeh','','Smoked Behemoth',1000,400,0,0,0,0,0,0,0,0,0,0,'','Endurance',
-		'Infinite stamina'),
+		'Infinite stamina.'),
 	new Food ('Recipeh','','Hearty Cutlet on Rice',1500,250,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Tide Grouper Carpaccio',1000,300,0,0,0,0,0,0,0,0,0,0,'Instant Death','',
 		''),
 	new Food ('Recipeh','','Crown City Roast',3000,400,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Lasagna al Forno',4000,0,0,0,0,0,0,0,0,100,0,0,'','Resistant',
-		'Immune to Fire, Ice, and Lightning elemental damage'),
+		'Immune to Fire, Ice, and Lightning elemental damage.'),
 	new Food ('Recipeh','','Golden Tail Soup',0,0,0,0,0,0,0,0,6,0,100,0,'','',''),
 	new Food ('Recipeh','','Seasoned Midgardsormr',1000,350,0,0,0,0,0,0,0,0,0,0,'',
 		'Equalizer','+2% damage per level for level difference between attacker and higher-level' +
-		' target'),
+		' target.'),
 	new Food ('Recipeh','','Legendary Herb-Grilled Whopper',0,500,0,-Infinity,0,0,0,0,0,0,0,0,'','',
 		''),
 	new Food ('Recipeh','','Fried Tide Grouper',0,500,0,0,0,0,0,0,0,0,0,0,'','',''),
@@ -1090,9 +1090,9 @@ const foodList = [
 	new Food ('Recipeh','','Crispy Zu Skewers',2000,0,0,0,0,0,0,0,0,0,80,0,'','',''),
 	new Food ('Recipeh','','Kenny\'s Secret Recipe',0,400,300,300,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Oak-Smoked Devil Gar',2000,0,0,0,0,0,0,0,0,0,0,0,'','Resistant',
-		'Immune to Fire, Ice, and Lightning elemental damage'),
+		'Immune to Fire, Ice, and Lightning elemental damage.'),
 	new Food ('Recipeh','','Royal Banquet Canapé',0,0,0,0,0,0,0,0,0,50,0,0,'',
-		'Prime','Strength +75%, Magic +75%'),
+		'Prime','Strength +75%, Magic +75%.'),
 	new Food ('Recipeh','','Longwythe\'s Peak',4000,600,0,0,0,0,0,0,8,0,0,0,'','',''),
 	new Food ('Recipeh','','Chilled Food Tin',100,30,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','Gladiolus','Cup Noodles (Initial)',300,30,0,0,0,0,0,0,0,0,0,0,'','',''),
@@ -1105,17 +1105,17 @@ const foodList = [
 	new Food ('Recipeh','Gladiolus','Cup Noodles (Real Taste)',500,80,0,0,0,0,0,0,0,20,0,0,'','',
 		''),
 	new Food ('Recipeh','','Crispy Cheese Pizza',0,100,0,0,0,0,0,0,0,0,0,0,'Poison','Endurance',
-		'Infinite stamina'),
+		'Infinite stamina.'),
 	new Food ('Recipeh','','Kupoberry Cheesecake',0,0,0,0,0,0,0,0,0,0,0,0,'','Line Boost',
-		'Fishing Line HP Damage Rate reduced by 25%'),
+		'Fishing Line HP Damage Rate reduced by 25%.'),
 	new Food ('Recipeh','','Golden Chocobo Tart',0,0,0,0,0,0,0,0,0,0,0,0,'','Chocobolster',
-		'Chocobo\'s Stamina Depletion Rate reduced by 25%'),
+		'Chocobo\'s Stamina Depletion Rate reduced by 25%.'),
 	new Food ('Recipeh','','Plump \'n\' Pungent Tofu',0,500,0,500,0,0,0,0,0,10,0,0,'','Last Stand',
-		'Max HP reduced to 10% (truncated). Max HP possible is 999'),
+		'Max HP reduced to 10% (truncated). Max HP possible is 999.'),
 	new Food ('Recipeh','Noctis','Scientia-Style Sushi',0,0,0,0,0,0,0,0,0,50,100,0,'',
-		'Prime Endurance','Strength +75%, Magic +75%. Infinite stamina'),
+		'Prime, Endurance','Strength +75%, Magic +75%. Infinite stamina.'),
 	new Food ('Recipeh','','Semur Skewers',0,0,0,0,0,0,0,0,4,0,0,0,'','Endurance',
-		'Infinite stamina'),
+		'Infinite stamina.'),
 	new Food ('Recipeh','Noctis','Pit Crew\'s Meat Wraps',750,180,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','Prompto','Keycatrich Salad',500,0,0,0,0,0,0,0,1,20,0,0,'','',''),
 	new Food ('Recipeh','','Moogle Mousse with Kupoberry Sauce',1000,0,250,0,400,0,0,0,0,0,0,0,'',
@@ -1123,11 +1123,11 @@ const foodList = [
 	new Food ('Recipeh','Gladiolus','Military Man\'s Banquet',0,160,0,0,0,0,0,0,4,0,0,0,'','',''),
 	new Food ('Recipeh','','Miss Mercenary\'s Cassoulet',1000,120,0,0,0,0,0,0,0,0,0,0,'',
 		'Technician','For Noctis: +100% to tech bar fill rate; for allies: +100% tech leveling ' +
-		'rate and always perform critical versions of techniques'),
+		'rate and always perform critical versions of techniques.'),
 	new Food ('Recipeh','Ignis','Feast of the Divine',3000,0,0,0,0,0,100,0,0,0,0,0,
 		'All but Instant Death','',''),
 	new Food ('Recipeh','','Hearty Stir-Fry',500,350,0,0,0,0,0,0,0,0,0,0,'','Endurance',
-		'Infinite stamina'),
+		'Infinite stamina.'),
 	new Food ('Restaurant','','Chili con Carne',50,20,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Restaurant','','Leiden Jambalaya',200,150,0,0,0,0,0,0,1,0,0,0,'','',''),
 	new Food ('Restaurant','','Hammerhead Hot Sandwich',200,80,0,0,0,0,0,0,0,0,0,0,'','',''),
@@ -1141,7 +1141,7 @@ const foodList = [
 		''),
 	new Food ('Restaurant','','Sea\'s Bounty Risotto',600,120,0,0,0,0,0,0,1,0,0,0,'','',''),
 	new Food ('Restaurant','','Steamed Crab with Rock Salt',0,0,0,0,0,0,0,0,0,0,0,0,'',
-		'Resistant','Immune to Fire, Ice, and Lightning elemental damage'),
+		'Resistant','Immune to Fire, Ice, and Lightning elemental damage.'),
 	new Food ('Restaurant','','Tenebraen Berry Opera',0,-Infinity,0,500,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Restaurant','','Gysahl Chips',400,0,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Restaurant','','Green Smoothie',0,0,0,0,0,90,90,90,0,0,0,0,'','',''),
@@ -1152,7 +1152,7 @@ const foodList = [
 	new Food ('Restaurant','','Bird-Broth Rice with Curry',250,80,0,0,0,0,0,0,1,0,0,0,'','',''),
 	new Food ('Restaurant','','Offal Stew',0,0,200,0,0,0,0,0,3,0,0,0,'','',''),
 	new Food ('Restaurant','','Spicy Skewers',1000,350,0,0,0,0,0,0,0,0,0,0,'','Equalizer',
-		'+2% damage per level for level difference between attacker and higher-level target'),
+		'+2% damage per level for level difference between attacker and higher-level target.'),
 	new Food ('Restaurant','','Roti and Curry Plate',200,120,0,100,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Restaurant','','Soul Soup',0,120,0,0,200,70,0,0,0,0,0,0,'','',''),
 	new Food ('Restaurant','','Big Bread Buns',600,0,0,0,0,0,0,0,2,0,0,0,'','',''),
@@ -1166,13 +1166,13 @@ const foodList = [
 		''),
 	new Food ('Restaurant','','Maagho Lasagna',4000,0,0,0,0,0,0,0,0,100,0,0,'','',''),
 	new Food ('Restaurant','','Fine Caviar Canapé',0,0,0,0,0,0,0,0,0,50,0,0,'','Prime',
-		'Strength +75%, Magic +75%'),
+		'Strength +75%, Magic +75%.'),
 	new Food ('Restaurant','','Wood-Smoked Fish',1500,0,0,0,0,0,50,0,0,0,0,0,'Toad','',''),
 	new Food ('Restaurant','','Set Dinner Course',500,0,0,0,0,0,0,0,0,0,0,0,'','',''),
 	new Food ('Restaurant','','Kupoberry Cheesecake',0,0,0,0,0,0,0,0,0,0,0,0,'',
-		'Line Boost','Fishing Line HP Damage Rate reduced by 25%'),
+		'Line Boost','Fishing Line HP Damage Rate reduced by 25%.'),
 	new Food ('Restaurant','','Golden Chocobo Tart',0,0,0,0,0,0,0,0,0,0,0,0,'',
-		'Chocobolster','Chocobo\'s Stamina Depletion Rate reduced by 25%'),
+		'Chocobolster','Chocobo\'s Stamina Depletion Rate reduced by 25%.'),
 	new Food ('Restaurant','','Semur Skewers',0,0,0,0,0,0,0,0,4,0,0,0,'','','')];
 
 //Weapons
@@ -1281,7 +1281,7 @@ const weaponList = [
 		'10% chance to inflict Enfeebled.'),
 	new Weapon ('Daggers',0,'Mythril Knives',62,7,0,6,0,0,50,0,0,0,0,0,0,0,'',''),
 	new Weapon ('Daggers',1,'Mage Mashers',66,7,0,13,0,0,32,0,0,0,0,0,0,0,'',
-		'+30 to Fire, Ice, and Lightning resistances.'),
+		'-30% Fire/Ice/Lightning damage.'),
 	new Weapon ('Daggers',0,'Plunderers',111,7,0,10,0,0,10,0,0,0,0,0,0,0,'',
 		'Absorbs elemental energy when dealing the finishing blow to an enemy.'),
 	new Weapon ('Daggers',0,'Assassin\'s Daggers',126,7,0,7,0,0,10,0,0,0,0,0,0,0,'',
@@ -1309,7 +1309,7 @@ const weaponList = [
 		'+50% breakage on body parts/appendages.'),
 	new Weapon ('Firearm',0,'Cocytus',45,1,0,0,0,0,0,7,0,0,0,0,0,0,'Ice',''),
 	new Weapon ('Firearm',0,'Calamity',53,1,0,0,0,0,0,5,0,0,0,0,0,0,'',
-		'10% chance to inflict poison.'),
+		'10% chance to inflict Poison.'),
 	new Weapon ('Firearm',0,'Mythril Pistol',96,1,0,0,0,0,42,11,0,0,0,0,0,0,'',''),
 	new Weapon ('Firearm',0,'Valiant',147,1,0,11,0,0,0,12,0,0,0,0,0,0,'',
 		'Absorbs elemental energy when dealing the finishing blow to an enemy.'),
@@ -1882,72 +1882,70 @@ function updateData() {
     const magLevel = document.getElementById('magLevel').value;
     const sprLevel = +document.getElementById('sprLevel').checked;
 
-    //HP,HPRec, MP, MPRec
-   	let rareMetalHP = 0;
-
    	//Special Case - Rare Metal accessory
+   	let rareMetalHP = 0;
     if (accessory[0].name == 'Rare Metal' || accessory[1].name == 'Rare Metal' ||
     	accessory[2].name == 'Rare Metal') {
-    	//Gives HP to remove, makes input negative to round down on .5 cases.
+    	//Gives HP to remove, makes input negative so it rounds down on .5 cases.
     	rareMetalHP = Math.round(-((baseStats.hp + weapon[0].hp + weapon[1].hp + weapon[2].hp +
     		weapon[3].hp + accessory[0].hp + accessory[1].hp + accessory[2].hp + (healthLevel *
     		baseStats.level)) * 0.9));
     }
 
-    let hp = Math.floor(baseStats.hp * (1 + attire.hpBonus/100)) + Math.round((1 + attire.hpBonus/100) *
-    	(weapon[0].hp + weapon[1].hp + weapon[2].hp + weapon[3].hp + accessory[0].hp +
-        accessory[1].hp + accessory[2].hp + (healthLevel * baseStats.level))) + food.hp +
-    	rareMetalHP;
-    let hpLimited = limit(hp,1,9999);
-
-    //Special Case - Last Stand food effect.
-    if (food.effect == 'Last Stand') {
-    	hpLimited = Math.floor(hpLimited/10);
-    }
+    //HP,HPRec, MP, MPRec
+    let hp = Math.floor(baseStats.hp * (1 + attire.hpBonus/100)) +
+		Math.round((1 + attire.hpBonus/100) * (weapon[0].hp + weapon[1].hp + weapon[2].hp +
+		weapon[3].hp + accessory[0].hp + accessory[1].hp + accessory[2].hp +
+		(healthLevel * baseStats.level))) + food.hp + rareMetalHP;
 
     let hprec = char.hprec + weapon[0].hprec + weapon[1].hprec + weapon[2].hprec + weapon[3].hprec +
     	accessory[0].hprec + accessory[1].hprec + accessory[2].hprec + attire.hprec + food.hprec +
     	(megaphones * 10);
 
-    let mp = Math.floor(baseStats.mp * (1 + attire.mpBonus/100)) + Math.round((1 + attire.mpBonus/100) *
-    	(weapon[0].mp + weapon[1].mp + weapon[2].mp + weapon[3].mp + accessory[0].mp +
-		accessory[1].mp + accessory[2].mp + (experimagic * baseStats.level)));
-    let mpLimited = limit(mp,1,999);
+    let mp = Math.floor(baseStats.mp * (1 + attire.mpBonus/100)) +
+    	Math.round((1 + attire.mpBonus/100) * (weapon[0].mp + weapon[1].mp + weapon[2].mp +
+    	weapon[3].mp + accessory[0].mp + accessory[1].mp + accessory[2].mp +
+    	(experimagic * baseStats.level)));
 
     let mprec = char.mprec + accessory[0].mprec + accessory[1].mprec + accessory[2].mprec +
     	attire.mprec;
 
-    //Str,Vit,Mag,Spr
     let str = Math.floor(baseStats.str * (1 + attire.strBonus/100)) + Math.round((1 +
         attire.strBonus/100) * (weapon[0].str + weapon[1].str + weapon[2].str + weapon[3].str +
         accessory[0].str + accessory[1].str + accessory[2].str + (strLevel * baseStats.level))) +
     	food.str;
-    let strLimited = limit(str,0,9999);
 
     let vit = Math.floor(baseStats.vit * (1 + attire.vitBonus/100)) + Math.round((1 +
         attire.vitBonus/100) * (weapon[0].vit + weapon[1].vit + weapon[2].vit + weapon[3].vit +
         accessory[0].vit + accessory[1].vit + accessory[2].vit + (vitLevel * baseStats.level))) +
     	food.vit;
-    let vitLimited = limit(vit,0,9999);
 
     let mag = Math.floor(baseStats.mag * (1 + attire.magBonus/100)) + Math.round((1 +
     	attire.magBonus/100) * (weapon[0].mag + weapon[1].mag + weapon[2].mag + weapon[3].mag +
     	accessory[0].mag + accessory[1].mag + accessory[2].mag + (magLevel * baseStats.level))) +
     	food.mag;
-    let magLimited = limit(mag,0,9999);
 
     let spr = Math.floor(baseStats.spr * (1 + attire.sprBonus/100)) + Math.round((1 +
     	attire.sprBonus/100) * (weapon[0].spr + weapon[1].spr + weapon[2].spr + weapon[3].spr +
     	accessory[0].spr + accessory[1].spr + accessory[2].spr + (sprLevel * baseStats.level))) +
     	food.spr;
-    let sprLimited = limit(spr,0,9999);
 
     //Special Case - Prime Food Effect.
     if (food.effect == 'Prime' || food.effect == 'Prime, Endurance') {
-    	str = Math.round(str * 0.75);
-    	strLimited = limit(str,0,9999);
-    	mag = Math.round(mag * 0.75);
-    	magLimited = limit(mag,0,9999);
+    	str = Math.round(str * 1.75);
+    	mag = Math.round(mag * 1.75);
+    }
+
+    let hpLimited = limit(hp,1,9999);
+    let mpLimited = limit(mp,1,999);
+    let strLimited = limit(str,0,9999);
+    let vitLimited = limit(vit,0,9999);
+    let magLimited = limit(mag,0,9999);
+    let sprLimited = limit(spr,0,9999);
+
+    //Special Case - Last Stand food effect.
+    if (food.effect == 'Last Stand') {
+    	hpLimited = Math.floor(hpLimited/10);
     }
 
     //Attack, Defense, Crit
@@ -1962,7 +1960,7 @@ function updateData() {
 
     let critLimited = limit(crit,0,100);
 
-    //Physical Damage
+    //Physical Damage Type
     let physicalDamageValueString = '';
     if (weapon[equipped].type == 'Ring'){
     	physicalDamageValueString = '';//Add nothing
@@ -1979,7 +1977,7 @@ function updateData() {
     		weapon[equipped].type + '</span>';
     }
 
-    //Magical Damage
+    //Magical Damage Type
     let magicalDamageValueString = '';
     if (weapon[equipped].type == 'Ring'){
     	magicalDamageValueString = '<span class="death">Death</span>/<span class="light">' +
@@ -1993,23 +1991,24 @@ function updateData() {
     //Elemental
     let fire = attire.fire + weapon[0].fire + weapon[1].fire + weapon[2].fire + weapon[3].fire +
         accessory[0].fire + accessory[1].fire + accessory[2].fire + food.fire;
-    let fireLimited = limit(fire,-899,100);
 
     let ice = attire.ice + weapon[0].ice + weapon[1].ice + weapon[2].ice + weapon[3].ice +
         accessory[0].ice + accessory[1].ice + accessory[2].ice + food.ice;
-    let iceLimited = limit(ice,-899,100);
 
     let lightning = attire.lightning + weapon[0].lightning + weapon[1].lightning + weapon[2].lightning +
     	weapon[3].lightning + accessory[0].lightning + accessory[1].lightning +
     	accessory[2].lightning + food.lightning;
-    let lightningLimited = limit(lightning,-899,100);
 
     let dark = attire.dark + weapon[0].dark + weapon[1].dark + weapon[2].dark + weapon[3].dark +
-        accessory[0].dark + accessory[1].dark + accessory[2].dark;
-    let darkLimited = limit(dark,-899,100);
+        accessory[0].dark + accessory[1].dark + accessory[2].dark;   
 
     let shot = attire.shot + weapon[0].shot + weapon[1].shot + weapon[2].shot + weapon[3].shot +
         accessory[0].shot + accessory[1].shot + accessory[2].shot;
+
+    let fireLimited = limit(fire,-899,100);
+    let iceLimited = limit(ice,-899,100);
+    let lightningLimited = limit(lightning,-899,100);
+    let darkLimited = limit(dark,-899,100);
     let shotLimited = limit(shot,-899,100);
 
     //TDA's
@@ -2025,6 +2024,13 @@ function updateData() {
     if (weapon[equipped].name == 'Blazefire Saber' || weapon[equipped].name == 'Blazefire Saber XV')
     	tdaPhysical *= 1.15;//+15% Physical Damage resistance
 
+    //Special Case - Mage Mashers
+    if (weapon[equipped].name == 'Mage Mashers') {
+    	tdaFire *= 1.30;
+    	tdaIce *= 1.30;
+    	tdaLightning *= 1.30;
+    }
+
     //Special Cases - Resistant Food Effect, Thermal Suit, Trihead Heart.
     if (food.effect == 'Resistant') {
     	tdaFire = Infinity;
@@ -2038,12 +2044,13 @@ function updateData() {
     //Extras
     let itemDrop = accessory[0].itemDrop + accessory[1].itemDrop + accessory[2].itemDrop +
     	attire.itemDrop + food.itemDrop;
-    let itemDropLimited = limit(itemDrop,0,100);
 
     let xpBonus = accessory[0].xpBonus + accessory[1].xpBonus + accessory[2].xpBonus + food.xpBonus;
 
    	let phase = accessory[0].phase + accessory[1].phase + accessory[2].phase +
    		attire.phase;
+
+   	let itemDropLimited = limit(itemDrop,0,100);
    	let phaseLimited = limit(phase,-100,0);
 
    	//Accumulated XP and XP needed to reach level 120.
