@@ -1,4 +1,6 @@
 "use strict";//Cause that's how I roll.
+/*jshint esversion: 6 */
+/*jshint -W097 */
 
 //--------------------------------------------------------------------
 //Helper functions. Very nice! :)
@@ -14,7 +16,7 @@ function limit(someNumber, lowerBound, higherBound) {
     	return someNumber;
 }
 
-//Receives a number and applies a plus sign if it's 0 or positive. Returns string.
+//Receives a number and prepends a plus sign if it's 0 or positive. Returns string.
 function addPlusSign(someValue) {
 	if (someValue >= 0)
 		return '+' + someValue;
@@ -107,6 +109,41 @@ function displayXpDifferenceIfAny (xp) {
 		return insertCommas(xp.toString());
 	}
 }
+
+//Disable and enable unique weapons
+function disOrEnUniquesWeapons (weapDropdownLists, uniqueWeapsEquipped) {
+	//TODO
+	
+
+}
+
+//Disable and enable unique accessories
+function disOrEnUniquesAccessories (accDropdownLists, uniqueAccsEquipped) {
+
+}
+
+//Check if specified weapon or accessory is equipped
+/** BLORP!
+function isEquipped (itemType, itemName) {
+	if (itemType == 'weapon') {
+		if (weapon[0] == itemName || weapon[1] == itemName || weapon[2] == itemName || weapon[3] == itemName)
+			return true;
+		else
+			return false;
+	}
+
+	else if (itemType == 'accessory') {
+		if (accessory[0] == itemName || accessory[1] == itemName || accessory[2] == itemName)
+			return true;
+		else
+			return false;
+	}
+
+	if (itemType == '')
+	else
+		return false;
+}
+*/
 
 //--------------------------------------------------------------------
 //Classes
@@ -1281,7 +1318,7 @@ const weaponList = [
 		'10% chance to inflict Enfeebled.'),
 	new Weapon ('Daggers',0,'Mythril Knives',62,7,0,6,0,0,50,0,0,0,0,0,0,0,'',''),
 	new Weapon ('Daggers',1,'Mage Mashers',66,7,0,13,0,0,32,0,0,0,0,0,0,0,'',
-		'-30% Fire/Ice/Lightning damage.'),
+		'-30% Fire, Ice, and Lightning elemental damage.'),
 	new Weapon ('Daggers',0,'Plunderers',111,7,0,10,0,0,10,0,0,0,0,0,0,0,'',
 		'Absorbs elemental energy when dealing the finishing blow to an enemy.'),
 	new Weapon ('Daggers',0,'Assassin\'s Daggers',126,7,0,7,0,0,10,0,0,0,0,0,0,0,'',
@@ -1444,7 +1481,7 @@ const accessoryList = [
 	new Accessory ('HP','All',0,'Legatus Bangle',1200,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',''),
 	new Accessory ('HP','All',0,'Gigas Bangle',1500,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',''),
 	new Accessory ('HP','All',0,'Onion Bangle',2500,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',''),
-	new Accessory ('HP','All',1,'Adamantite Bangle',10000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',''),
+	new Accessory ('HP','All',0,'Adamantite Bangle',10000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',''),
 	new Accessory ('MP','Noctis',0,'Soul of Thamasa',0,50,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',''),
 	new Accessory ('HP Recovery Rate','All',0,'White Choker',0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,'',
 		''),
@@ -1838,9 +1875,7 @@ function updateCharacter() {
 function updateData() {
 
     const levelBox = document.getElementById('level');
-    //Limit level input to integers between [1,120], change the input to value in range.
     const level = Math.round(limit(levelBox.value,1,120));//Limit input to int range [1,120].
-    levelBox.value = level;//Change the input to value in range.
 
     const char = charList[document.getElementById('character').value];//Get selected character.
 
@@ -1937,7 +1972,9 @@ function updateData() {
     }
 
     let hpLimited = limit(hp,1,9999);
+    let hpRecLimited = limit(hprec,0,Infinity);
     let mpLimited = limit(mp,1,999);
+    let mpRecLimited = limit(mprec,0,Infinity);
     let strLimited = limit(str,0,9999);
     let vitLimited = limit(vit,0,9999);
     let magLimited = limit(mag,0,9999);
@@ -2005,11 +2042,24 @@ function updateData() {
     let shot = attire.shot + weapon[0].shot + weapon[1].shot + weapon[2].shot + weapon[3].shot +
         accessory[0].shot + accessory[1].shot + accessory[2].shot;
 
+    //let sword = accessory[0].sword + accessory[1].sword + accessory[2].sword;
+
+    //let greatsword = accessory[0].greatsword + accessory[1].greatsword + accessory[2].greatsword;
+
+    //let polearm = accessory[0].polearm + accessory[1].polearm + accessory[2].polearm;
+    let sword = 0;
+    let greatsword = 0;
+    let polearm = 0;
+    //Commente these and uncomment the others once I got the resistances going.
+
     let fireLimited = limit(fire,-899,100);
     let iceLimited = limit(ice,-899,100);
     let lightningLimited = limit(lightning,-899,100);
     let darkLimited = limit(dark,-899,100);
     let shotLimited = limit(shot,-899,100);
+    let swordLimited = limit(sword,-899,100);
+    let greatswordLimited = limit(greatsword,-899,100);
+    let polearmLimited = limit(polearm,-899,100);
 
     //TDA's
     let tdaPhysical = hpLimited * (1 + vitLimited/100);
@@ -2056,7 +2106,6 @@ function updateData() {
    	//Accumulated XP and XP needed to reach level 120.
    	const xpBox = document.getElementById('xp');//Get current XP.
     const currentXp = Math.round(limit(xpBox.value,0,Infinity));//Limit input to int range [0,Inf].
-    xpBox.value = currentXp;//Change the input to value in range.
     const currentXpWithLodgingBonus = Math.round(currentXp *
     	document.getElementById('LodgingXPBonus').value);//Rounded to nearest integer.
 
@@ -2131,6 +2180,12 @@ function updateData() {
 	//Dump all the data on screen at once
 	//--------------------------------------------------------------------
 
+	//Level
+	levelBox.value = level;//Change the input to value in range.
+
+	//XP
+	xpBox.value = currentXp;//Change the input to value in range.
+
     //TDA
     document.getElementById('TDAPhysical').innerHTML = insertCommas(
     	Math.round(tdaPhysical).toString());
@@ -2153,8 +2208,8 @@ function updateData() {
     document.getElementById('StatsAttack').innerHTML = attack;
     document.getElementById('StatsDefense').innerHTML = defense;
 
-    document.getElementById('StatsHPRec').innerHTML = (hprec/100) + '%';
-    document.getElementById('StatsMPRec').innerHTML = (mprec/100) + '%';
+    document.getElementById('StatsHPRec').innerHTML = (hpRecLimited/100) + '%';
+    document.getElementById('StatsMPRec').innerHTML = (mpRecLimited/100) + '%';
     document.getElementById('StatsCrit').innerHTML = displayDifferenceIfAny(critLimited,crit,'%');
     document.getElementById('StatsPhysicalDamage').innerHTML = physicalDamageValueString;
 	document.getElementById('StatsMagicalDamage').innerHTML = magicalDamageValueString;
@@ -2170,7 +2225,22 @@ function updateData() {
     document.getElementById('StatsDark').innerHTML = displayDifferenceIfAny(darkLimited,dark,'%');
     document.getElementById('StatsShot').innerHTML = displayDifferenceIfAny(shotLimited,shot,'%');
 
+    if (swordLimited != 0 || greatswordLimited != 0 || polearmLimited != 0) {
+    	document.getElementById('TDAExtraResistancesContainer').classList.remove('d-none');
+    	document.getElementById('StatsExtraResistancesContainer').classList.remove('d-none');
+    }
+    else {
+    	document.getElementById('TDAExtraResistancesContainer').classList.add('d-none');
+    	document.getElementById('StatsExtraResistancesContainer').classList.add('d-none');
+    }
+
+
     //Extras
+    if (itemDropLimited != 0 || xpBonus != 0 || phaseLimited != 0)
+    	document.getElementById('ExtrasITRExpPCContainer').classList.remove('d-none');
+    else
+    	document.getElementById('ExtrasITRExpPCContainer').classList.add('d-none');
+
    	document.getElementById('ExtrasIDR').innerHTML = displayDifferenceIfAny(itemDropLimited,
    		itemDrop,'%');
     document.getElementById('ExtrasXP').innerHTML = '+' + xpBonus + '%';
@@ -2181,22 +2251,22 @@ function updateData() {
     document.getElementById('ExtrasXP120').innerHTML = displayXpDifferenceIfAny(xpTo120);
 
     if (immunitiesValueString == '') {
-    	document.getElementById('ExtrasImmunitiesLabel').innerHTML = '';//Remove title of section.
+    	document.getElementById('ExtrasImmunitiesContainer').classList.add('d-none');
     	immunitiesBox.innerHTML = '';//Clear contents if any were there
     }
     else {
-    	document.getElementById('ExtrasImmunitiesLabel').innerHTML = '- - - - - - - - - - - - - ' +
-    		'- Immunities - - - - - - - - - - - - - -';//write title of section.
+    	document.getElementById('ExtrasImmunitiesContainer').classList.remove('d-none');
     	immunitiesBox.innerHTML = immunitiesValueString;
     }
 
+
     //Notes
     if (notesValueString == '') {
-    	document.getElementById('NotesContainer').style.display = 'none';
+    	document.getElementById('NotesContainer').classList.add('d-none');
     	notesBox.innerHTML = '';//Clear contents if any were there
     }
     else {
-    	document.getElementById('NotesContainer').style.display = 'flex';
+    	document.getElementById('NotesContainer').classList.remove('d-none');
     	notesBox.innerHTML = notesValueString;
     }
 
