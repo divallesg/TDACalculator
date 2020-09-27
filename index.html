@@ -74,7 +74,7 @@
                         </div>
                         <div class="row" style="height:1.2rem;">
                             <div class="col">
-                                <p style="font-size:small;padding-left:0.05rem;">▼ Equipped<br></p>
+                                <p style="font-size:small;padding-left:0.05rem;">▼ Held<br></p>
                             </div>
                         </div>
                         <div class="row">
@@ -230,7 +230,7 @@
                         </div>
                         <div class="row divider">
                             <div class="col">
-                                <h5>- - - - - - - - - - - - - - Elemental&nbsp;- - - - - - - - - - - - - -<br></h5>
+                                <h5>- - - - - - - - - - - - - - - Resistances - - - - - - - - - - - - - -<br></h5>
                             </div>
                         </div>
                         <div class="row">
@@ -290,7 +290,45 @@
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <h6 class="shot">Shot</h6>
+                                        <h6 class="shot">Shot/Firearm</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row d-none" id="TDAExtraResistancesContainer">
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        <p id="TDASword" class="result-box"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="sword">Sword</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        <p id="TDAGreatsword" class="result-box"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="greatsword">Greatsword</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        <p id="TDAPolearm" class="result-box"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="polearm">Polearm</h6>
                                     </div>
                                 </div>
                             </div>
@@ -515,7 +553,7 @@
                         </div>
                         <div class="row divider">
                             <div class="col">
-                                <h5>- - - - - - - - - - - Elemental Resistances - - - - - - - - - - -<br></h5>
+                                <h5>- - - - - - - - - - - - - - - Resistances - - - - - - - - - - - - - -<br></h5>
                             </div>
                         </div>
                         <div class="row">
@@ -575,7 +613,45 @@
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <h6 class="shot">Shot</h6>
+                                        <h6 class="shot">Shot/Firearm</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row d-none" id="StatsExtraResistancesContainer">
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        <p id="StatsSword" class="result-box"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="sword">Sword</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        <p id="StatsGreatsword" class="result-box"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="greatsword">Greatsword</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        <p id="StatsPolearm" class="result-box"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="polearm">Polearm</h6>
                                     </div>
                                 </div>
                             </div>
@@ -589,7 +665,7 @@
                                 <h2 class="text-center">Extras</h2>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row d-none" id="ExtrasITRExpPCContainer">
                             <div class="col">
                                 <div class="row">
                                     <div class="col">
@@ -610,7 +686,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <h6>Experience</h6>
+                                        <h6>Experience Bonus</h6>
                                     </div>
                                 </div>
                             </div>
@@ -653,19 +729,23 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row divider">
+                        <div class="row d-none" id="ExtrasImmunitiesContainer">
                             <div class="col">
-                                <h5 id="ExtrasImmunitiesLabel"><br></h5>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <p class="text-left" id="ExtrasImmunities"></p>
+                                <div class="row divider">
+                                    <div class="col">
+                                        <h5 id="ExtrasImmunitiesLabel">- - - - - - - - - - - - - - - Immunities - - - - - - - - - - - - - - -</h5>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="text-left" id="ExtrasImmunities"></p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row titled-container" id="NotesContainer" style="background-color:#FBFFB5;display:none;">
+                <div class="row d-none titled-container" id="NotesContainer" style="background-color:#FBFFB5;">
                     <div class="col">
                         <div class="row">
                             <div class="col">
