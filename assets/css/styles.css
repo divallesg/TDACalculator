@@ -1,3 +1,11 @@
+.tooltip {
+  background-color:#73AD21;
+  color:#FFFFFF;
+  border:1px solid green;
+  padding:15px;
+  font-size:80px;
+}
+
 .leftside {
   padding-right:0rem;
   min-width:26rem;
