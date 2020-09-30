@@ -3,9 +3,9 @@
 /*jshint -W097 */
 
 //Initialize tooltips.
-$( document ).ready(function() {
-        $('[data-toggle="tooltip"]').tooltip({'placement': 'right'});
-});
+//$( document ).ready(function() {
+//        $('[data-toggle="tooltip"]').tooltip({'placement': 'right'});
+//});
 
 //--------------------------------------------------------------------
 //Helper functions. Very nice! :)
@@ -1550,7 +1550,7 @@ function updateCharacter() {
     const weapon2Box = document.getElementById('weapon2');
     const weapon3Box = document.getElementById('weapon3');
     const weapon4Box = document.getElementById('weapon4');
-    const equippedRadios = document.getElementsByName('equipped');
+    const currentlyHeldRadios = document.getElementsByName('currentlyHeld');
 
     //Save previous selection.
     const oldWeapon1BoxValue = weapon1Box.value;
@@ -1559,8 +1559,8 @@ function updateCharacter() {
     if (char.name == 'Noctis') {
     	weapon3Box.disabled = false;//Enable weapons 3 and 4 since Noctis can use 4 weapons.
     	weapon4Box.disabled = false;
-    	equippedRadios[2].disabled = false;//Enable back radio buttons.
-    	equippedRadios[3].disabled = false;
+    	currentlyHeldRadios[2].disabled = false;//Enable back radio buttons.
+    	currentlyHeldRadios[3].disabled = false;
 
     	//Replace dropdown lists.
     	weapon1Box.innerHTML = newWeaponListString1;
@@ -1571,12 +1571,12 @@ function updateCharacter() {
     else {//Not Noctis
 		weapon3Box.disabled = true;//Disable Weapons 3 and 4 if not Noctis.
 		weapon4Box.disabled = true;
-		equippedRadios[2].disabled = true;//Disable respective radio buttons.
-		equippedRadios[3].disabled = true;
+		currentlyHeldRadios[2].disabled = true;//Disable respective radio buttons.
+		currentlyHeldRadios[3].disabled = true;
 
 		//Change checkmark to weapon 1, if 3 or 4 were checked.
-		if (equippedRadios[2].checked || equippedRadios[3].checked) {
-			equippedRadios[0].checked = true;
+		if (currentlyHeldRadios[2].checked || currentlyHeldRadios[3].checked) {
+			currentlyHeldRadios[0].checked = true;
 		}
 
     	//Replace dropdown lists.
@@ -1665,11 +1665,11 @@ function updateData() {
     $('#accessory3').attr("title", accessory[2].getTooltipMessage());
 
     //Read radio buttons for selected one.
-    const equippedRadios = document.getElementsByName('equipped');
-    let equipped;
-    for (let i = 0; i < equippedRadios.length; i++) {
-        if (equippedRadios[i].checked) {
-            equipped = i;
+    const currentlyHeldRadios = document.getElementsByName('currentlyHeld');
+    let currentlyHeld;
+    for (let i = 0; i < currentlyHeldRadios.length; i++) {
+        if (currentlyHeldRadios[i].checked) {
+            currentlyHeld = i;
             break;
         }
     }
@@ -1754,43 +1754,43 @@ function updateData() {
     }
 
     //Attack, Defense, Crit
-    let attack = weapon[equipped].attack + strLimited;
+    let attack = weapon[currentlyHeld].attack + strLimited;
     let defense = vitLimited;
-    let crit = weapon[equipped].crit + accessory[0].crit + accessory[1].crit + accessory[2].crit +
+    let crit = weapon[currentlyHeld].crit + accessory[0].crit + accessory[1].crit + accessory[2].crit +
     	attire.crit + food.crit;
 
     //Special Case - Precision Lance, Enforcer
-    if (weapon[equipped].name == 'Precision Lance' || weapon[equipped].name == 'Enforcer')
+    if (weapon[currentlyHeld].name == 'Precision Lance' || weapon[currentlyHeld].name == 'Enforcer')
     	crit += 10;//+10 Crit from weapon description.
 
     let critLimited = limit(crit,0,100);
 
     //Physical Damage Type
     let physicalDamageValueString = '';
-    if (weapon[equipped].type == 'Ring'){
+    if (weapon[currentlyHeld].type == 'Ring'){
     	physicalDamageValueString = '';//Add nothing
     }
-    else if (weapon[equipped].type == 'Firearm') {//Add the word 'Shot' as well on Firearms.
+    else if (weapon[currentlyHeld].type == 'Firearm') {//Add the word 'Shot' as well on Firearms.
     	physicalDamageValueString = '<span class="firearm">Firearm</span>/<span class="shot">' +
     		'Shot</span>';
     }
-    else if (weapon[equipped].type == 'Royal Arm') {//Write in the 'royal-arm' class correctly.
+    else if (weapon[currentlyHeld].type == 'Royal Arm') {//Write in the 'royal-arm' class correctly.
     	physicalDamageValueString = '<span class="royal-arm">Royal Arm</span>';
     }
     else {
-    	physicalDamageValueString = '<span class="' + weapon[equipped].type.toLowerCase() + '">' +
-    		weapon[equipped].type + '</span>';
+    	physicalDamageValueString = '<span class="' + weapon[currentlyHeld].type.toLowerCase() + '">' +
+    		weapon[currentlyHeld].type + '</span>';
     }
 
     //Magical Damage Type
     let magicalDamageValueString = '';
-    if (weapon[equipped].type == 'Ring'){
+    if (weapon[currentlyHeld].type == 'Ring'){
     	magicalDamageValueString = '<span class="death">Death</span>/<span class="light">' +
     		'Light</span>';
     }
     else {
-    	magicalDamageValueString = '<span class="' + weapon[equipped].element.toLowerCase() + '">' +
-    		weapon[equipped].element + '</span>';
+    	magicalDamageValueString = '<span class="' + weapon[currentlyHeld].element.toLowerCase() + '">' +
+    		weapon[currentlyHeld].element + '</span>';
     }
 
     //Elemental
@@ -1839,11 +1839,11 @@ function updateData() {
     let tdaShot = tdaPhysical / (1 - shotLimited/100);
 
     //Special Case - Blazefire Saber and Blazefire Saber XV
-    if (weapon[equipped].name == 'Blazefire Saber' || weapon[equipped].name == 'Blazefire Saber XV')
+    if (weapon[currentlyHeld].name == 'Blazefire Saber' || weapon[currentlyHeld].name == 'Blazefire Saber XV')
     	tdaPhysical *= 1.15;//+15% Physical Damage resistance
 
     //Special Case - Mage Mashers
-    if (weapon[equipped].name == 'Mage Mashers') {
+    if (weapon[currentlyHeld].name == 'Mage Mashers') {
     	tdaFire *= 1.30;
     	tdaIce *= 1.30;
     	tdaLightning *= 1.30;
@@ -1932,9 +1932,9 @@ function updateData() {
     	}
     }
 
-    if (weapon[equipped].effect != '') {
-        notesValueString += '<strong>' + weapon[equipped].name +
-            ':</strong> ' + weapon[equipped].effect + '<br>';
+    if (weapon[currentlyHeld].effect != '') {
+        notesValueString += '<strong>' + weapon[currentlyHeld].name +
+            ':</strong> ' + weapon[currentlyHeld].effect + '<br>';
     }
 
     for (let i = 0; i < accessory.length; i++) {
@@ -2056,7 +2056,7 @@ document.getElementById('weapon2').addEventListener('change', updateData);
 document.getElementById('weapon3').addEventListener('change', updateData);
 document.getElementById('weapon4').addEventListener('change', updateData);
 
-let radios = document.getElementsByName('equipped');
+let radios = document.getElementsByName('currentlyHeld');
 for (let i = 0; i < radios.length; i++) {
     radios[i].addEventListener('change', updateData);
 }
