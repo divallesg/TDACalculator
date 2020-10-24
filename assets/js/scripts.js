@@ -113,6 +113,12 @@ function displayXpDifferenceIfAny (xp) {
 	}
 }
 
+//Round to two decimal places only if needed.
+function roundTo2(number) {
+	return Math.round((number + Number.EPSILON) * 100) / 100;
+}
+
+
 //Disable and enable unique weapons
 function disOrEnUniquesWeapons (weapDropdownLists, uniqueWeapsEquipped) {
 	//TODO or not
@@ -860,7 +866,7 @@ const charList = [new Character ('Noctis',4,20,'','',
 	new Attire('None',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',''),
 	new Attire('Crownsguard Fatigues',20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',''),
 	new Attire('Crownsguard Fatigues (No Jacket)',0,0,0,0,20,0,20,0,0,0,0,0,0,0,0,'',''),
-	new Attire('Crownsguard Casual [equipped]',0,0,0,0,30,0,0,0,0,0,0,0,0,0,0,'',''),
+	new Attire('Crownsguard Casual',0,0,0,0,30,0,0,0,0,0,0,0,0,0,0,'',''),
 	new Attire('Unkempt Crownsguard',0,0,0,0,35,0,0,0,0,0,0,0,0,0,0,'',''),
 	new Attire('Casual Outfit',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'Enfeebled, Disenchanted, Burnt, Frozen, Shocked',''),
 	new Attire('Casual Outfit (No Jacket)',0,0,0,0,0,0,0,0,0,0,0,0,0,20,0,'',''),
@@ -1697,6 +1703,10 @@ function updateData() {
 
     let critLimited = limit(crit,0,100);
 
+    //Damage Output
+    let damageOutput = roundTo2(((attack + level*3) * critLimited/100 * 2) + ((attack + level*3) * (1 - critLimited/100)));
+
+
     //Physical Damage Type
     let physicalDamageValueString = '';
     if (weapon[currentlyHeld].type == 'Ring'){
@@ -1715,9 +1725,11 @@ function updateData() {
 
     //Magical Damage Type
     let magicalDamageValueString = '';
-    if (weapon[currentlyHeld].type == 'Ring'){
-    	magicalDamageValueString = '<span class="death">Death</span>/<span class="light">' +
-    		'Light</span>';
+    if (weapon[currentlyHeld].element == 'Light, Death') {
+    	magicalDamageValueString = '<span class="light">Light</span>,<span class="death">Death</span>';
+    }
+    else if (weapon[currentlyHeld].element == 'Multiple') {
+    	magicalDamageValueString = '<span class="fire">Mul</span><span class="ice">ti</span><span class="lightning">ple</span>';
     }
     else {
     	magicalDamageValueString = '<span class="' + weapon[currentlyHeld].element.toLowerCase() + '">' +
@@ -1841,7 +1853,19 @@ function updateData() {
    	//Notes
     const notesBox = document.getElementById('Notes');
     let notesValueString = '';//Initialize string
-    
+
+    if (weapon[currentlyHeld].effect != '') {
+        notesValueString += '<strong>' + weapon[currentlyHeld].name +
+            ':</strong> ' + weapon[currentlyHeld].effect + '<br>';
+    }
+
+    for (let i = 0; i < accessory.length; i++) {
+    	if (accessory[i].effect != '') {
+	    	notesValueString += '<strong>' + accessory[i].name +
+	            ':</strong> ' + accessory[i].effect + '<br>';
+	    }
+    }
+
     if (attire.effect != '')
         notesValueString += '<strong>' + attire.name + ':</strong> ' + attire.effect + '<br>';
 
@@ -1857,18 +1881,6 @@ function updateData() {
     		notesValueString += '<strong>Favorite Food:</strong> +100% to tech leveling rate ' +
     			'and always perform critical versions of techniques.<br>';
     	}
-    }
-
-    if (weapon[currentlyHeld].effect != '') {
-        notesValueString += '<strong>' + weapon[currentlyHeld].name +
-            ':</strong> ' + weapon[currentlyHeld].effect + '<br>';
-    }
-
-    for (let i = 0; i < accessory.length; i++) {
-    	if (accessory[i].effect != '') {
-	    	notesValueString += '<strong>' + accessory[i].name +
-	            ':</strong> ' + accessory[i].effect + '<br>';
-	    }
     }
 
 	//--------------------------------------------------------------------
@@ -1909,6 +1921,7 @@ function updateData() {
     //Stats
     document.getElementById('StatsHP').innerHTML = displayDifferenceIfAny(hpLimited,hp,'');
     document.getElementById('StatsMP').innerHTML = displayDifferenceIfAny(mpLimited,mp,'');
+    document.getElementById('StatsDamageOutput').innerHTML = damageOutput;
     document.getElementById('StatsAttack').innerHTML = attack;
     document.getElementById('StatsDefense').innerHTML = defense;
 
