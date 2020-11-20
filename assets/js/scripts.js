@@ -1113,7 +1113,7 @@ const foodList = [
 		'Infinite stamina.'),
 	new Food ('Recipeh','','Three-Mushroom Kebabs',800,150,0,0,0,0,0,0,0,0,0,0,
 		'All but Instant Death','',''),
-	new Food ('Recipeh','Prompto','Green Soup Curry',800,160,0,0,0,70,0,0,0,0,0,0,'','',''),
+	new Food ('Recipeh','Prompto','Green Curry Soup',800,160,0,0,0,70,0,0,0,0,0,0,'','',''),
 	new Food ('Recipeh','','Royal Road Paella',1000,150,0,0,0,0,0,0,0,0,0,0,'','Endurance',
 		'Infinite stamina.'),
 	new Food ('Recipeh','','Elegant Orange Cake',1000,0,250,0,400,0,0,0,0,0,0,0,'','',''),
@@ -1513,13 +1513,6 @@ function updateCharacter() {
     	weapon4Box.innerHTML = '<option value="0" selected>None</option>\n';
     }
 
-    /* Will get rid of this I guess.
-    //Restore old selection only if the new char can equip the same weapons.
-    if (canEquipWeapon(char.weaponType1, weaponList[oldWeapon1BoxValue]))
-    	weapon1Box.value = oldWeapon1BoxValue;
-    if (canEquipWeapon(char.weaponType2, weaponList[oldWeapon2BoxValue]))
-    	weapon2Box.value = oldWeapon2BoxValue;*/
-
     //---Accessories---
 	//Get Accessory dropdown list elements.
     const acc1Box = document.getElementById('accessory1');
@@ -1536,15 +1529,6 @@ function updateCharacter() {
     acc2Box.innerHTML = newAccessoryListString;
     acc3Box.innerHTML = newAccessoryListString;
 
-    /*
-    //Restore old selection only if the new char can equip the same accessories.
-    if (canEquipAccessory(char.name, accessoryList[oldAcc1BoxValue].equip))
-    	acc1Box.value = oldAcc1BoxValue;
-    if (canEquipAccessory(char.name, accessoryList[oldAcc2BoxValue].equip))
-    	acc2Box.value = oldAcc2BoxValue;
-    if (canEquipAccessory(char.name, accessoryList[oldAcc3BoxValue].equip))
-    	acc3Box.value = oldAcc3BoxValue;*/
-
     //Add or Remove the Megaphone option in Accessories.
     if (char.name != 'Gladiolus') {
     	document.getElementById('MegaphonesContainter').classList.remove('d-none');
@@ -1552,6 +1536,16 @@ function updateCharacter() {
     else {
     	document.getElementById('MegaphonesContainter').classList.add('d-none');
     	document.getElementById('megaphones').value = 0;
+    }
+
+    //Add or Remove the Experimagic option in Ascension.
+    const experimagicCheckbox = document.getElementById('experimagic');
+    if (char.name != 'Noctis') {
+    	experimagicCheckbox.disabled = true;//Disable Experimagic if not Noctis.
+    	experimagicCheckbox.checked = false;
+    }
+    else {
+    	experimagicCheckbox.disabled = false;//Disable Experimagic if not Noctis.
     }
 
     updateData();//Compute the result screen with the new values.
@@ -1634,42 +1628,36 @@ function updateData() {
     }
 
     //HP,HPRec, MP, MPRec
-    let hp = Math.floor(baseStats.hp * (1 + attire.hpBonus/100)) +
+    let hp = Math.floor((baseStats.hp + (healthLevel * baseStats.level))* (1 + attire.hpBonus/100)) +
 		Math.round((1 + attire.hpBonus/100) * (weapon[0].hp + weapon[1].hp + weapon[2].hp +
-		weapon[3].hp + accessory[0].hp + accessory[1].hp + accessory[2].hp +
-		(healthLevel * baseStats.level))) + food.hp + rareMetalHP;
+		weapon[3].hp + accessory[0].hp + accessory[1].hp + accessory[2].hp)) + food.hp + rareMetalHP;
 
     let hprec = char.hprec + weapon[0].hprec + weapon[1].hprec + weapon[2].hprec + weapon[3].hprec +
     	accessory[0].hprec + accessory[1].hprec + accessory[2].hprec + attire.hprec + food.hprec +
     	(megaphones * 10);
 
-    let mp = Math.floor(baseStats.mp * (1 + attire.mpBonus/100)) +
+    let mp = Math.floor((baseStats.mp + (experimagic * baseStats.level)) * (1 + attire.mpBonus/100)) +
     	Math.round((1 + attire.mpBonus/100) * (weapon[0].mp + weapon[1].mp + weapon[2].mp +
-    	weapon[3].mp + accessory[0].mp + accessory[1].mp + accessory[2].mp +
-    	(experimagic * baseStats.level)));
+    	weapon[3].mp + accessory[0].mp + accessory[1].mp + accessory[2].mp));
 
     let mprec = char.mprec + accessory[0].mprec + accessory[1].mprec + accessory[2].mprec +
     	attire.mprec;
 
-    let str = Math.floor(baseStats.str * (1 + attire.strBonus/100)) + Math.round((1 +
-        attire.strBonus/100) * (weapon[0].str + weapon[1].str + weapon[2].str + weapon[3].str +
-        accessory[0].str + accessory[1].str + accessory[2].str + (strLevel * baseStats.level))) +
-    	food.str;
+    let str = Math.floor((baseStats.str + (strLevel * baseStats.level)) * (1 + attire.strBonus/100)) +
+    	Math.round((1 + attire.strBonus/100) * (weapon[0].str + weapon[1].str + weapon[2].str + weapon[3].str +
+        accessory[0].str + accessory[1].str + accessory[2].str)) + food.str;
 
-    let vit = Math.floor(baseStats.vit * (1 + attire.vitBonus/100)) + Math.round((1 +
+    let vit = Math.floor((baseStats.vit + (vitLevel * baseStats.level)) * (1 + attire.vitBonus/100)) + Math.round((1 +
         attire.vitBonus/100) * (weapon[0].vit + weapon[1].vit + weapon[2].vit + weapon[3].vit +
-        accessory[0].vit + accessory[1].vit + accessory[2].vit + (vitLevel * baseStats.level))) +
-    	food.vit;
+        accessory[0].vit + accessory[1].vit + accessory[2].vit)) + food.vit;
 
-    let mag = Math.floor(baseStats.mag * (1 + attire.magBonus/100)) + Math.round((1 +
+    let mag = Math.floor((baseStats.mag + (magLevel * baseStats.level)) * (1 + attire.magBonus/100)) + Math.round((1 +
     	attire.magBonus/100) * (weapon[0].mag + weapon[1].mag + weapon[2].mag + weapon[3].mag +
-    	accessory[0].mag + accessory[1].mag + accessory[2].mag + (magLevel * baseStats.level))) +
-    	food.mag;
+    	accessory[0].mag + accessory[1].mag + accessory[2].mag)) + food.mag;
 
-    let spr = Math.floor(baseStats.spr * (1 + attire.sprBonus/100)) + Math.round((1 +
+    let spr = Math.floor((baseStats.spr + (sprLevel * baseStats.level)) * (1 + attire.sprBonus/100)) + Math.round((1 +
     	attire.sprBonus/100) * (weapon[0].spr + weapon[1].spr + weapon[2].spr + weapon[3].spr +
-    	accessory[0].spr + accessory[1].spr + accessory[2].spr + (sprLevel * baseStats.level))) +
-    	food.spr;
+    	accessory[0].spr + accessory[1].spr + accessory[2].spr)) + food.spr;
 
     //Special Case - Prime Food Effect.
     if (food.effect == 'Prime' || food.effect == 'Prime, Endurance') {
@@ -1697,14 +1685,18 @@ function updateData() {
     let crit = weapon[currentlyHeld].crit + accessory[0].crit + accessory[1].crit + accessory[2].crit +
     	attire.crit + food.crit;
 
-    //Special Case - Precision Lance, Enforcer
-    if (weapon[currentlyHeld].effect == '+10 to Critical Hit Rate.')
+    //Special Case - Precision Lance, Enforcer, Alien Shield
+    if (weapon[currentlyHeld].name == 'Precision Lance' || weapon[currentlyHeld].name == 'Enforcer' || weapon[currentlyHeld].name == 'Alien Shield')
     	crit += 10;//+10 Crit from weapon description.
 
     let critLimited = limit(crit,0,100);
 
     //Damage Output
-    let damageOutput = roundTo2(((attack + level*3) * critLimited/100 * 2) + ((attack + level*3) * (1 - critLimited/100)));
+    let damageOutput = 0;
+    if (weapon[currentlyHeld].name == 'Bow of the Clever') //Special Case - Bow of the Clever hits with MAG as well as STR.
+    	damageOutput = roundTo2(((attack + level*3 + magLimited) * (critLimited/100) * 2) + ((attack + level*3 + magLimited) * (1 - critLimited/100)));
+    else
+    	damageOutput = roundTo2(((attack + level*3) * (critLimited/100) * 2) + ((attack + level*3) * (1 - critLimited/100)));
 
 
     //Physical Damage Type
