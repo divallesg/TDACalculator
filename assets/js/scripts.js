@@ -629,7 +629,7 @@ const charList = [new Character ('Noctis',4,20,'','',
 	new Weapon ('Firearm','Executioner',363,1,0,0,0,0,0,0,22,0,0,0,0,0,'',0,'+50% damage to enemies in Vulnerable status.'),
 	new Weapon ('Firearm','Hyper Magnum',388,1,0,0,0,0,0,0,21,0,0,0,0,0,'',0,''),
 	new Weapon ('Firearm','Death Penalty',424,1,0,0,0,0,0,0,25,0,0,0,0,0,'',0,'1% chance to inflict Instant Death.'),
-	new Weapon ('Firearm','Cerberus',156,1,0,0,0,0,0,0,6,0,0,0,0,0,'',1,'Can be aimed in 3rd person, over-the-shoulder, and in 1st person (when scoped).'),
+	new Weapon ('Firearm','Cerberus',156,1,0,0,0,0,0,0,6,0,0,0,0,0,'',1,'+900% breakage on body parts/appendages. Can be aimed over-the-shoulder (extending range to 200 ft) and scoped (extending range to 320 ft). Exclusive to Noctis.'),
 	new Weapon ('Firearm','Lion Heart',262,1,0,0,0,9,0,0,14,0,0,0,0,0,'',1,'When below 30% HP: +30% damage and +9% damage for each 1% missing HP below 30%.'),
 	new Weapon ('Firearm','Garuda\'s Abandon',193,50,0,0,6,22,24,29,20,0,0,0,0,0,'',1,'+50% breakage on body parts/appendages.'),
 	new Weapon ('Firearm','Abandon of the Vortex',399,100,0,0,60,31,31,31,22,0,0,0,0,0,'',1,'+50% breakage on body parts/appendages. +50% damage to enemies in Vulnerable status.'),
@@ -1961,7 +1961,7 @@ function updateData() {
     else
     	document.getElementById('ExtrasITRExpPCContainer').classList.add('d-none');
 
-	document.getElementById('ExtrasIDR').innerHTML = (itemDropLimited/100) + '%';
+	document.getElementById('ExtrasIDR').innerHTML = '+' + (itemDropLimited) + '%';
    	
     document.getElementById('ExtrasXP').innerHTML = '+' + xpBonus + '%';
     document.getElementById('ExtrasPhase').innerHTML = displayDifferenceIfAny(phaseLimited,phase,
