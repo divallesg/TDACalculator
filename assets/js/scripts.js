@@ -647,19 +647,19 @@ const charList = [new Character ('Noctis',4,20,'','',
 	new Weapon ('Shield','Ziedrich',327,0,0,0,0,0,50,0,0,0,0,0,0,14,'',0,'+200 Strength for 3 seconds after Blinking (blocking at the last second).'),
 	new Weapon ('Shield','Medjay Assassin\'s Shield',202,0,0,0,0,0,0,0,0,0,0,0,0,0,'',1,'+200 Strength for 3 seconds after Blinking (blocking at the last second).'),
 	new Weapon ('Shield','Alien Shield',313,0,0,13,0,18,52,0,48,12,14,13,10,18,'Light',1,'+10 to Critical Hit Rate.'),
-	new Weapon ('Machinery','Auto Crossbow',61,1,12,0,0,0,0,0,0,0,0,0,0,10,'',0,'Fires a barrage of crossbow bolts.'),
-	new Weapon ('Machinery','Bioblaster',74,1,0,0,0,0,0,0,0,0,0,0,0,0,'',0,'Disperses a poisonous mist.'),
-	new Weapon ('Machinery','Circular Saw',90,1,0,0,0,0,9,0,0,0,0,0,0,7,'',0,'Inflicts repeated damage with spinning blades.'),
-	new Weapon ('Machinery','Gravity Well',108,1,0,0,0,0,0,8,0,0,0,0,0,0,'',0,'Pulls foes in with a gravity sphere.'),
-	new Weapon ('Machinery','Noiseblaster',153,1,0,0,0,0,0,0,11,0,0,0,0,0,'',0,'Emits a pummeling sonic wave over a wide area.'),
-	new Weapon ('Machinery','Drillbreaker',181,1,7,0,0,0,5,0,0,0,0,0,0,8,'',0,'Inflicts repeated damage with piercing drills.'),
-	new Weapon ('Machinery','Auto Crossbow Plus',323,1,18,0,0,0,0,0,0,0,0,0,0,22,'',0,'Fires a barrage of crossbow bolts.'),
-	new Weapon ('Machinery','Bioblaster Plus',339,1,0,0,0,0,0,0,0,0,0,0,0,0,'',0,'Disperses a poisonous mist.'),
-	new Weapon ('Machinery','Circular Saw Plus',356,1,0,0,0,0,21,0,0,0,0,0,0,12,'',0,'Inflicts repeated damage with spinning blades.'),
-	new Weapon ('Machinery','Gravity Well Plus',374,1,0,0,0,0,0,18,0,0,0,0,0,0,'',0,'Pulls foes in with a Gravity Sphere.'),
-	new Weapon ('Machinery','Noiseblaster Plus',397,1,0,0,0,0,0,0,23,0,0,0,0,0,'',0,'Emits a pummeling sonic wave over a wide area.'),
-	new Weapon ('Machinery','Drillbreaker Plus',432,1,12,0,0,0,13,0,0,0,0,0,0,13,'',0,'Inflicts repeated damage with piercing drills.'),
-	new Weapon ('Machinery','Flamebreath Cannon',286,1,0,0,0,0,0,0,0,0,0,0,0,0,'Fire',0,'Spews a constant stream of elemental flames towards enemies, constantly draining MP.'),
+	new Weapon ('Machinery','Auto Crossbow',61,1,12,0,0,0,0,0,0,0,0,0,0,10,'',0,'Special attack: Fires a barrage of crossbow bolts (60 MP).'),
+	new Weapon ('Machinery','Bioblaster',74,1,0,0,0,0,0,0,0,0,0,0,0,0,'',0,'Special attack: Disperses a poisonous mist (40 MP).'),
+	new Weapon ('Machinery','Circular Saw',90,1,0,0,0,0,9,0,0,0,0,0,0,7,'',0,'Special attack: Inflicts repeated damage with spinning blades (40 MP).'),
+	new Weapon ('Machinery','Gravity Well',108,1,0,0,0,0,0,8,0,0,0,0,0,0,'',0,'Special attack: Pulls foes in with a gravity sphere (80 MP).'),
+	new Weapon ('Machinery','Noiseblaster',153,1,0,0,0,0,0,0,11,0,0,0,0,0,'',0,'Special attack: Emits a pummeling sonic wave over a wide area (80 MP).'),
+	new Weapon ('Machinery','Drillbreaker',181,1,7,0,0,0,5,0,0,0,0,0,0,8,'',0,'Special attack: Inflicts repeated damage with piercing drills (80 MP).'),
+	new Weapon ('Machinery','Auto Crossbow Plus',323,1,18,0,0,0,0,0,0,0,0,0,0,22,'',0,'Special attack: Fires a barrage of crossbow bolts (60 MP).'),
+	new Weapon ('Machinery','Bioblaster Plus',339,1,0,0,0,0,0,0,0,0,0,0,0,0,'',0,'Special attack: Disperses a poisonous mist (40 MP).'),
+	new Weapon ('Machinery','Circular Saw Plus',356,1,0,0,0,0,21,0,0,0,0,0,0,12,'',0,'Special attack: Inflicts repeated damage with spinning blades (40 MP).'),
+	new Weapon ('Machinery','Gravity Well Plus',374,1,0,0,0,0,0,18,0,0,0,0,0,0,'',0,'Special attack: Pulls foes in with a gravity sphere (80 MP).'),
+	new Weapon ('Machinery','Noiseblaster Plus',397,1,0,0,0,0,0,0,23,0,0,0,0,0,'',0,'Special attack: Emits a pummeling sonic wave over a wide area (80 MP).'),
+	new Weapon ('Machinery','Drillbreaker Plus',432,1,12,0,0,0,13,0,0,0,0,0,0,13,'',0,'Special attack: Inflicts repeated damage with piercing drills (80 MP).'),
+	new Weapon ('Machinery','Flamebreath Cannon',286,1,0,0,0,0,0,0,0,0,0,0,0,0,'Fire',0,'Special attack: Spews a constant stream of elemental flames towards enemies, constantly draining MP.'),
 	new Weapon ('Royal Arm','Sword of the Wise',194,2,100,0,0,0,30,30,30,0,0,0,0,0,'',1,'A sword that performs short Warp-Strikes when near enemies.'),
 	new Weapon ('Royal Arm','Axe of the Conqueror',483,1,0,0,0,60,-80,0,0,0,0,0,0,0,'',1,'A polearm that performs slow but powerful attacks, at the expense of defense and increased HP loss. Has a unique warp-strike, launching diagonally upward above the target then crashing down. Especially good at making enemies vulnerable.'),
 	new Weapon ('Royal Arm','Bow of the Clever',203,6,0,0,0,0,0,80,0,0,0,0,0,50,'',1,'A bow that fires piercing arrows, and can fire while moving in any direction. Its damage is based on the Magic stat. Warp-strike fires multiple arrows upward.'),
@@ -746,7 +746,7 @@ const charList = [new Character ('Noctis',4,20,'','',
 	new Attire('None',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',''),
 	new Attire('Crownsguard Fatigues',20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'',''),
 	new Attire('Crownsguard Fatigues (No Jacket)',0,0,0,0,20,0,20,0,0,0,0,0,0,0,0,'',''),
-	new Attire('Rugged Attire',0,0,0,0,30,-30,0,0,0,0,0,0,0,0,0,'','Boosts item drop rate by unknown amount.'),
+	new Attire('Rugged Attire',0,0,0,0,30,-30,0,0,0,0,0,0,0,0,0,'',''),
 	new Attire('Casual Outfit',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'Enfeebled, Disenchanted, Burnt, Frozen, Shocked',''),
 	new Attire('Casual Outfit (No Jacket)',0,0,0,0,0,0,0,0,0,0,0,0,0,20,0,'',''),
 	new Attire('Kingsglaive Garb',0,0,0,0,0,30,0,30,0,0,0,0,0,0,0,'',''),
@@ -786,7 +786,7 @@ const charList = [new Character ('Noctis',4,20,'','',
 	new Weapon ('Shield','Ice Shield',93,0,0,0,0,0,18,0,0,0,22,0,0,10,'',0,'+30% HP Recovery Rate for 5 seconds after taking Ice damage.'),
 	new Weapon ('Shield','Thunder Shield',111,0,0,0,0,0,21,0,0,0,0,24,0,12,'',0,'x4 Critical Hit Rate for 5 seconds after taking Lightning damage.'),
 	new Weapon ('Shield','Flame Shield',126,0,0,0,0,0,22,0,0,21,0,0,0,9,'',0,'+300 Strength for 5 seconds after taking Fire damage.'),
-	new Weapon ('Shield','Hero\'s Shield',144,0,0,0,0,0,25,0,0,0,0,0,0,22,'',0,'+30% Shot resistance.'),
+	new Weapon ('Shield','Hero\'s Shield',144,0,0,0,0,0,25,0,0,0,0,0,0,22,'',0,'-30% Shot damage received.'),
 	new Weapon ('Shield','Absorb Shield II',167,0,0,0,15,0,38,0,0,0,0,0,0,12,'',0,'Absorbs elemental energy when dealing the finishing blow to an enemy.'),
 	new Weapon ('Shield','Black Prince',175,0,0,0,0,0,32,0,0,0,0,0,22,13,'',0,'+300 Magic for 5 seconds after taking Darkness damage.'),
 	new Weapon ('Shield','Power Shield',176,0,0,0,0,0,6,0,0,0,0,0,0,11,'',0,''),
@@ -1770,15 +1770,17 @@ function updateData() {
     let tdaGreatsword = tdaPhysical / (1 - greatswordLimited/100);
     let tdaPolearm = tdaPhysical / (1 - polearmLimited/100);
 
-    //Special Case - Blazefire Saber and Blazefire Saber XV
-    if (weapon[currentlyHeld].name == 'Blazefire Saber' || weapon[currentlyHeld].name == 'Blazefire Saber XV')
+    //Special Cases - Blazefire Saber, Blazefire Saber XV, Mage Mashers, Hero's Shield.
+    if (weapon[currentlyHeld].name == 'Blazefire Saber' || weapon[currentlyHeld].name == 'Blazefire Saber XV') {
     	tdaPhysical *= 1.15;//+15% Physical Damage resistance
-
-    //Special Case - Mage Mashers
-    if (weapon[currentlyHeld].name == 'Mage Mashers') {
+    }
+    else if (weapon[currentlyHeld].name == 'Mage Mashers') {
     	tdaFire *= 1.30;
     	tdaIce *= 1.30;
     	tdaLightning *= 1.30;
+    }
+    else if (weapon[currentlyHeld].name == 'Hero\'s Shield') {
+    	tdaShot *= 1.30;
     }
 
     //Special Cases - Resistant Food Effect, Thermal Suit, Trihead Heart.
@@ -1794,12 +1796,16 @@ function updateData() {
     //Extras
     let itemDrop = accessory[0].itemDrop + accessory[1].itemDrop + accessory[2].itemDrop + food.itemDrop;
 
+    //Special Case - Rugged Attire
+    if (attire.name == 'Rugged Attire')
+    	itemDrop += 30;
+
     let xpBonus = accessory[0].xpBonus + accessory[1].xpBonus + accessory[2].xpBonus + food.xpBonus;
 
    	let phase = accessory[0].phase + accessory[1].phase + accessory[2].phase +
    		attire.phase;
 
-   	let itemDropLimited = limit(itemDrop,0,100);
+   	let itemDropLimited = limit(itemDrop,0,9999);
    	let phaseLimited = limit(phase,-100,0);
 
    	//Accumulated XP and XP needed to reach level 120.
@@ -1955,10 +1961,7 @@ function updateData() {
     else
     	document.getElementById('ExtrasITRExpPCContainer').classList.add('d-none');
 
-    if (attire.name == 'Rugged Attire')
-    	document.getElementById('ExtrasIDR').innerHTML = (itemDropLimited/100) + '% + ?';
-    else
-    	document.getElementById('ExtrasIDR').innerHTML = (itemDropLimited/100) + '%';
+	document.getElementById('ExtrasIDR').innerHTML = (itemDropLimited/100) + '%';
    	
     document.getElementById('ExtrasXP').innerHTML = '+' + xpBonus + '%';
     document.getElementById('ExtrasPhase').innerHTML = displayDifferenceIfAny(phaseLimited,phase,
