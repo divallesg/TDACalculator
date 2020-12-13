@@ -1643,12 +1643,25 @@ function updateData() {
 
     let critLimited = limit(crit,0,100);
 
+
     //Damage Output
     let damageOutput = 0;
-    if (weapon[currentlyHeld].name == 'Bow of the Clever') //Special Case - Bow of the Clever hits with MAG as well as STR.
+
+    //Special Cases - Bow of the Clever and Scepter of the Pious (add total MAG to the damage).
+    if (weapon[currentlyHeld].name == 'Bow of the Clever' || weapon[currentlyHeld].name == 'Scepter of the Pious') {
     	damageOutput = roundTo2(((attack + level*3 + magLimited) * (critLimited/100) * 2) + ((attack + level*3 + magLimited) * (1 - critLimited/100)));
-    else
+    }
+
+    //Special Cases - The other Royal Arms (add weapon's STR bonus once again; which is also affected by the attire's STR bonus if any).
+    else if (weapon[currentlyHeld].type == 'Royal Arm') {
+    	damageOutput = roundTo2(((attack + level*3 + (weapon[currentlyHeld].str * (1 + attire.strBonus/100))) * (critLimited/100) * 2) +
+    		((attack + level*3 + (weapon[currentlyHeld].str * (1 + attire.strBonus/100))) * (1 - critLimited/100)));
+    }
+
+    //Regular damage calculation for every other weapon.
+    else {
     	damageOutput = roundTo2(((attack + level*3) * (critLimited/100) * 2) + ((attack + level*3) * (1 - critLimited/100)));
+    }
 
 
     //Physical Damage Type
